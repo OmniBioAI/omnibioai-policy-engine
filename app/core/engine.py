@@ -59,7 +59,12 @@ class PolicyEngine:
         # 1. CACHE HIT (sub-ms path)
         cached = self.cache.get(key)
         if cached:
-            return PolicyDecision(**cached, policy_source="CACHE")
+            # `cached` is a previously stored decision.dict(), which always
+            # already has a policy_source key (RBAC/ABAC/RULES/ALL_PASSED) --
+            # spreading it alongside an explicit policy_source= kwarg raises
+            # "got multiple values for keyword argument 'policy_source'".
+            # Override it in the dict instead of passing it twice.
+            return PolicyDecision(**{**cached, "policy_source": "CACHE"})
 
         # 2. COMPUTE DECISION
         decision = self._evaluate_core(req)

@@ -2458,7 +2458,7 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_values __pyx_string_tab[68]
 #define __pyx_kp_b_iso88591_4A_IT_q_83a_4q_q_a_IT_q_S_4q_q __pyx_string_tab[69]
 #define __pyx_kp_b_iso88591_a_IQ __pyx_string_tab[70]
-#define __pyx_kp_b_iso88591_a_d_q_q_q_q_V4q_1_HN_4_aq_F_auH __pyx_string_tab[71]
+#define __pyx_kp_b_iso88591_a_d_q_q_q_q_V4q_1_Cx_4_aq_F_auH __pyx_string_tab[71]
 #define __pyx_int_300 __pyx_number_tab[0]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
@@ -3529,7 +3529,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
  *         # 1. CACHE HIT (sub-ms path)
  *         cached = self.cache.get(key)             # <<<<<<<<<<<<<<
  *         if cached:
- *             return PolicyDecision(**cached, policy_source="CACHE")
+ *             # `cached` is a previously stored decision.dict(), which always
 */
   __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 60, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
@@ -3551,38 +3551,35 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
  *         # 1. CACHE HIT (sub-ms path)
  *         cached = self.cache.get(key)
  *         if cached:             # <<<<<<<<<<<<<<
- *             return PolicyDecision(**cached, policy_source="CACHE")
- * 
+ *             # `cached` is a previously stored decision.dict(), which always
+ *             # already has a policy_source key (RBAC/ABAC/RULES/ALL_PASSED) --
 */
   __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_cached); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 61, __pyx_L1_error)
   if (__pyx_t_9) {
 
-    /* "app/core/engine.py":62
- *         cached = self.cache.get(key)
- *         if cached:
- *             return PolicyDecision(**cached, policy_source="CACHE")             # <<<<<<<<<<<<<<
+    /* "app/core/engine.py":67
+ *             # "got multiple values for keyword argument 'policy_source'".
+ *             # Override it in the dict instead of passing it twice.
+ *             return PolicyDecision(**{**cached, "policy_source": "CACHE"})             # <<<<<<<<<<<<<<
  * 
  *         # 2. COMPUTE DECISION
 */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 62, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (unlikely(__pyx_v_cached == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-      __PYX_ERR(0, 62, __pyx_L1_error)
+      __PYX_ERR(0, 67, __pyx_L1_error)
     }
     if (likely(PyDict_CheckExact(__pyx_v_cached))) {
-      __pyx_t_7 = PyDict_Copy(__pyx_v_cached); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 62, __pyx_L1_error)
+      __pyx_t_7 = PyDict_Copy(__pyx_v_cached); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 67, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
     } else {
-      __pyx_t_7 = __Pyx_PyObject_CallOneArg((PyObject*)&PyDict_Type, __pyx_v_cached); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 62, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_CallOneArg((PyObject*)&PyDict_Type, __pyx_v_cached); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 67, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
     }
-    if (unlikely(PyDict_Contains(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_policy_source))) {
-      __Pyx_RaiseDoubleKeywordsError("function", __pyx_mstate_global->__pyx_n_u_policy_source); __PYX_ERR(0, 62, __pyx_L1_error)
-    }
-    if (PyDict_SetItem(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_CACHE) < (0)) __PYX_ERR(0, 62, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_mstate_global->__pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 62, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_CACHE) < (0)) __PYX_ERR(0, 67, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_mstate_global->__pyx_empty_tuple, __pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 67, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -3594,12 +3591,12 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
  *         # 1. CACHE HIT (sub-ms path)
  *         cached = self.cache.get(key)
  *         if cached:             # <<<<<<<<<<<<<<
- *             return PolicyDecision(**cached, policy_source="CACHE")
- * 
+ *             # `cached` is a previously stored decision.dict(), which always
+ *             # already has a policy_source key (RBAC/ABAC/RULES/ALL_PASSED) --
 */
   }
 
-  /* "app/core/engine.py":65
+  /* "app/core/engine.py":70
  * 
  *         # 2. COMPUTE DECISION
  *         decision = self._evaluate_core(req)             # <<<<<<<<<<<<<<
@@ -3613,20 +3610,20 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
     PyObject *__pyx_callargs[2] = {__pyx_t_7, __pyx_v_req};
     __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_evaluate_core, __pyx_callargs+__pyx_t_8, (2-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 65, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_v_decision = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "app/core/engine.py":68
+  /* "app/core/engine.py":73
  * 
  *         # 3. STORE IN CACHE
  *         self.cache.set(key, decision.dict(), ttl=300)             # <<<<<<<<<<<<<<
  * 
  *         return decision
 */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_7 = __pyx_t_1;
   __Pyx_INCREF(__pyx_t_7);
@@ -3637,26 +3634,26 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
     PyObject *__pyx_callargs[2] = {__pyx_t_5, NULL};
     __pyx_t_6 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dict, __pyx_callargs+__pyx_t_8, (1-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 68, __pyx_L1_error)
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
   }
   __pyx_t_8 = 0;
   {
     PyObject *__pyx_callargs[3 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_7, __pyx_v_key, __pyx_t_6};
-    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_ttl, __pyx_mstate_global->__pyx_int_300, __pyx_t_5, __pyx_callargs+3, 0) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_ttl, __pyx_mstate_global->__pyx_int_300, __pyx_t_5, __pyx_callargs+3, 0) < (0)) __PYX_ERR(0, 73, __pyx_L1_error)
     __pyx_t_3 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_set, __pyx_callargs+__pyx_t_8, (3-__pyx_t_8) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_5);
     __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "app/core/engine.py":70
+  /* "app/core/engine.py":75
  *         self.cache.set(key, decision.dict(), ttl=300)
  * 
  *         return decision             # <<<<<<<<<<<<<<
@@ -4298,25 +4295,25 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } index[] = {{1},{1},{14},{18},{4},{10},{5},{11},{14},{12},{21},{27},{21},{13},{20},{4},{5},{4},{6},{7},{8},{15},{19},{18},{18},{18},{9},{5},{6},{18},{7},{8},{4},{7},{8},{13},{14},{13},{14},{8},{3},{8},{13},{5},{3},{8},{13},{10},{8},{2},{13},{3},{11},{12},{4},{6},{3},{8},{6},{5},{5},{4},{3},{12},{10},{8},{3},{7},{6},{180},{12},{113}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (661 bytes) */
-const char* const cstring = "BZh91AY&SY\224\263\356\005\000\000;\177\373\355\177\374\325}\001\254Q\277e\177 \277\357\377\341\200@@@@@@@@@@\000@\000@\002=\263\256\334\326\271\206\210\242y\240\214&\246OD\000h\r\0004b\030 \000\364\231\251\260\240\3214\2321\023S\302M\222\000\000\000\000\000\000\000\320\003B\032!\250)\241\246\215\003&\200\003\004\014\2154\320\000hh\320\000\302I\020\217T\365\017Q\352\031\000\006\200\000\006@\000\000\0006\243H\2026\256\037V~\327\341B\264/\344ZR\212IB$\206&LN\017@\3709\345ul \212U\326T\t,P\020\243\036\306\327\261\2214\\\354\r\270.)\002\003R\262\r-N\273\250$'}\220\220-K\331\332g\202\213\0271^A/\334c\035\374)\002\273\315\274\224\201\344\302\333o\233P\004\036S@y\237\246\343\246\353l\324Pn\242\002\032\001T\321)\220H0\034\260\350\240<\324f,1a@8\002\006\317\203!\375=\016\370`J\000(\304\200\247_.\370\322|\246\206\r\037\312\317 \001\004\273t\215*K\264$5\310\253\325\325\207N\023,\302\222\217J\313\224a\205d\222\305\232\217E(\323\213\312!\337\210\346\0328\014\300]_AGT\230\267\203\251\326\210\231\206\241\310\322&i\251\270\022\240|\321\255\214_\254\341\r7\305=\t\370\363ZQ\020e\002dnE\024\032c\366\021)\302\352i\006\345|\272\241\000\216\001 .\350\200\304\263D \010f\266\251\310,\344\010\0332\030D(\304\212Z\353J\336\020\330\240\002\336\036\261\002\000\035\022\213r\200lk\206|)>\030n\221\006z\246\314\341\365%s\356\352\253i4\322\255 O;\331'\021\223D\023\243\250\344\004\371\360WA\214<P\260X\304\245.\325m\025\t\n3\234\345\256]G\304\266\006\323\000\023\211\023 #G\250\305\003\312\303X\215\001\020\0338\220\220#\212W!\007\244\010\346\006\211c\r\231b\031^D`\362\257\255\210\357'\016\205B\323\210\242\211x\013\026l\013\363 \206t\245N\360\002\375\260c\006\020\"#\271\343\231\377?C\000\343\000\377=\312\303?\005\026q\367\337&\344\331\000U\231\000\311\215\371\326\016,/[\313\224*\254}PH\354\262\317\355k\024\363rE\024\325\216\004hV(\214\247`\326&7\033\331U\r\223\000\273\222)\302\204\204\245\237p(";
-    PyObject *data = __Pyx_DecompressString(cstring, 661, 2);
+    const struct { const unsigned int length: 8; } index[] = {{1},{1},{14},{18},{4},{10},{5},{11},{14},{12},{21},{27},{21},{13},{20},{4},{5},{4},{6},{7},{8},{15},{19},{18},{18},{18},{9},{5},{6},{18},{7},{8},{4},{7},{8},{13},{14},{13},{14},{8},{3},{8},{13},{5},{3},{8},{13},{10},{8},{2},{13},{3},{11},{12},{4},{6},{3},{8},{6},{5},{5},{4},{3},{12},{10},{8},{3},{7},{6},{180},{12},{118}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (680 bytes) */
+const char* const cstring = "BZh91AY&SYf\t\363\314\000\000<\177\377\355\177\374\325}\001\254Q\377e\177 \277\357\377\341\200@@@@@@@@\000@@@\000@\000@\0023V\332\225f\032$\241\346\251\352=OS\324yM\224i\220\000hd\032\003#\324\001\243\t\344\324\3656\324\310%\010U?\323F\225?\324\001\242\231\000b\003 \000\320\000\001\220\3654\300\320i\242\t\246\246\250\336\232\214\232jd\3234\2150\214\0010\206\206 h\311\265\032`\007\006A\243@\0314\3044\320d\030\206\0204\006\214LF\200\000\036\020YyC{\203\376\234<\007\022i\023\221\r)h\221\264!\001\006\037}\030\264\036\200\351Y4\322\376`9\261\273Ls\010\352c\034\224?\313\\!\032\215\037b\255\006\206p\341U}2WN\217\n\312+h\332\014\007\267S\273{|\237\244'\301\307\360T\242\357\305G'\317\211\200}\225X\301\364\256;\005\231\006]\345b\374\267l\337\346\336\235\230d]\211\206\230J\215\306\2508P\275\225Xp\3761\276\320\304\206Iq \244_\010\252u\275S\t\211\014I\0224\221f\021\370J\036d\221\232h\304\231\224\000A1\236\321\254\225\264r\224l\021j\352T\202\234\006R\206\222o\3607\227\006x\271\"p\344r\021\2021\207\212[\032\254\242\302B\250\027\261\311!\224\24195]W\224 \366\252\306\225\276\214\216!\224\276\263\352\266;\242\343\014\017\242\342\207\342\327\031\232\014X\232\244\366r\352IN8\224X\327\213\020\265\266\375w\020'\002\321>\365\007K\036\030\201\033\371\333\002\007\032\203\tV\3043%\241R\271\327\232\364\303\030(\001\323\023p{\000)\241Sv\300a*AiE\245\346X \036\264\240\225\rrj\325\335Ja\246\211\202\000[\266\305\021D\n<J\347r\332%\2309\357\302\247G\246<N\2423?.i\027\026\244\327\002\3235;\326T\370\tb\274\233\002\2561X\313:\"\t\217\344j\021H\004\350yaIW\t\271Az\300%\253\032\2352W\336F\226\"(\272\374\354\344\357`+\213\031kD\252\247\352\274\273%\rEA\346n\254\3730\201f\3101\347\350\004D}\276\362\351\374\375\031\030\377\000\377\177\n\2337J)\206\013j\336\2360\023\2770\021\271\353B\341\270X\026\273$\220R\227\255\351\234R\250\271\313=\023\327\216/)\3377P\275\"\210\245>\021H\243\221\361fTr\277\304]\311\024\341BA\230'\3170";
+    PyObject *data = __Pyx_DecompressString(cstring, 680, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (577 bytes) */
-const char* const cstring = "x\332\215\221=o\323@\030\307[\021\241\024\002$4\022\010U\025)\210\321UE\006\304\0002IP\220\242\252MZ$\246\323\365\374$\234r\361\331w\347\222,\260f\364\350\321\243G\217\371\030\031=\346#\364#pg\223\220L`\311\347{\336\177\317\337\326GL\010H\371r$\260\253\300\301\236wJ\270\200SpG\324\005\313\233\331\237\354\226\335\353\241\013{0\350\264[v\253\333\271\340\214\222Y\013\223\357P\\\333@\250\244\334-\254N^\272}\267\020\242.U\010\355:\341\026\263\000+@f\342Nh\035)\234}\360\003\220\246|6\325o\233\022\205\316a\252\3720\354k\272\376u\2573\3007\230`\2424\004f\214\377\3107\261L\337\365\327*62\346\204;\300\244\345\374\241\336r\211b\222\361H\020\267TKc\021\263'\2263\227Pn:\361@\351>\362&\240\314Ac\230\345\361\374p\010\323\021\275*R\002\023\320Dc\302\265\252S\265\036\345\030t\344p\2026\313oD0\033\354J\2621\204\016\3755\002\006\022\241a\340\352.#Pkm\021\225h\203G\025L\244\206Ch\2025\217~&\2400aX\312\334\340\216\356bn.\236\350/\037{\271\322H\362@\020\360\270\207\220'\300\303\"O\362\003\314\212DC\2425\225\334\325R\t(\322\005\250@\270\202k\256\034N\002\033J\003f\216\242N\337\034\030\342\200i\257\312\377\245R,\320\032#\352\230\305@.K'\313\223fj\257\312\225\371\227\360*:\216\375\344^\362.}\233\342\254\374p\336\234\373Y\3450\374\020\327\262\352\363h?\253>\013\375\254z\034\341\273\373{\007\217\266*\336\247\203\305\376\177U\\G\247I-y\225|K\311\242\366\317\212\352\374gt\231U\352\241mr\316\262\312\213\250\261,\351`\226\003_.KG\313#+\301\253\362\343\271\023\276\211\036\304\215\254\362\304t\3349\356\312{\007O\303z\3705jF~\234\203\236\025C\017\343nr\276h\230Y\365\260\031\376\212q\354\027\250\237\303\327!\016\203\250\033w\222zr\225\326Ve\335\3517\023\260t-";
-    PyObject *data = __Pyx_DecompressString(cstring, 577, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (586 bytes) */
+const char* const cstring = "x\332\215\221\277o\323@\024\307[Q\241\024RHh$\020\252*Z\020\243\243\212\014\210\0010iP\221*\324&-\022\323\351z~)\247^|\366\335\271$\013\254\031=z\364\3501cG\376\204\214\036\363'\344O\340\235MB3\201%\237\357\375\376\274\257\235w\2241\320\372\331\245\242\276\001\217\006A\223I\005M\360/\271\017N0r?\270m\367\370\230\234\270\275^\347\260\355\266\217:'Rp6jS\366\r\312\353!0\256\271\364K\253S\224\336\276;\204p\237\033BV\235pMED\r\020;q%\264\210\224\316.\204\021h[>\032\342{\310\231!\237ah\272\320\357\"]\367\374\270\323\243\027\224Qf\020\202\n!\277\027\2338\266\357\342\353\224\033Ys =\020\332\361\376P\337r\251r\222\365hP\327\034\245q\230\335\223\352\221\317\270\264\235dd\260\217\276\210\270\360\310\025\214\212xqxL`\004W%FQ\006Ht\305$\252:4\213Q\236E'\236dd\271\374R\004\273\301\252$KCa\350\257\021\t\320\204\364#\037\273\\\202YhK\270&K<n`\240\021\216\220\001E\036|\006`(\023T\353\302\220\036v\2617\237\016\360+\257\202Bi\242e\244\030\0042 $P\020PU$\205\021\025e\242%AM\265\364Q*\005e\272\002\023)_I\344*\3404\210\276\266`\366(\353\360\346A\237F\002\275\246\370\227\306\210\0105&\334\263\213\201\236n\354O\367[\023wV\251\216?\305g\311n\032fw\262\327\223W\023\232W\356\217[\3430\257n\307o\323z^{\222\254\347\265\307q\230\327v\023:\277\273\266\271u\253\342\315\244w\263\376_\025\347I3\253g\317\263\257\023vS\377gEm\374#9\315\253\215\330\2659\007y\365i\2627\335\300`^\000\237N7v\246;NFg\225\007c/~\231\334K\367\362\352C\333q\345\230W\3266\037\305\215\370K\322J\302\264\000=\230W\327\266\0328v;m\247\303i\363\375\257u;\260\021\267\342\237)M\303\222\367c\374\"\246q\224\034\245\235\254\221\235M\352\263\n\266\373\rA\317u\227";
+    PyObject *data = __Pyx_DecompressString(cstring, 586, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (955 bytes) */
-const char* const bytes = ".?access grantedapp/core/engine.pyABACALL_PASSEDCACHEPolicyCachePolicyDecisionPolicyEnginePolicyEngine.__init__PolicyEngine._evaluate_corePolicyEngine.evaluatePolicyRequest__Pyx_PyDict_NextRefRBACRULESabacactionallowedapp.coreapp.core.engineapp.models.decisionapp.models.requestapp.services.cacheasyncio.coroutinesbuild_keycachecachedcline_in_tracebackcontextdecisiondict__doc__evaluateevaluate_abac_evaluate_coreevaluate_rbacevaluate_rules__func__get__init___is_coroutineitemskey__main____metaclass____module____name__okpolicy_sourcepop__prepare____qualname__rbacreasonreqresourcereturnrolesrulesselfset__set_name__setdefault__test__ttluser_idvalues\320\004\"\320\"4\260A\340\010\014\210I\220T\230\036\240q\250\003\2508\2603\260a\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220T\230\036\240q\250\003\250:\260S\270\001\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220U\230/\250\021\250#\250Y\260c\270\021\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\020\210~\230Q\330\014\024\220A\330\014\023\2201\330\014\032\230!\320\004\036\230a\330\010\014\210I\220Q\320\004\034\320\034.\250a\340\010\016\210d\220&\230\n\240!\330\014\017\210q\330\014\017\210q\330\014\017\210q\330\014\017\210q\360\010\000\t\022\220\024\220V\2304\230q\240\001\330\010\013\2101\330\014\023\220>\240\023\240H\250N\270!\360\006\000\t\024\2204\220\177\240a\240q\360\006\000\t\r\210F\220$\220a\220u\230H\240E\250\024\250T\260\021\340\010\017\210q";
+    #else /* compression: none (960 bytes) */
+const char* const bytes = ".?access grantedapp/core/engine.pyABACALL_PASSEDCACHEPolicyCachePolicyDecisionPolicyEnginePolicyEngine.__init__PolicyEngine._evaluate_corePolicyEngine.evaluatePolicyRequest__Pyx_PyDict_NextRefRBACRULESabacactionallowedapp.coreapp.core.engineapp.models.decisionapp.models.requestapp.services.cacheasyncio.coroutinesbuild_keycachecachedcline_in_tracebackcontextdecisiondict__doc__evaluateevaluate_abac_evaluate_coreevaluate_rbacevaluate_rules__func__get__init___is_coroutineitemskey__main____metaclass____module____name__okpolicy_sourcepop__prepare____qualname__rbacreasonreqresourcereturnrolesrulesselfset__set_name__setdefault__test__ttluser_idvalues\320\004\"\320\"4\260A\340\010\014\210I\220T\230\036\240q\250\003\2508\2603\260a\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220T\230\036\240q\250\003\250:\260S\270\001\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220U\230/\250\021\250#\250Y\260c\270\021\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\020\210~\230Q\330\014\024\220A\330\014\023\2201\330\014\032\230!\320\004\036\230a\330\010\014\210I\220Q\320\004\034\320\034.\250a\340\010\016\210d\220&\230\n\240!\330\014\017\210q\330\014\017\210q\330\014\017\210q\330\014\017\210q\360\010\000\t\022\220\024\220V\2304\230q\240\001\330\010\013\2101\360\014\000\r\024\220>\240\023\240C\240x\320/@\300\001\360\006\000\t\024\2204\220\177\240a\240q\360\006\000\t\r\210F\220$\220a\220u\230H\240E\250\024\250T\260\021\340\010\017\210q";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
@@ -4436,7 +4433,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   {
     const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 50};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_req, __pyx_mstate->__pyx_n_u_key, __pyx_mstate->__pyx_n_u_cached, __pyx_mstate->__pyx_n_u_decision};
-    __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_engine_py, __pyx_mstate->__pyx_n_u_evaluate, __pyx_mstate->__pyx_kp_b_iso88591_a_d_q_q_q_q_V4q_1_HN_4_aq_F_auH, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_engine_py, __pyx_mstate->__pyx_n_u_evaluate, __pyx_mstate->__pyx_kp_b_iso88591_a_d_q_q_q_q_V4q_1_Cx_4_aq_F_auH, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;

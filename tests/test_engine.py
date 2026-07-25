@@ -134,7 +134,15 @@ def test_all_checks_pass_returns_allowed():
 
 def test_evaluate_returns_cached_decision():
     mock_redis = MagicMock()
-    mock_redis.get.return_value = json.dumps({"allowed": True, "reason": "cached", "context": {}})
+    # A real cached entry is always a previous decision.dict(), which always
+    # includes policy_source (RBAC/ABAC/RULES/ALL_PASSED) -- a payload
+    # missing that key (as this test used to use) can't reproduce the
+    # duplicate-kwarg bug in evaluate()'s cache-hit branch. See
+    # test_evaluate_cache_hit_after_miss_does_not_raise for the regression
+    # test that exercises a real store->retrieve round trip instead.
+    mock_redis.get.return_value = json.dumps(
+        {"allowed": True, "reason": "cached", "context": {}, "policy_source": "ALL_PASSED"}
+    )
     engine, _ = make_engine(mock_redis)
 
     req = basic_request()
@@ -143,6 +151,48 @@ def test_evaluate_returns_cached_decision():
     assert decision.allowed is True
     assert decision.policy_source == "CACHE"
     mock_redis.setex.assert_not_called()
+
+
+class _FakeRedis:
+    """Minimal redis stand-in: get/setex backed by an in-memory dict, so a
+    real store -> retrieve round trip happens instead of a static mocked
+    payload. This is what actually reproduces the PolicyDecision
+    duplicate-kwarg bug: a stored decision.dict() always carries its own
+    policy_source (e.g. "ALL_PASSED"), which a hand-written mock payload can
+    accidentally omit and mask (as test_evaluate_returns_cached_decision
+    used to, before it was corrected above)."""
+
+    def __init__(self):
+        self.store: dict = {}
+
+    def get(self, key):
+        return self.store.get(key)
+
+    def setex(self, key, ttl, value):
+        self.store[key] = value
+
+
+def test_evaluate_cache_hit_after_miss_does_not_raise():
+    """Regression test for PolicyDecision(**cached, policy_source="CACHE")
+    raising TypeError: got multiple values for keyword argument
+    'policy_source'. `cached` is a previously stored decision.dict(), which
+    already has a policy_source key from the original evaluation -- the
+    first call (real cache miss) computes and stores a real decision, and
+    the second call (real cache hit against that same stored value) must
+    succeed instead of raising, returning policy_source="CACHE"."""
+    fake_redis = _FakeRedis()
+    engine, _ = make_engine(fake_redis)
+    req = basic_request()
+
+    first = engine.evaluate(req)
+    assert first.allowed is True
+    assert first.policy_source == "ALL_PASSED"
+
+    second = engine.evaluate(req)  # must not raise
+
+    assert second.allowed == first.allowed
+    assert second.reason == first.reason
+    assert second.policy_source == "CACHE"
 
 
 def test_evaluate_cache_miss_computes_and_stores():
