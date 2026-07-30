@@ -8,11 +8,6 @@ WORKDIR /app
 
 # Build context is the parent directory (/home/manish/Desktop/machine).
 
-# Install IAM client SDK from source.
-COPY omnibioai-iam-client /tmp/omnibioai-iam-client
-RUN pip install --no-cache-dir /tmp/omnibioai-iam-client \
- && rm -rf /tmp/omnibioai-iam-client
-
 # Install security-audit package so that `audit.logger` is importable.
 # The pyproject.toml is currently empty, so fall back to copying the
 # audit package directly into site-packages if pip install fails.

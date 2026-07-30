@@ -15,7 +15,6 @@ EXTENSIONS = [
     "app/core/rbac.py",
     "app/core/abac.py",
     "app/core/rules.py",
-    "app/core/middleware.py",
     "app/services/policy_service.py",
     "app/services/cache.py",
     "app/api/routes_policy.py",
