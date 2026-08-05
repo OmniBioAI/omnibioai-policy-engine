@@ -7,6 +7,8 @@ class PolicyRequest(BaseModel):
     email: Optional[str] = None
     roles: list[str] = []
     permissions: list[str] = []
+    # PR12: requester's organization, for tenancy scoping (app/core/tenancy.py).
+    org_id: Optional[str] = None
 
     action: str
     resource: str

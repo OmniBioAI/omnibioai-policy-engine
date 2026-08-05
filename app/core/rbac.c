@@ -2247,7 +2247,7 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
   PyObject *__pyx_tuple[4];
   PyObject *__pyx_codeobj_tab[1];
-  PyObject *__pyx_string_tab[37];
+  PyObject *__pyx_string_tab[38];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
 PyTypeObject *__pyx_CommonTypesMetaclassType;
@@ -2294,37 +2294,38 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_kp_u_admin_override __pyx_string_tab[3]
 #define __pyx_kp_u_app_core_rbac_py __pyx_string_tab[4]
 #define __pyx_kp_u_dataset __pyx_string_tab[5]
-#define __pyx_kp_u_list_str __pyx_string_tab[6]
-#define __pyx_kp_u_missing_role_data_scientist __pyx_string_tab[7]
-#define __pyx_kp_u_missing_role_researcher __pyx_string_tab[8]
-#define __pyx_kp_u_rbac_passed __pyx_string_tab[9]
-#define __pyx_kp_u_tes __pyx_string_tab[10]
-#define __pyx_kp_u_tuple_bool_str __pyx_string_tab[11]
-#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[12]
-#define __pyx_n_u_action __pyx_string_tab[13]
-#define __pyx_n_u_admin __pyx_string_tab[14]
-#define __pyx_n_u_app_core_rbac __pyx_string_tab[15]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[16]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[17]
-#define __pyx_n_u_data_scientist __pyx_string_tab[18]
-#define __pyx_n_u_evaluate_rbac __pyx_string_tab[19]
-#define __pyx_n_u_func __pyx_string_tab[20]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[21]
-#define __pyx_n_u_items __pyx_string_tab[22]
-#define __pyx_n_u_main __pyx_string_tab[23]
-#define __pyx_n_u_module __pyx_string_tab[24]
-#define __pyx_n_u_name __pyx_string_tab[25]
-#define __pyx_n_u_pop __pyx_string_tab[26]
-#define __pyx_n_u_qualname __pyx_string_tab[27]
-#define __pyx_n_u_researcher __pyx_string_tab[28]
-#define __pyx_n_u_return __pyx_string_tab[29]
-#define __pyx_n_u_set_name __pyx_string_tab[30]
-#define __pyx_n_u_setdefault __pyx_string_tab[31]
-#define __pyx_n_u_str __pyx_string_tab[32]
-#define __pyx_n_u_test __pyx_string_tab[33]
-#define __pyx_n_u_user_roles __pyx_string_tab[34]
-#define __pyx_n_u_values __pyx_string_tab[35]
-#define __pyx_kp_b_iso88591_1_xs_vQ_v_wa_v_T_wa_6 __pyx_string_tab[36]
+#define __pyx_kp_u_dataset_read __pyx_string_tab[6]
+#define __pyx_kp_u_list_str __pyx_string_tab[7]
+#define __pyx_kp_u_missing_role_data_scientist __pyx_string_tab[8]
+#define __pyx_kp_u_missing_role_researcher __pyx_string_tab[9]
+#define __pyx_kp_u_rbac_passed __pyx_string_tab[10]
+#define __pyx_kp_u_tes __pyx_string_tab[11]
+#define __pyx_kp_u_tuple_bool_str __pyx_string_tab[12]
+#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[13]
+#define __pyx_n_u_action __pyx_string_tab[14]
+#define __pyx_n_u_admin __pyx_string_tab[15]
+#define __pyx_n_u_app_core_rbac __pyx_string_tab[16]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[17]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[18]
+#define __pyx_n_u_data_scientist __pyx_string_tab[19]
+#define __pyx_n_u_evaluate_rbac __pyx_string_tab[20]
+#define __pyx_n_u_func __pyx_string_tab[21]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[22]
+#define __pyx_n_u_items __pyx_string_tab[23]
+#define __pyx_n_u_main __pyx_string_tab[24]
+#define __pyx_n_u_module __pyx_string_tab[25]
+#define __pyx_n_u_name __pyx_string_tab[26]
+#define __pyx_n_u_pop __pyx_string_tab[27]
+#define __pyx_n_u_qualname __pyx_string_tab[28]
+#define __pyx_n_u_researcher __pyx_string_tab[29]
+#define __pyx_n_u_return __pyx_string_tab[30]
+#define __pyx_n_u_set_name __pyx_string_tab[31]
+#define __pyx_n_u_setdefault __pyx_string_tab[32]
+#define __pyx_n_u_str __pyx_string_tab[33]
+#define __pyx_n_u_test __pyx_string_tab[34]
+#define __pyx_n_u_user_roles __pyx_string_tab[35]
+#define __pyx_n_u_values __pyx_string_tab[36]
+#define __pyx_kp_b_iso88591_1_xs_vQ_v_wa_k_G3a_WA_wa_6 __pyx_string_tab[37]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2341,7 +2342,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   #endif
   for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<37; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<38; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
 Py_CLEAR(clear_module_state->__pyx_CommonTypesMetaclassType);
@@ -2366,7 +2367,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_unicode);
   for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<37; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<38; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
 Py_VISIT(traverse_module_state->__pyx_CommonTypesMetaclassType);
@@ -2552,7 +2553,7 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
  *     if action.startswith("tes.") and "researcher" not in user_roles:
  *         return False, "missing role: researcher"             # <<<<<<<<<<<<<<
  * 
- *     if action.startswith("dataset.") and "data_scientist" not in user_roles:
+ *     # PR12: dataset.read is exempted from the blanket data_scientist
 */
     __Pyx_XDECREF(__pyx_r);
     __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[1]);
@@ -2568,27 +2569,57 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
 */
   }
 
-  /* "app/core/rbac.py":8
- *         return False, "missing role: researcher"
- * 
- *     if action.startswith("dataset.") and "data_scientist" not in user_roles:             # <<<<<<<<<<<<<<
- *         return False, "missing role: data_scientist"
- * 
+  /* "app/core/rbac.py":17
+ *     # still gated here exactly as before.
+ *     if (
+ *         action.startswith("dataset.")             # <<<<<<<<<<<<<<
+ *         and action != "dataset.read"
+ *         and "data_scientist" not in user_roles
 */
-  __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 17, __pyx_L1_error)
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L8_bool_binop_done;
   }
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_data_scientist, __pyx_v_user_roles, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 8, __pyx_L1_error)
+
+  /* "app/core/rbac.py":18
+ *     if (
+ *         action.startswith("dataset.")
+ *         and action != "dataset.read"             # <<<<<<<<<<<<<<
+ *         and "data_scientist" not in user_roles
+ *     ):
+*/
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset_read, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 18, __pyx_L1_error)
+  if (__pyx_t_2) {
+  } else {
+    __pyx_t_1 = __pyx_t_2;
+    goto __pyx_L8_bool_binop_done;
+  }
+
+  /* "app/core/rbac.py":19
+ *         action.startswith("dataset.")
+ *         and action != "dataset.read"
+ *         and "data_scientist" not in user_roles             # <<<<<<<<<<<<<<
+ *     ):
+ *         return False, "missing role: data_scientist"
+*/
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_data_scientist, __pyx_v_user_roles, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 19, __pyx_L1_error)
   __pyx_t_1 = __pyx_t_2;
   __pyx_L8_bool_binop_done:;
+
+  /* "app/core/rbac.py":16
+ *     # granting write/delete). Write/delete actions are unaffected --
+ *     # still gated here exactly as before.
+ *     if (             # <<<<<<<<<<<<<<
+ *         action.startswith("dataset.")
+ *         and action != "dataset.read"
+*/
   if (__pyx_t_1) {
 
-    /* "app/core/rbac.py":9
- * 
- *     if action.startswith("dataset.") and "data_scientist" not in user_roles:
+    /* "app/core/rbac.py":21
+ *         and "data_scientist" not in user_roles
+ *     ):
  *         return False, "missing role: data_scientist"             # <<<<<<<<<<<<<<
  * 
  *     return True, "rbac passed"
@@ -2598,16 +2629,16 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
     __pyx_r = __pyx_mstate_global->__pyx_tuple[2];
     goto __pyx_L0;
 
-    /* "app/core/rbac.py":8
- *         return False, "missing role: researcher"
- * 
- *     if action.startswith("dataset.") and "data_scientist" not in user_roles:             # <<<<<<<<<<<<<<
- *         return False, "missing role: data_scientist"
- * 
+    /* "app/core/rbac.py":16
+ *     # granting write/delete). Write/delete actions are unaffected --
+ *     # still gated here exactly as before.
+ *     if (             # <<<<<<<<<<<<<<
+ *         action.startswith("dataset.")
+ *         and action != "dataset.read"
 */
   }
 
-  /* "app/core/rbac.py":11
+  /* "app/core/rbac.py":23
  *         return False, "missing role: data_scientist"
  * 
  *     return True, "rbac passed"             # <<<<<<<<<<<<<<
@@ -3076,29 +3107,29 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
  *     if action.startswith("tes.") and "researcher" not in user_roles:
  *         return False, "missing role: researcher"             # <<<<<<<<<<<<<<
  * 
- *     if action.startswith("dataset.") and "data_scientist" not in user_roles:
+ *     # PR12: dataset.read is exempted from the blanket data_scientist
 */
   __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_role_researcher); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 6, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
 
-  /* "app/core/rbac.py":9
- * 
- *     if action.startswith("dataset.") and "data_scientist" not in user_roles:
+  /* "app/core/rbac.py":21
+ *         and "data_scientist" not in user_roles
+ *     ):
  *         return False, "missing role: data_scientist"             # <<<<<<<<<<<<<<
  * 
  *     return True, "rbac passed"
 */
-  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_role_data_scientist); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_role_data_scientist); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
 
-  /* "app/core/rbac.py":11
+  /* "app/core/rbac.py":23
  *         return False, "missing role: data_scientist"
  * 
  *     return True, "rbac passed"             # <<<<<<<<<<<<<<
 */
-  __pyx_mstate_global->__pyx_tuple[3] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_rbac_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[3] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_rbac_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 23, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[3]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[3]);
   #if CYTHON_IMMORTAL_CONSTANTS
@@ -3131,34 +3162,34 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } index[] = {{1},{179},{8},{14},{16},{8},{9},{28},{24},{11},{4},{16},{20},{6},{5},{13},{18},{18},{14},{13},{8},{13},{5},{8},{10},{8},{3},{12},{10},{6},{12},{10},{3},{8},{10},{6},{86}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (525 bytes) */
-const char* const cstring = "BZh91AY&SY\374\025\"\325\000\000,\177\377d\310\244E`\247\245P\217!t\n\277\377\377\340@@@@@\000@@@\000@@@\000@\001\245@A\250\232j\237\210\324\236\005=M\244\320i\2657\252=@h\014\215\036\247\251\3413T\022\246CA4\022m\032&\246F\200\000\000\r\000z\232\003\230\0020L@0\t\202h\310h`\023\004bc\230\0020L@0\t\202h\310h`\023\004bl\030-\r\r*\010\341\n\242_\210n)i__\255\225s\325\247c,\320{L\342v\374\243\350\035\230$]\014&qH\341\312\363&\236o\357\205\256\331`\225\323\235\312u\3707\220\343\307\2669\340p3\323\334\306\031c\242\345\274\346 \304?\252\357\252\034\363\320~\217\321\"\225\244Z\010?\256\243\322?a]!\030\254\003\227F\244\242\375[\260\016\222\336:L\222d\214P%L\204\\H\206p`\0368\272\350&\020\025\3224\036\375\243\366\364\356Z\215bi\227U\272\032\\\220\036K\277\234w\343\250\3208;\0261ct\272\255\t~\344\254\263-\220\262\333\003\007\234#J\013\216\366\010C\217'\034\215\365s\006\261.\343R\005\2666\332>p01\233\314\364\234\311\304\301\022Y \205,\260\207-\346\326R7+\257:.\365\264n\243\320\324\217#\205aw\n?R8\\\332\342\304y%k\335\272&\374\363\013nLfU\212\251\003,r6.\255NDJ\363B,T\312\3422\242V\004\030\253\244\222\321]\256\014?4#D)s\017\024$\346B<\365WB=\305T;s\330\217\203\260TTJ\307\226\322\250k\307\022\223\330$\244#\246\217\226\273\331\257\3764\304\335\205\264\310\024\240\372\2423D\244\223\200\331)\314\250\2267\236\242~\3203VM\357:\321\314,\027_~\024\273\256\262\277\271\273q(m\003\374]\311\024\341BC\360T\213T";
-    PyObject *data = __Pyx_DecompressString(cstring, 525, 2);
+    const struct { const unsigned int length: 8; } index[] = {{1},{179},{8},{14},{16},{8},{12},{9},{28},{24},{11},{4},{16},{20},{6},{5},{13},{18},{18},{14},{13},{8},{13},{5},{8},{10},{8},{3},{12},{10},{6},{12},{10},{3},{8},{10},{6},{99}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (557 bytes) */
+const char* const cstring = "BZh91AY&SY\315\023\375\\\000\0000\177\373\347\315\244C`\207\255P\257\241p\212\277\377\377\340@@@@@\000@@@@@\000@\000@\001\246\356\325g\010\246\000\246\3212\237\250\2154\323#\t\246\236\243F\201\3524\r\007\240\332OMPjja=T\375OT\336\202OL\243 \000\014\002a0L\200z\201\206\246\t\0324\223\312\r\352\207\244\000\0001\000d\000\000\001(\202zMS\324dz#M\032h=@\000\000\000\000\000^\376\300\246\272\304u(\n\000Q\r\013\010*M`\372\310\366&-;\250\303F_\231\267d5$\032~\265#\354\r\324\344\203d\220\203R#\267\307\014\334[~!\206\226F\302\214\306&u\371h}\323\207o4\267$\032\005\267\317\211\020Ud\242s\332#0_\323w\231\013\323\310$\222D\305D\031\352A4\014!7\240\344ah=B+\206\311\r\365g\177\341\004\370\275\254\371&)\220X\\\225aV;[\276\217\003V)\245\363\007\222!\025\302S0L\332g\201\241\216\006Q~;\224\3419\026\022\203\353\254\272\037`\220\026\272\267\251V\361\232\277qY\276\2467\234\3425\203\232\352\213\210-h@\036Fs\334\025T\311LB\206\241\200J\n\247\323B\203\267\2316\342MB\250y\244V\256f\rb\251\024<\361\230!EF\313MB\353\3144M\3145i\302\366\242\010B\302@\327(ZoA,'\003\313e@\340\271!v\352'X\242Y@t\344\363\r`l\001B'\304,A\034h\"&\360\251l&:\336!\026\245g\002\014M\031Z\363\222\270P>\342\221\245Jj(\0368\031(R8f\344\204r\334\345K%u_\000\306r\271Vq\277SL+\265h\246WEf\025\022\"!\221\034\3618\351\001\\\215x\230\nPB\251H\373P0\344\212k\252\225aQ\277\003\367\327'\365\352 j\367\236\247\206\034\373gk^\327h,\366mj\260\354\256\031\036W\213\374]\311\024\341BC4O\365p";
+    PyObject *data = __Pyx_DecompressString(cstring, 557, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (442 bytes) */
-const char* const cstring = "x\332UQ=o\0241\020\005\t\t$\n\024\211\"\005\212\206\352\204\004\033!E\010\245\241\340C\242\211\016Dw:Y\263\366\034g\360\332\213g\274\334v)\257\2742\345\375\204\224)\371\tW\246\344\2470\016\210$+\255w\274\363\346\371\275\3477'I\010d\211\002oGY\246\010\236\301Q\360-e\024\n#\260do\205r\005E\230\276\237\2768z}\004\030\035d\372FV\030\270\2646 31\244\005\264\305\007\361\021d\354\211\033\370\270\2001\025\210D\016$A\257\270\233\003\262\244\010LR\013\230`\214IP|\212F\307}\374:\001\347\263\036\342\007\252\323\037005\350\234Q\034\241\353\364\2344P\316\336\021\366\375\241M\231\016s\213\266\351G\207\202J\334\004\3172S\023\363\3163+%\344\024\350\030j\333\260\365\024E\001\267{\231\2300\333\245\022+\327\225fr\242n\244\364\201fmJ\341y\315en\314t\\\351\373N\0232'\264\222\317\264@[\365_iSIM\225\324T\032\3441Z\237\352\217T4 b\033t5^\275f\264\244\220\357\267E\321\200\241\350%\230:n\314\242D]\215g\363\237\302\013ulL\207J\242O\227\\\tT\253\210\235~\373\324\033\363\243`\370\273\275a\213\244d\035\321|\376A\265r\252\275\004Q_\306\250Y1\2460eS#\341\252\204xw\347`w\360\362|\377b\357\362\336\375\323\325\2327O/\037<Z\017\233O\277u?\254ggw\317\366\267\217\267\363\363\211B\264\363s\203\327\235'\333/\273g\307\027\223_\327\255\207\353W\233\275?\222\320\371\230";
-    PyObject *data = __Pyx_DecompressString(cstring, 442, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (469 bytes) */
+const char* const cstring = "x\332UQ=o\0241\020\rR\200HD\240\223R\244!2\3255\260\021\"B\210\006!\276D\023\0354\024\247\310\232\263\3478\023\257\275x\306\307mG\271\345\226W\336OH\311\317\270\362\312\373\t\374\004\306\t\240d\245\265\307\3537o\336{\373\35242*\236\001\2537-\317bP\216\224E\357&\230\200\321\267\21289\303\230\n(\250\321\273\321\223\223\027'\n\202U\t\277\241aR\224'\306\003\021\222\212S5\311\316\263\013\212\333\006\251R\037\247\252\215Y\005D\2538\252Fp\327\033x\206A\021r)\324\020B\210\014\354b\320\322\356\302\327\241\262.\311\0207\307\322\375\036<a\005\326j\301!\330Z\346\3049\246\344,B\323\034\233\230\3608M\300TMk\201A\210\253\177{\022\274w\304c1tV;\"\241W)z|\251\nD\223q\030X\0007\357\022\022B23\031\"\274\227\372\321\2628\343\334x\034Ob\364\217KFgZ\217\332\205\274o%-}\212\013\376\214S0\305\313\245N\221W\025yU\241\001j\203q\261|\210Y\302B2^V\355\304w\002\203\0029\277)\n\347\340\263\374\020]\332\265\236\346 \253v\244\377S8\306\232\264\256AH\344\251\243\315\036K\025\240\226\275\211\215\326\3373\370\253\3435[\3109I\213d\364\027*\225\025\355\331\263\370\322Z\314\262\326\2310\351\022\t\025%H\353\235\243\365\321\323\213\303_\203\315\356\335\237\213\216\372G\233\275\007\335\274\377\264\225\363\274\033/o-\017W\007\253\263\213\241@\344\346G\017\277\017vn\337\331\354\335\357\316\227\203\245\300\367\273\017\375\263\036\244X\357?\\~Y\275\336^\341\266\273\367\272\347\375\340\017\024B\001\355";
+    PyObject *data = __Pyx_DecompressString(cstring, 469, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (643 bytes) */
-const char* const bytes = "?Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.add_noteadmin overrideapp/core/rbac.pydataset.list[str]missing role: data_scientistmissing role: researcherrbac passedtes.tuple[bool, str]__Pyx_PyDict_NextRefactionadminapp.core.rbacasyncio.coroutinescline_in_tracebackdata_scientistevaluate_rbac__func___is_coroutineitems__main____module____name__pop__qualname__researcherreturn__set_name__setdefaultstr__test__user_rolesvalues\320\000\036\320\0361\260\030\270\021\330\004\007\200x\210s\220!\330\010\017\210v\220Q\340\004\007\200v\210[\230\001\230\030\240\024\240]\260'\270\021\330\010\017\210w\220a\340\004\007\200v\210[\230\001\230\034\240T\320):\270'\300\021\330\010\017\210w\220a\340\004\013\2106\220\021";
+    #else /* compression: none (668 bytes) */
+const char* const bytes = "?Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.add_noteadmin overrideapp/core/rbac.pydataset.dataset.readlist[str]missing role: data_scientistmissing role: researcherrbac passedtes.tuple[bool, str]__Pyx_PyDict_NextRefactionadminapp.core.rbacasyncio.coroutinescline_in_tracebackdata_scientistevaluate_rbac__func___is_coroutineitems__main____module____name__pop__qualname__researcherreturn__set_name__setdefaultstr__test__user_rolesvalues\320\000\036\320\0361\260\030\270\021\330\004\007\200x\210s\220!\330\010\017\210v\220Q\340\004\007\200v\210[\230\001\230\030\240\024\240]\260'\270\021\330\010\017\210w\220a\360\024\000\005\006\330\010\016\210k\230\021\230!\330\010\014\210G\2203\220a\330\010\014\320\014\035\230W\240A\340\010\017\210w\220a\340\004\013\2106\220\021";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 36; i++) {
+    for (int i = 0; i < 37; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
-      if (likely(string) && i >= 12) PyUnicode_InternInPlace(&string);
+      if (likely(string) && i >= 13) PyUnicode_InternInPlace(&string);
       if (unlikely(!string)) {
         Py_XDECREF(data);
         __PYX_ERR(0, 1, __pyx_L1_error)
@@ -3166,7 +3197,7 @@ const char* const bytes = "?Note that Cython is deliberately stricter than PEP-4
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 36; i < 37; i++) {
+    for (int i = 37; i < 38; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -3177,14 +3208,14 @@ const char* const bytes = "?Note that Cython is deliberately stricter than PEP-4
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 37; i++) {
+    for (Py_ssize_t i = 0; i < 38; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 36;
+      PyObject **table = stringtab + 37;
       for (Py_ssize_t i=0; i<1; ++i) {
         #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
         #if PY_VERSION_HEX < 0x030E0000
@@ -3232,7 +3263,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   {
     const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_user_roles, __pyx_mstate->__pyx_n_u_action};
-    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_rbac_py, __pyx_mstate->__pyx_n_u_evaluate_rbac, __pyx_mstate->__pyx_kp_b_iso88591_1_xs_vQ_v_wa_v_T_wa_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_rbac_py, __pyx_mstate->__pyx_n_u_evaluate_rbac, __pyx_mstate->__pyx_kp_b_iso88591_1_xs_vQ_v_wa_k_G3a_WA_wa_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;
