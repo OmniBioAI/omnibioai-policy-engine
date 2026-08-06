@@ -65,6 +65,39 @@ def test_permission_allow_falls_through_to_all_passed():
     assert decision.policy_source == "ALL_PASSED"
 
 
+def test_permission_deny_for_real_gateway_action_shape_workflow_execute():
+    """PR13 regression lock: the tests above all use action="tes.submit",
+    which is never what real gateway-routed traffic actually sends for
+    workbench/tes/toolserver (the Gateway's PolicyClient pre-resolves
+    `action` to the literal permission string itself, per
+    SERVICE_PERMISSION_MAP) -- this is that real shape, and would have
+    caught the ACTION_PERMISSION_MAP gap this PR fixes (previously
+    required_permission("workflow.execute", ...) returned None, so this
+    request was allowed unconditionally regardless of `permissions`)."""
+    engine, _ = make_engine()
+    req = basic_request(
+        roles=[], permissions=["dataset.read"],  # populated, but missing workflow.execute
+        action="workflow.execute", resource="workbench",
+    )
+
+    decision = engine._evaluate_core(req)
+
+    assert decision.allowed is False
+    assert decision.policy_source == "PERMISSION"
+
+
+def test_permission_allow_for_real_gateway_action_shape_model_use():
+    engine, _ = make_engine()
+    req = basic_request(
+        roles=[], permissions=["model.use"], action="model.use", resource="model-registry",
+    )
+
+    decision = engine._evaluate_core(req)
+
+    assert decision.allowed is True
+    assert decision.policy_source == "ALL_PASSED"
+
+
 def test_permission_check_is_noop_for_legacy_role_only_traffic():
     """No permissions supplied at all (today's real production shape) must
     behave exactly as it did before this PR."""
