@@ -1,4 +1,4 @@
-from app.core import rbac, abac, rules
+from app.core import rbac, abac, rules, permissions, tenancy
 from app.models.request import PolicyRequest
 from app.models.decision import PolicyDecision
 from app.services.cache import PolicyCache
@@ -20,6 +20,24 @@ class PolicyEngine:
                 allowed=False,
                 reason=reason,
                 policy_source="RBAC"
+            )
+
+        ok, reason = permissions.evaluate_permission(
+            req.roles, req.permissions, req.action, req.resource
+        )
+        if not ok:
+            return PolicyDecision(
+                allowed=False,
+                reason=reason,
+                policy_source="PERMISSION"
+            )
+
+        ok, reason = tenancy.evaluate_tenancy(req.org_id, req.context)
+        if not ok:
+            return PolicyDecision(
+                allowed=False,
+                reason=reason,
+                policy_source="TENANCY"
             )
 
         ok, reason = abac.evaluate_abac(req.context, req.roles)
@@ -53,7 +71,9 @@ class PolicyEngine:
             req.user_id,
             req.action,
             req.resource,
-            req.context
+            req.context,
+            org_id=req.org_id,
+            permissions=req.permissions,
         )
 
         # 1. CACHE HIT (sub-ms path)
