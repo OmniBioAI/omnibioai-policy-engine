@@ -67,6 +67,31 @@ It evaluates:
 * Bioinformatics dataset protection rules
 * Model registry immutability rules
 
+### 🔑 Permission-aware authorization
+
+A second, additive gate alongside role-name/action-string RBAC
+(`app/core/rbac.py`): `app/core/permissions.py`'s `ACTION_PERMISSION_MAP`
+checks the requester's `permissions` claim (forwarded by
+`omnibioai-api-gateway`'s `PolicyMiddleware` on every `/policy/evaluate`
+call) against the same permission-registry strings `omnibioai-auth`
+reserves (`workflow.execute`, `model.use`, `dataset.read`, etc.) —
+this is the receiving end of the gateway's own
+`SERVICE_PERMISSION_MAP` (see
+[omnibioai-api-gateway's README](../omnibioai-api-gateway#authentication-pipeline)).
+Deliberately opt-in: a caller with `permissions=[]` falls back to the
+pre-existing role-based check, so nothing changes for traffic that
+predates permission-awareness.
+
+### 🏢 Org-tenancy scoping
+
+`app/core/tenancy.py` adds an opt-in tenancy gate: if a request names
+which organization owns the resource being acted on
+(`context["resource_org_id"]`), the requester's own `org_id` must match
+it. This service has no database of its own to look resource ownership
+up in, so it can only enforce this when a caller explicitly supplies it
+— a no-op for every caller today (no real caller populates
+`resource_org_id` yet). See [Roadmap](#roadmap) below.
+
 ---
 
 ## 🚀 API Overview
@@ -144,6 +169,32 @@ curl http://localhost:8001/health
 
 ---
 
+## Repository Structure
+
+```text
+app/
+├── main.py
+├── api/
+│   ├── routes_policy.py   # POST /policy/evaluate — the only route
+│   └── deps.py
+├── core/
+│   ├── engine.py          # Orchestrates RBAC → ABAC → permissions → tenancy → rules
+│   ├── rbac.py             # Role-name/action-string check
+│   ├── abac.py              # Attribute-based checks (GPU, HPC node, dataset sensitivity)
+│   ├── permissions.py       # ACTION_PERMISSION_MAP — see "Permission-aware authorization" above
+│   ├── tenancy.py            # Opt-in org_id scoping gate — see "Org-tenancy scoping" above
+│   └── rules.py               # Domain-specific policy rules
+├── services/
+│   ├── policy_service.py      # Service-layer orchestration
+│   └── cache.py                # Redis-backed decision cache
+├── models/
+│   ├── request.py, policy.py, decision.py   # Pydantic request/response models
+└── db/                          # Present but unused today — this service has no
+                                   # database of its own (see "Org-tenancy scoping")
+```
+
+---
+
 ## 🧠 Policy Evaluation Flow
 
 1. **RBAC check**
@@ -181,8 +232,8 @@ This service is used by:
 cd ~/Desktop/machine/omnibioai-policy-engine
 pytest tests/ -v --cov=.
 
-# 48 tests passing
-# 93% coverage
+# 90 tests passing
+# 95% coverage
 # Covers: RBAC, ABAC, rule engine, cache, policy service, routes
 ```
 
@@ -225,9 +276,11 @@ pytest tests/ -v --cov=.
 | Redis caching for policy decisions | ✓ Implemented |
 | RBAC/ABAC evaluation | ✓ Stable |
 | Custom rule engine | ✓ Stable |
+| Permission-aware authorization (`app/core/permissions.py`) | ✓ Implemented — see [Permission-aware authorization](#permission-aware-authorization) below |
+| Org-tenancy scoping gate (`app/core/tenancy.py`) | ✓ Implemented, opt-in — activates only once a caller supplies `context["resource_org_id"]`; no real caller does yet |
 | OPA (Open Policy Agent) backend | Planned |
 | Policy versioning system | Planned |
-| Org-level multi-tenancy | Planned v0.5 |
+| Org-level multi-tenancy enforced by default | Planned v0.5 |
 
 ---
 
