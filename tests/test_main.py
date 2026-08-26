@@ -19,7 +19,7 @@ async def test_subscriber_processes_valid_message():
         yield {"type": "subscribe", "data": 1}
         yield {"type": "message", "data": message_data}
         processed.set()
-        await asyncio.sleep(9999)
+        raise asyncio.CancelledError
 
     mock_pubsub = MagicMock()
     mock_pubsub.subscribe = AsyncMock()
@@ -53,7 +53,7 @@ async def test_subscriber_ignores_empty_user_id():
     async def mock_listen():
         yield {"type": "message", "data": message_data}
         done.set()
-        await asyncio.sleep(9999)
+        raise asyncio.CancelledError
 
     mock_pubsub = MagicMock()
     mock_pubsub.subscribe = AsyncMock()
@@ -86,7 +86,7 @@ async def test_subscriber_swallows_invalid_json():
     async def mock_listen():
         yield {"type": "message", "data": "not-json"}
         done.set()
-        await asyncio.sleep(9999)
+        raise asyncio.CancelledError
 
     mock_pubsub = MagicMock()
     mock_pubsub.subscribe = AsyncMock()
@@ -157,7 +157,7 @@ async def test_lifespan_starts_and_stops_subscriber():
     """lifespan should start the subscriber task and cancel it cleanly."""
     with patch("app.main._invalidation_subscriber", new_callable=AsyncMock) as mock_sub:
         async def long_running():
-            await asyncio.sleep(9999)
+            await asyncio.Event().wait()
 
         mock_sub.side_effect = long_running
 
