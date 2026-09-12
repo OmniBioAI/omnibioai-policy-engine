@@ -144,19 +144,19 @@ docker compose up -d policy-engine
 ```
 
 Access (internal only — not exposed externally):
-`http://policy-engine:8001` (Docker internal network)
+`http://policy-engine:8002` (Docker internal network)
 
 ### Standalone (development)
 
 ```bash
 pip install -r requirements.txt
-uvicorn app.main:app --host 0.0.0.0 --port 8001 --reload
+uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
 ```
 
 ### Health check
 
 ```bash
-curl http://localhost:8001/health
+curl http://localhost:8002/health
 # {"status": "ok"}
 ```
 
