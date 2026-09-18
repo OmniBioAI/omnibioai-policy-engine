@@ -1,4 +1,7 @@
-"""Tests for app/main.py: _invalidation_subscriber and lifespan."""
+"""Tests for app/main.py: _invalidation_subscriber and lifespan.
+
+Developer: Manish Kumar <manish@omnibioai.org>
+"""
 import asyncio
 import json
 import pytest
@@ -11,6 +14,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 @pytest.mark.asyncio
 async def test_subscriber_processes_valid_message():
+    """_invalidation_subscriber invalidates the cache for the user id in a valid pubsub message."""
     mock_cache = MagicMock()
     message_data = json.dumps({"user_id": "u1"})
     processed = asyncio.Event()
@@ -46,6 +50,8 @@ async def test_subscriber_processes_valid_message():
 
 @pytest.mark.asyncio
 async def test_subscriber_ignores_empty_user_id():
+    """_invalidation_subscriber does not invalidate the cache for a message whose user_id is empty.
+    """
     mock_cache = MagicMock()
     message_data = json.dumps({"user_id": ""})
     done = asyncio.Event()
@@ -80,6 +86,9 @@ async def test_subscriber_ignores_empty_user_id():
 
 @pytest.mark.asyncio
 async def test_subscriber_swallows_invalid_json():
+    """_invalidation_subscriber does not invalidate the cache and does not raise for a message whose
+    data is not valid JSON.
+    """
     mock_cache = MagicMock()
     done = asyncio.Event()
 
@@ -171,6 +180,7 @@ async def test_lifespan_starts_and_stops_subscriber():
 # ---------------------------------------------------------------------------
 
 def test_app_has_evaluate_route():
+    """The app registers a policy evaluation route."""
     from app.main import app
     paths = [r.path for r in app.routes]
     assert any("evaluate" in p for p in paths)

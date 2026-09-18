@@ -1,3 +1,10 @@
+"""Unit tests for app/core/engine.py::PolicyEngine: RBAC, ABAC and RULES denial
+short-circuit evaluation with the right policy_source and reason, an all-pass
+request is allowed, the Redis-backed cache is read on evaluate() and written on
+a miss, and a cached decision skips policy checks entirely.
+
+Developer: Manish Kumar <manish@omnibioai.org>
+"""
 import json
 import pytest
 from unittest.mock import MagicMock
@@ -7,6 +14,9 @@ from app.models.decision import PolicyDecision
 
 
 def make_engine(mock_redis=None):
+    """Build a PolicyEngine with its cache backed by the given (or a default empty) mock Redis
+    client.
+    """
     if mock_redis is None:
         mock_redis = MagicMock()
         mock_redis.get.return_value = None
@@ -21,6 +31,7 @@ def make_engine(mock_redis=None):
 
 
 def basic_request(**kwargs):
+    """Build a PolicyRequest with sensible defaults, overridable by keyword."""
     defaults = {
         "user_id": "u1",
         "email": "u1@test.com",
@@ -39,6 +50,9 @@ def basic_request(**kwargs):
 # ---------------------------------------------------------------------------
 
 def test_rbac_deny_stops_evaluation():
+    """A request missing the researcher role is denied at the RBAC stage with a reason naming the
+    role.
+    """
     engine, _ = make_engine()
     req = basic_request(roles=[], action="tes.submit")  # no researcher role
 
@@ -54,6 +68,9 @@ def test_rbac_deny_stops_evaluation():
 # ---------------------------------------------------------------------------
 
 def test_abac_deny_gpu_access():
+    """A GPU-required request from a caller without the gpu_user role is denied at the ABAC stage
+    with a reason mentioning GPU.
+    """
     engine, _ = make_engine()
     req = basic_request(
         roles=["researcher"],
@@ -68,6 +85,9 @@ def test_abac_deny_gpu_access():
 
 
 def test_abac_deny_hpc_access():
+    """An HPC-node request from a caller without the hpc_user role is denied at the ABAC stage with
+    a reason mentioning HPC.
+    """
     engine, _ = make_engine()
     req = basic_request(
         roles=["researcher"],
@@ -86,6 +106,7 @@ def test_abac_deny_hpc_access():
 # ---------------------------------------------------------------------------
 
 def test_rules_deny_protected_dataset_delete():
+    """Deleting a protected dataset is denied at the RULES stage even after RBAC and ABAC pass."""
     engine, _ = make_engine()
     req = basic_request(
         roles=["data_scientist"],
@@ -100,6 +121,9 @@ def test_rules_deny_protected_dataset_delete():
 
 
 def test_rules_deny_model_registry_delete():
+    """Deleting from the model registry is denied at the RULES stage even for an admin who passes
+    RBAC and ABAC.
+    """
     engine, _ = make_engine()
     req = basic_request(
         roles=["admin"],
@@ -118,6 +142,9 @@ def test_rules_deny_model_registry_delete():
 # ---------------------------------------------------------------------------
 
 def test_all_checks_pass_returns_allowed():
+    """A request that passes every stage is allowed with policy_source ALL_PASSED and reason "access
+    granted".
+    """
     engine, _ = make_engine()
     req = basic_request()
 
@@ -133,6 +160,9 @@ def test_all_checks_pass_returns_allowed():
 # ---------------------------------------------------------------------------
 
 def test_evaluate_returns_cached_decision():
+    """evaluate() returns a decision reconstructed from a cached, previously stored decision
+    payload, reporting policy_source CACHE and never calling setex.
+    """
     mock_redis = MagicMock()
     # A real cached entry is always a previous decision.dict(), which always
     # includes policy_source (RBAC/ABAC/RULES/ALL_PASSED) -- a payload
@@ -163,12 +193,15 @@ class _FakeRedis:
     used to, before it was corrected above)."""
 
     def __init__(self):
+        """Start with an empty in-memory store."""
         self.store: dict = {}
 
     def get(self, key):
+        """Return the stored value for a key, or None."""
         return self.store.get(key)
 
     def setex(self, key, ttl, value):
+        """Store a value under a key with a TTL."""
         self.store[key] = value
 
 
@@ -196,6 +229,7 @@ def test_evaluate_cache_hit_after_miss_does_not_raise():
 
 
 def test_evaluate_cache_miss_computes_and_stores():
+    """On a cache miss, evaluate() computes an allowed decision and stores it once via setex."""
     mock_redis = MagicMock()
     mock_redis.get.return_value = None
     engine, _ = make_engine(mock_redis)
@@ -208,6 +242,7 @@ def test_evaluate_cache_miss_computes_and_stores():
 
 
 def test_evaluate_cache_miss_rbac_deny_stores_denial():
+    """On a cache miss, evaluate() computes and stores a denied RBAC decision once via setex."""
     mock_redis = MagicMock()
     mock_redis.get.return_value = None
     engine, _ = make_engine(mock_redis)
@@ -224,6 +259,7 @@ def test_evaluate_cache_miss_rbac_deny_stores_denial():
 # ---------------------------------------------------------------------------
 
 def test_abac_gpu_with_gpu_user_role_passes():
+    """A GPU-required request from a caller with the gpu_user role passes the ABAC stage."""
     engine, _ = make_engine()
     req = basic_request(
         roles=["researcher", "gpu_user"],
@@ -234,6 +270,7 @@ def test_abac_gpu_with_gpu_user_role_passes():
 
 
 def test_abac_hpc_with_hpc_user_role_passes():
+    """An HPC-node request from a caller with the hpc_user role passes the ABAC stage."""
     engine, _ = make_engine()
     req = basic_request(
         roles=["researcher", "hpc_user"],
