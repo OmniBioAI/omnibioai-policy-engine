@@ -1,3 +1,11 @@
+"""Unit tests for app/core/permissions.py: no permissions supplied is a no-op
+allow (the legacy role-only shape), admin always overrides, required_permission
+maps actions/resources to the permission they need (or None when unrelated),
+and evaluate_permission grants or denies based on whether the caller holds that
+permission.
+
+Developer: Manish Kumar <manish@omnibioai.org>
+"""
 import pytest
 from app.core.permissions import evaluate_permission, required_permission
 
@@ -8,12 +16,18 @@ from app.core.permissions import evaluate_permission, required_permission
 # ---------------------------------------------------------------------------
 
 def test_no_permissions_supplied_is_noop():
+    """With no permissions supplied at all, evaluate_permission allows with a reason mentioning that
+    no permissions were supplied.
+    """
     allowed, reason = evaluate_permission(["researcher"], [], "tes.submit", "job")
     assert allowed is True
     assert "no permissions supplied" in reason
 
 
 def test_admin_role_always_overrides_even_with_permissions_supplied():
+    """The admin role allows regardless of the caller's actual permissions, with reason "admin
+    override".
+    """
     allowed, reason = evaluate_permission(["admin"], ["something.else"], "tes.submit", "job")
     assert allowed is True
     assert reason == "admin override"
@@ -24,6 +38,7 @@ def test_admin_role_always_overrides_even_with_permissions_supplied():
 # ---------------------------------------------------------------------------
 
 def test_required_permission_for_tes_prefix():
+    """required_permission maps a tes.submit action to workflow.execute."""
     assert required_permission("tes.submit", "job") == "workflow.execute"
 
 
@@ -45,10 +60,12 @@ def test_required_permission_for_tes_prefix():
 
 
 def test_required_permission_for_workflow_execute_action():
+    """required_permission maps a workflow.execute action to workflow.execute."""
     assert required_permission("workflow.execute", "job") == "workflow.execute"
 
 
 def test_required_permission_for_model_use_action():
+    """required_permission maps a model.use action to model.use."""
     assert required_permission("model.use", "model") == "model.use"
 
 
@@ -76,14 +93,18 @@ def test_viewer_denied_workflow_execute_via_gateway_shaped_action():
 
 
 def test_required_permission_for_dataset_read():
+    """required_permission maps a dataset.read action to dataset.read."""
     assert required_permission("dataset.read", "human_genome") == "dataset.read"
 
 
 def test_required_permission_for_model_registry_delete():
+    """required_permission maps a delete action on the model_registry resource to workflow.manage.
+    """
     assert required_permission("delete", "model_registry") == "workflow.manage"
 
 
 def test_required_permission_none_for_unrelated_action():
+    """required_permission returns None for an action with no associated permission."""
     assert required_permission("profile.read", "profile") is None
 
 
@@ -92,6 +113,9 @@ def test_required_permission_none_for_unrelated_action():
 # ---------------------------------------------------------------------------
 
 def test_scientist_with_workflow_execute_allowed_tes_submit():
+    """A caller holding workflow.execute is granted with reason "permission granted" for a
+    tes.submit action.
+    """
     allowed, reason = evaluate_permission(
         [], ["workflow.execute", "dataset.read"], "tes.submit", "job"
     )
@@ -100,6 +124,7 @@ def test_scientist_with_workflow_execute_allowed_tes_submit():
 
 
 def test_viewer_with_dataset_read_allowed_dataset_read():
+    """A caller holding dataset.read is granted for a dataset.read action."""
     allowed, reason = evaluate_permission([], ["dataset.read"], "dataset.read", "human_genome")
     assert allowed is True
 
@@ -109,12 +134,17 @@ def test_viewer_with_dataset_read_allowed_dataset_read():
 # ---------------------------------------------------------------------------
 
 def test_viewer_without_workflow_execute_denied_tes_submit():
+    """A caller without workflow.execute is denied for a tes.submit action, with a reason naming it.
+    """
     allowed, reason = evaluate_permission([], ["dataset.read"], "tes.submit", "job")
     assert allowed is False
     assert "workflow.execute" in reason
 
 
 def test_scientist_without_workflow_manage_denied_model_registry_delete():
+    """A caller without workflow.manage is denied for a model-registry delete action, with a reason
+    naming it.
+    """
     allowed, reason = evaluate_permission(
         [], ["workflow.execute", "dataset.read"], "delete", "model_registry"
     )
@@ -123,6 +153,9 @@ def test_scientist_without_workflow_manage_denied_model_registry_delete():
 
 
 def test_unrelated_action_allowed_even_with_permissions_supplied():
+    """An action with no required permission is allowed regardless of the caller's permissions, with
+    reason "no permission required".
+    """
     allowed, reason = evaluate_permission([], ["dataset.read"], "profile.read", "profile")
     assert allowed is True
     assert reason == "no permission required"

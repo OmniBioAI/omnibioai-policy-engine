@@ -1,3 +1,12 @@
+"""Unit tests for PolicyEngine's permission and tenancy checks: a required
+permission's absence denies at the PERMISSION stage (unless the caller is admin
+or held no permissions at all, the legacy role-only shape), a request whose
+resource organization differs from the caller's is denied at the TENANCY stage,
+and PolicyCache.build_key's cache key varies with organization id and
+permissions.
+
+Developer: Manish Kumar <manish@omnibioai.org>
+"""
 import json
 from unittest.mock import MagicMock, patch
 
@@ -7,6 +16,7 @@ from app.services.cache import PolicyCache
 
 
 def make_engine():
+    """Build a PolicyEngine with its cache backed by a mock Redis client that always misses."""
     mock_redis = MagicMock()
     mock_redis.get.return_value = None
     with patch("app.services.cache.redis") as mock_redis_module:
@@ -17,6 +27,7 @@ def make_engine():
 
 
 def basic_request(**kwargs):
+    """Build a PolicyRequest with sensible defaults, overridable by keyword."""
     defaults = {
         "user_id": "u1",
         "email": "u1@test.com",
@@ -36,6 +47,9 @@ def basic_request(**kwargs):
 # ---------------------------------------------------------------------------
 
 def test_permission_deny_stops_before_abac():
+    """A request lacking the required workflow.execute permission is denied at the PERMISSION stage
+    with a reason naming it.
+    """
     engine, _ = make_engine()
     req = basic_request(
         roles=["researcher"],  # passes RBAC
@@ -52,6 +66,7 @@ def test_permission_deny_stops_before_abac():
 
 
 def test_permission_allow_falls_through_to_all_passed():
+    """A request holding the required workflow.execute permission passes through to ALL_PASSED."""
     engine, _ = make_engine()
     req = basic_request(
         roles=["researcher"],
@@ -87,6 +102,9 @@ def test_permission_deny_for_real_gateway_action_shape_workflow_execute():
 
 
 def test_permission_allow_for_real_gateway_action_shape_model_use():
+    """A request for the real model.use action against the model registry, holding no roles but the
+    model.use permission, is allowed.
+    """
     engine, _ = make_engine()
     req = basic_request(
         roles=[], permissions=["model.use"], action="model.use", resource="model-registry",
@@ -115,6 +133,9 @@ def test_permission_check_is_noop_for_legacy_role_only_traffic():
 # ---------------------------------------------------------------------------
 
 def test_tenancy_deny_cross_org_access():
+    """A request whose resource belongs to a different organization than the caller is denied at the
+    TENANCY stage with reason "cross-tenant access denied".
+    """
     engine, _ = make_engine()
     req = basic_request(
         roles=["researcher"],
@@ -132,6 +153,8 @@ def test_tenancy_deny_cross_org_access():
 
 
 def test_tenancy_allow_same_org():
+    """A request whose resource belongs to the caller's own organization passes the TENANCY stage.
+    """
     engine, _ = make_engine()
     req = basic_request(
         roles=["researcher"],
@@ -172,6 +195,9 @@ def test_admin_bypasses_permission_but_not_tenancy():
 # ---------------------------------------------------------------------------
 
 def test_cache_key_differs_by_org_id():
+    """build_key produces different cache keys for the same request under different organization
+    ids.
+    """
     _, mock_redis = make_engine()
     cache = PolicyCache(redis_url="redis://localhost")
     key_org1 = cache.build_key("u1", "tes.submit", "job", {}, org_id="org-1", permissions=[])
@@ -180,6 +206,8 @@ def test_cache_key_differs_by_org_id():
 
 
 def test_cache_key_differs_by_permissions():
+    """build_key produces different cache keys for the same request with different permission sets.
+    """
     cache = PolicyCache(redis_url="redis://localhost")
     key_a = cache.build_key("u1", "tes.submit", "job", {}, org_id=None, permissions=["workflow.execute"])
     key_b = cache.build_key("u1", "tes.submit", "job", {}, org_id=None, permissions=[])

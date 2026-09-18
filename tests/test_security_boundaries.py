@@ -3,6 +3,8 @@
 These tests deliberately use fakes/mocks only.  They cover ordering,
 validation, cache failure behavior, and boundary values without requiring
 Redis, IAM, a database, or a network service.
+
+Developer: Manish Kumar <manish@omnibioai.org>
 """
 
 import json
@@ -17,6 +19,7 @@ from app.services.cache import PolicyCache
 
 
 def request(**overrides):
+    """Build a PolicyRequest with sensible defaults, overridable by keyword."""
     values = {
         "user_id": "u1",
         "roles": ["researcher"],
@@ -30,6 +33,7 @@ def request(**overrides):
 
 
 def engine_with_redis(redis):
+    """Build a PolicyEngine with its cache backed by the given Redis client."""
     with patch("app.services.cache.redis") as redis_module:
         redis_module.from_url.return_value = redis
         cache = PolicyCache("redis://unused")
@@ -38,6 +42,9 @@ def engine_with_redis(redis):
 
 
 def test_evaluation_stops_at_first_denial_in_security_order():
+    """When ABAC denies, RBAC, PERMISSION and TENANCY have already run but RULES is never called,
+    and the decision reports ABAC's denial.
+    """
     redis = MagicMock()
     redis.get.return_value = None
     engine = engine_with_redis(redis)
@@ -72,6 +79,10 @@ def test_evaluation_stops_at_first_denial_in_security_order():
 def test_earlier_denials_prevent_all_later_policy_layers(
     denying_check, source, reason, later_checks
 ):
+    """Whichever of RBAC, PERMISSION or TENANCY denies first, every later stage in the
+    RBAC/PERMISSION/TENANCY/ABAC/RULES order is skipped and the decision reports that stage's
+    source and reason.
+    """
     redis = MagicMock()
     redis.get.return_value = None
     engine = engine_with_redis(redis)
@@ -98,6 +109,9 @@ def test_earlier_denials_prevent_all_later_policy_layers(
 
 
 def test_rules_deny_is_not_overridden_by_admin_or_permissions():
+    """Deleting from the model registry is denied at the RULES stage even for an admin holding
+    workflow.manage.
+    """
     redis = MagicMock()
     redis.get.return_value = None
     engine = engine_with_redis(redis)
@@ -126,11 +140,17 @@ def test_rules_deny_is_not_overridden_by_admin_or_permissions():
     ],
 )
 def test_malformed_policy_input_is_rejected_before_evaluation(payload):
+    """PolicyRequest raises ValidationError for an empty payload, one missing required fields, or
+    one with a wrong-typed roles or context field.
+    """
     with pytest.raises(ValidationError):
         PolicyRequest(**payload)
 
 
 def test_cache_malformed_external_response_is_not_treated_as_an_allow():
+    """evaluate raises json.JSONDecodeError, rather than silently allowing, when the cached Redis
+    value is not valid JSON.
+    """
     redis = MagicMock()
     redis.get.return_value = "not-json"
     engine = engine_with_redis(redis)
@@ -140,6 +160,9 @@ def test_cache_malformed_external_response_is_not_treated_as_an_allow():
 
 
 def test_cache_backend_failure_does_not_fall_through_to_allow():
+    """evaluate propagates a Redis connection error rather than silently allowing when the cache
+    backend fails.
+    """
     redis = MagicMock()
     redis.get.side_effect = ConnectionError("cache unavailable")
     engine = engine_with_redis(redis)
@@ -149,6 +172,9 @@ def test_cache_backend_failure_does_not_fall_through_to_allow():
 
 
 def test_cache_key_separates_context_values_that_change_abac_decisions():
+    """build_key produces different keys for requests that differ only in GPU-required context or in
+    tenant organization context.
+    """
     redis = MagicMock()
     cache = engine_with_redis(redis).cache
 
@@ -166,6 +192,9 @@ def test_cache_key_separates_context_values_that_change_abac_decisions():
 
 
 def test_tenancy_missing_context_fails_closed_when_resource_is_scoped():
+    """A request with no caller organization against an organization-scoped resource is denied at
+    the TENANCY stage with reason "missing organization context".
+    """
     redis = MagicMock()
     redis.get.return_value = None
     engine = engine_with_redis(redis)
@@ -184,6 +213,9 @@ def test_tenancy_missing_context_fails_closed_when_resource_is_scoped():
     reason="Unknown actions currently pass the default RBAC/permission path; fail-closed unknown-action handling is a production defect.",
 )
 def test_unknown_action_should_fail_closed():
+    """An unknown action is expected to fail closed but currently passes through the default
+    RBAC/permission path, tracked here as a known xfail production defect.
+    """
     redis = MagicMock()
     redis.get.return_value = None
     engine = engine_with_redis(redis)
@@ -200,6 +232,9 @@ def test_unknown_action_should_fail_closed():
     reason="Wildcard action/resource semantics are not defined or denied; current implementation treats them as unrelated actions.",
 )
 def test_wildcard_action_should_not_bypass_authorization():
+    """A wildcard action and resource are expected to be denied but are currently treated as an
+    ordinary unrelated action, tracked here as a known xfail production defect.
+    """
     redis = MagicMock()
     redis.get.return_value = None
     engine = engine_with_redis(redis)

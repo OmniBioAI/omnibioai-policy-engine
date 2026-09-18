@@ -23,6 +23,8 @@ both the legacy role AND the registry permission. The one deliberate
 exception is dataset.read, narrowed in rbac.py by this same PR to be
 governed by the permission gate alone -- see that change's comment --
 which is what makes a genuine read-only Viewer tier possible at all.
+
+Developer: Manish Kumar <manish@omnibioai.org>
 """
 
 import pytest
@@ -34,6 +36,7 @@ from unittest.mock import MagicMock, patch
 
 
 def make_engine():
+    """Build a PolicyEngine with its cache backed by a mock Redis client that always misses."""
     mock_redis = MagicMock()
     mock_redis.get.return_value = None
     with patch("app.services.cache.redis") as mock_redis_module:
@@ -51,6 +54,9 @@ VIEWER = ([], ["dataset.read"])
 
 
 def request_for(tier, action, resource="job_queue", org_id="org-1", context=None):
+    """Build a PolicyRequest for the given conceptual tier (roles, permissions), action and
+    resource.
+    """
     roles, perms = tier
     return PolicyRequest(
         user_id="u1",
@@ -70,6 +76,9 @@ def request_for(tier, action, resource="job_queue", org_id="org-1", context=None
 
 @pytest.mark.parametrize("tier", [PLATFORM_OWNER, ORG_ADMIN, SCIENTIST])
 def test_execute_workflows_allowed_for_tiers_holding_workflow_execute(tier):
+    """Platform Owner, Org Admin and Scientist tiers, which all hold workflow.execute, are allowed
+    to submit a TES job.
+    """
     engine = make_engine()
     decision = engine._evaluate_core(request_for(tier, "tes.submit"))
     assert decision.allowed is True
@@ -77,6 +86,7 @@ def test_execute_workflows_allowed_for_tiers_holding_workflow_execute(tier):
 
 @pytest.mark.parametrize("tier", [PLATFORM_OWNER, ORG_ADMIN, SCIENTIST, VIEWER])
 def test_dataset_read_allowed_for_every_tier(tier):
+    """Every tier, including read-only Viewer, is allowed to read a dataset."""
     engine = make_engine()
     decision = engine._evaluate_core(request_for(tier, "dataset.read"))
     assert decision.allowed is True
@@ -101,12 +111,18 @@ def test_org_admin_workflow_manage_permission_passes_but_immutable_rule_still_bl
 # ---------------------------------------------------------------------------
 
 def test_viewer_denied_execute_workflows():
+    """The Viewer tier, holding neither the researcher role nor workflow.execute, is denied
+    submitting a TES job.
+    """
     engine = make_engine()
     decision = engine._evaluate_core(request_for(VIEWER, "tes.submit"))
     assert decision.allowed is False
 
 
 def test_scientist_denied_model_registry_delete():
+    """The Scientist tier is denied deleting from the model registry, reporting policy_source
+    PERMISSION and a reason naming workflow.manage.
+    """
     engine = make_engine()
     decision = engine._evaluate_core(
         request_for(SCIENTIST, "delete", resource="model_registry")
@@ -121,6 +137,9 @@ def test_scientist_denied_model_registry_delete():
 # ---------------------------------------------------------------------------
 
 def test_org_admin_denied_cross_org_even_with_manage_org():
+    """The Org Admin tier is denied acting on a resource belonging to a different organization,
+    reporting policy_source TENANCY, even though it holds manage_org.
+    """
     engine = make_engine()
     decision = engine._evaluate_core(
         request_for(

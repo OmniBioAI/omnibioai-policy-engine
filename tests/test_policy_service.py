@@ -1,5 +1,7 @@
 """
 Tests for evaluate_policy() — patches the module-level engine so no Redis needed.
+
+Developer: Manish Kumar <manish@omnibioai.org>
 """
 import pytest
 from unittest.mock import MagicMock, patch
@@ -28,6 +30,7 @@ def patched_engine():
 
 
 def test_evaluate_policy_allow(patched_engine):
+    """evaluate_policy allows a request that passes every policy stage."""
     from app.services.policy_service import evaluate_policy
 
     result = evaluate_policy({
@@ -44,6 +47,7 @@ def test_evaluate_policy_allow(patched_engine):
 
 
 def test_evaluate_policy_deny_rbac(patched_engine):
+    """evaluate_policy denies a request missing its required role, reporting policy_source RBAC."""
     from app.services.policy_service import evaluate_policy
 
     result = evaluate_policy({
@@ -61,6 +65,9 @@ def test_evaluate_policy_deny_rbac(patched_engine):
 
 
 def test_evaluate_policy_deny_abac(patched_engine):
+    """evaluate_policy denies a GPU-required request from a caller without the gpu_user role,
+    reporting policy_source ABAC.
+    """
     from app.services.policy_service import evaluate_policy
 
     result = evaluate_policy({
@@ -78,6 +85,9 @@ def test_evaluate_policy_deny_abac(patched_engine):
 
 
 def test_evaluate_policy_deny_rules(patched_engine):
+    """evaluate_policy denies deleting a protected human-genome dataset, reporting policy_source
+    RULES.
+    """
     from app.services.policy_service import evaluate_policy
 
     result = evaluate_policy({
