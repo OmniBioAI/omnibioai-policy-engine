@@ -32,7 +32,12 @@ class PolicyEngine:
                 policy_source="PERMISSION"
             )
 
-        ok, reason = tenancy.evaluate_tenancy(req.org_id, req.context)
+        resource_scope = req.resource_scope or (
+            "tenant" if req.context.get("resource_org_id") else "global"
+        )
+        ok, reason = tenancy.evaluate_tenancy(
+            req.org_id, req.context, resource_scope=resource_scope, roles=req.roles
+        )
         if not ok:
             return PolicyDecision(
                 allowed=False,
@@ -67,6 +72,10 @@ class PolicyEngine:
     # ----------------------------
     def evaluate(self, req: PolicyRequest) -> PolicyDecision:
 
+        resource_scope = req.resource_scope or (
+            "tenant" if req.context.get("resource_org_id") else "global"
+        )
+
         key = self.cache.build_key(
             req.user_id,
             req.action,
@@ -74,6 +83,7 @@ class PolicyEngine:
             req.context,
             org_id=req.org_id,
             permissions=req.permissions,
+            resource_scope=resource_scope,
         )
 
         # 1. CACHE HIT (sub-ms path)

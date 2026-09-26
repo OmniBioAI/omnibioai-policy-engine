@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Literal
 
 
 class PolicyRequest(BaseModel):
@@ -14,3 +14,6 @@ class PolicyRequest(BaseModel):
     resource: str
 
     context: Dict[str, Any] = {}
+    # Explicitly separates capability checks from resource ownership.
+    # Global is the compatibility default for operations with no resource.
+    resource_scope: Literal["global", "tenant", "admin"] | None = None

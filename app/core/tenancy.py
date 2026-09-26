@@ -18,11 +18,28 @@ resource) actually supplies it.
 from typing import Any, Dict
 
 
-def evaluate_tenancy(org_id: Any, context: Dict[str, Any]) -> tuple[bool, str]:
+def evaluate_tenancy(
+    org_id: Any,
+    context: Dict[str, Any],
+    resource_scope: str | None = None,
+    roles: list[str] | None = None,
+) -> tuple[bool, str]:
+    # Compatibility for direct legacy callers: an explicit resource owner
+    # continues to imply tenant scope; no owner continues to mean global.
+    effective_scope = resource_scope or ("tenant" if context.get("resource_org_id") else "global")
+
+    if effective_scope == "global":
+        return True, "global resource" if resource_scope == "global" else "no tenancy scoping required"
+
+    if effective_scope == "admin":
+        if roles and ("admin" in roles or "platform_admin" in roles):
+            return True, "platform admin resource"
+        return False, "platform admin role required"
+
     resource_org_id = context.get("resource_org_id")
 
-    if resource_org_id is None:
-        return True, "no tenancy scoping required"
+    if not resource_org_id:
+        return False, "missing resource organization context"
 
     if org_id is None:
         return False, "missing organization context"

@@ -19,13 +19,14 @@ class PolicyCache:
         context: dict,
         org_id: Optional[str] = None,
         permissions: Optional[list] = None,
+        resource_scope: str = "global",
     ) -> str:
         # PR12: org_id/permissions now affect the decision (tenancy.py,
         # permissions.py), so they must be part of the key -- otherwise a
         # cache hit for one org/permission-set could be served to another.
         raw = (
             f"{user_id}:{action}:{resource}:{json.dumps(context, sort_keys=True)}:"
-            f"{org_id}:{json.dumps(sorted(permissions or []))}"
+            f"{org_id}:{json.dumps(sorted(permissions or []))}:{resource_scope}"
         )
         digest = hashlib.sha256(raw.encode()).hexdigest()
         return f"policy:{digest}"
