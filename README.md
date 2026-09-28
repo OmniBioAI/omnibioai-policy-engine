@@ -3,7 +3,10 @@
 **Policy Engine is the authorization brain of the OmniBioAI ecosystem.**
 It evaluates *who can do what*, *on which resource*, under *what conditions*.
 
-It enforces RBAC + ABAC rules across distributed systems like TES, Workbench, Studio, and future HPC services.
+It enforces RBAC + ABAC decisions for callers such as TES, Workbench, Studio,
+and other configured OmniBioAI services. HPC quota evaluation is provided by
+the separate HPC Policy Engine; this service evaluates the policy contract
+presented to it.
 
 ---
 
@@ -232,9 +235,10 @@ This service is used by:
 cd ~/Desktop/machine/omnibioai-policy-engine
 pytest tests/ -v --cov=.
 
-# 90 tests passing
-# 95% coverage
-# Covers: RBAC, ABAC, rule engine, cache, policy service, routes
+# The command above is the supported validation entrypoint. Test counts and
+# coverage figures from earlier dated runs are historical snapshots and are
+# not asserted as current status here.
+# It covers RBAC, ABAC, rule evaluation, cache, policy service, and routes.
 ```
 
 ---
@@ -330,4 +334,3 @@ If Auth says:
 Then Policy Engine says:
 
 > “What are you allowed to do?”
-
