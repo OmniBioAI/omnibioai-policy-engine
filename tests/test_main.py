@@ -182,5 +182,20 @@ async def test_lifespan_starts_and_stops_subscriber():
 def test_app_has_evaluate_route():
     """The app registers a policy evaluation route."""
     from app.main import app
-    paths = [r.path for r in app.routes]
+
+    def route_paths(routes):
+        paths = []
+        for route in routes:
+            path = getattr(route, "path", None)
+            if path is not None:
+                paths.append(path)
+            nested = getattr(route, "routes", None)
+            if nested is None:
+                original_router = getattr(route, "original_router", None)
+                nested = getattr(original_router, "routes", None)
+            if nested:
+                paths.extend(route_paths(nested))
+        return paths
+
+    paths = route_paths(app.routes)
     assert any("evaluate" in p for p in paths)

@@ -34,7 +34,18 @@ jobs:
           else
             pip install -e .
           fi
-          pip install ruff pytest
+          pip install \
+            fastapi \
+            uvicorn \
+            "redis[asyncio]" \
+            pydantic \
+            starlette \
+            swagger-ui-bundle \
+            aiofiles \
+            httpx \
+            pytest-asyncio \
+            ruff \
+            pytest
 
       - name: Lint with ruff
         run: ruff check .
