@@ -3,8 +3,9 @@ Route tests — patch evaluate_policy at the routes module level so no Redis is 
 
 Developer: Manish Kumar <manish@omnibioai.org>
 """
+from unittest.mock import patch
+
 import pytest
-from unittest.mock import patch, MagicMock
 from fastapi import FastAPI
 from fastapi.testclient import TestClient
 

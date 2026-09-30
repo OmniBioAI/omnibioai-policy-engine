@@ -6,9 +6,7 @@ permission.
 
 Developer: Manish Kumar <manish@omnibioai.org>
 """
-import pytest
 from app.core.permissions import evaluate_permission, required_permission
-
 
 # ---------------------------------------------------------------------------
 # Backward compatibility: no permissions supplied -> no-op (PR12 requirement
@@ -72,12 +70,12 @@ def test_required_permission_for_model_use_action():
 def test_scientist_denied_workflow_publish_via_gateway_shaped_action():
     """Scientist's permission set (per this PR's role matrix) has
     workflow.execute/dataset.read/model.use but not workflow.publish."""
-    allowed, reason = evaluate_permission(
+    allowed, _reason = evaluate_permission(
         [], ["workflow.execute", "dataset.read", "model.use"], "model.use", "model"
     )
     assert allowed is True
 
-    allowed, reason = evaluate_permission(
+    allowed, _reason = evaluate_permission(
         [], ["workflow.execute", "dataset.read", "model.use"], "workflow.execute", "job"
     )
     assert allowed is True
@@ -125,7 +123,7 @@ def test_scientist_with_workflow_execute_allowed_tes_submit():
 
 def test_viewer_with_dataset_read_allowed_dataset_read():
     """A caller holding dataset.read is granted for a dataset.read action."""
-    allowed, reason = evaluate_permission([], ["dataset.read"], "dataset.read", "human_genome")
+    allowed, _reason = evaluate_permission([], ["dataset.read"], "dataset.read", "human_genome")
     assert allowed is True
 
 

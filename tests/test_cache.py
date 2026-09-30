@@ -5,9 +5,9 @@ with a default TTL, and per-user cache invalidation.
 Developer: Manish Kumar <manish@omnibioai.org>
 """
 import json
-import hashlib
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 
 @pytest.fixture

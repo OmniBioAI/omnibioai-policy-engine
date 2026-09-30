@@ -42,10 +42,11 @@ jobs:
             starlette \
             swagger-ui-bundle \
             aiofiles \
-            httpx \
+            httpx2 \
             pytest-asyncio \
             ruff \
-            pytest
+            pytest \
+            setuptools
 
       - name: Lint with ruff
         run: ruff check .

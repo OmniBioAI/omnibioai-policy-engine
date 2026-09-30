@@ -1,16 +1,20 @@
 """G4 reproduction tests for explicit global/tenant/admin resource scope."""
 
-from app.core.engine import PolicyEngine
 from app.models.request import PolicyRequest
 from tests.test_engine import make_engine
 
 
 def _request(**overrides):
-    data = dict(
-        user_id="u1", roles=["researcher"], permissions=["dataset.read"],
-        action="dataset.read", resource="study-a", org_id="org-a", context={},
-        resource_scope="tenant",
-    )
+    data = {
+        "user_id": "u1",
+        "roles": ["researcher"],
+        "permissions": ["dataset.read"],
+        "action": "dataset.read",
+        "resource": "study-a",
+        "org_id": "org-a",
+        "context": {},
+        "resource_scope": "tenant",
+    }
     data.update(overrides)
     return PolicyRequest(**data)
 

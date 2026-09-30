@@ -1,7 +1,7 @@
-import json
 import hashlib
+import json
+
 import redis
-from typing import Optional, Any
 
 
 class PolicyCache:
@@ -17,8 +17,8 @@ class PolicyCache:
         action: str,
         resource: str,
         context: dict,
-        org_id: Optional[str] = None,
-        permissions: Optional[list] = None,
+        org_id: str | None = None,
+        permissions: list | None = None,
         resource_scope: str = "global",
     ) -> str:
         # PR12: org_id/permissions now affect the decision (tenancy.py,
@@ -34,7 +34,7 @@ class PolicyCache:
     # ----------------------------
     # get cached decision
     # ----------------------------
-    def get(self, key: str) -> Optional[dict]:
+    def get(self, key: str) -> dict | None:
         val = self.redis.get(key)
         if val:
             return json.loads(val)
@@ -51,6 +51,6 @@ class PolicyCache:
     # ----------------------------
     def invalidate_user(self, user_id: str):
         # simple pattern-based invalidation (can be improved later with redis SCAN)
-        for key in self.redis.scan_iter(f"policy:*"):
+        for key in self.redis.scan_iter("policy:*"):
             if user_id in key:
                 self.redis.delete(key)

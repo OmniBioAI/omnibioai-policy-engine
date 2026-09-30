@@ -7,7 +7,6 @@ permissions.
 
 Developer: Manish Kumar <manish@omnibioai.org>
 """
-import json
 from unittest.mock import MagicMock, patch
 
 from app.core.engine import PolicyEngine
@@ -198,7 +197,7 @@ def test_cache_key_differs_by_org_id():
     """build_key produces different cache keys for the same request under different organization
     ids.
     """
-    _, mock_redis = make_engine()
+    _, _mock_redis = make_engine()
     cache = PolicyCache(redis_url="redis://localhost")
     key_org1 = cache.build_key("u1", "tes.submit", "job", {}, org_id="org-1", permissions=[])
     key_org2 = cache.build_key("u1", "tes.submit", "job", {}, org_id="org-2", permissions=[])

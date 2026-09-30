@@ -5,9 +5,7 @@ is allowed since RBAC does not gate it.
 
 Developer: Manish Kumar <manish@omnibioai.org>
 """
-import pytest
 from app.core.rbac import evaluate_rbac
-
 
 # ---------------------------------------------------------------------------
 # Admin override
@@ -72,7 +70,7 @@ def test_missing_data_scientist_denied_dataset_action():
 
 def test_viewer_denied_dataset_action():
     """The viewer role alone is denied a dataset action."""
-    allowed, reason = evaluate_rbac([], "dataset.delete")
+    allowed, _reason = evaluate_rbac([], "dataset.delete")
     assert allowed is False
 
 
@@ -89,5 +87,5 @@ def test_unrelated_action_allowed_for_any_role():
 
 def test_empty_roles_allowed_for_unrelated_action():
     """An action RBAC does not gate is allowed even with no roles at all."""
-    allowed, reason = evaluate_rbac([], "ping")
+    allowed, _reason = evaluate_rbac([], "ping")
     assert allowed is True

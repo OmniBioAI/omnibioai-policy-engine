@@ -27,12 +27,13 @@ which is what makes a genuine read-only Viewer tier possible at all.
 Developer: Manish Kumar <manish@omnibioai.org>
 """
 
+from unittest.mock import MagicMock, patch
+
 import pytest
 
 from app.core.engine import PolicyEngine
 from app.models.request import PolicyRequest
 from app.services.cache import PolicyCache
-from unittest.mock import MagicMock, patch
 
 
 def make_engine():

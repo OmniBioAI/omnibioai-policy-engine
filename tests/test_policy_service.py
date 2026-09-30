@@ -3,8 +3,9 @@ Tests for evaluate_policy() — patches the module-level engine so no Redis need
 
 Developer: Manish Kumar <manish@omnibioai.org>
 """
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 
 def make_engine_with_mock_redis():

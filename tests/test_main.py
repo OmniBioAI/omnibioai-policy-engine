@@ -4,9 +4,9 @@ Developer: Manish Kumar <manish@omnibioai.org>
 """
 import asyncio
 import json
-import pytest
 from unittest.mock import AsyncMock, MagicMock, patch
 
+import pytest
 
 # ---------------------------------------------------------------------------
 # _invalidation_subscriber
@@ -170,7 +170,7 @@ async def test_lifespan_starts_and_stops_subscriber():
 
         mock_sub.side_effect = long_running
 
-        from app.main import lifespan, app
+        from app.main import app, lifespan
         async with lifespan(app):
             pass  # startup → yield → shutdown
 

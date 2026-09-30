@@ -15,12 +15,12 @@ tests, or eventually the Gateway once it's taught which org owns a given
 resource) actually supplies it.
 """
 
-from typing import Any, Dict
+from typing import Any
 
 
 def evaluate_tenancy(
     org_id: Any,
-    context: Dict[str, Any],
+    context: dict[str, Any],
     resource_scope: str | None = None,
     roles: list[str] | None = None,
 ) -> tuple[bool, str]:

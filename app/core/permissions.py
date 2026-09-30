@@ -29,7 +29,6 @@ neither this map nor PREFIX_PERMISSION_MAP's "tes." prefix rule -- only
 tests/test_permissions.py's workflow.execute/model.use regression tests.
 """
 
-from typing import List, Optional
 
 # action (exact match) -> required permission
 #
@@ -66,7 +65,7 @@ RESOURCE_ACTION_PERMISSION_MAP = {
 }
 
 
-def required_permission(action: str, resource: str) -> Optional[str]:
+def required_permission(action: str, resource: str) -> str | None:
     if action in ACTION_PERMISSION_MAP:
         return ACTION_PERMISSION_MAP[action]
 
@@ -78,7 +77,7 @@ def required_permission(action: str, resource: str) -> Optional[str]:
 
 
 def evaluate_permission(
-    roles: List[str], permissions: List[str], action: str, resource: str
+    roles: list[str], permissions: list[str], action: str, resource: str
 ) -> tuple[bool, str]:
     if "admin" in roles:
         return True, "admin override"

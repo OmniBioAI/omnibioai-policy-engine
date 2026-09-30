@@ -6,11 +6,10 @@ a miss, and a cached decision skips policy checks entirely.
 Developer: Manish Kumar <manish@omnibioai.org>
 """
 import json
-import pytest
 from unittest.mock import MagicMock
+
 from app.core.engine import PolicyEngine
 from app.models.request import PolicyRequest
-from app.models.decision import PolicyDecision
 
 
 def make_engine(mock_redis=None):
@@ -21,8 +20,9 @@ def make_engine(mock_redis=None):
         mock_redis = MagicMock()
         mock_redis.get.return_value = None
 
-    from app.services.cache import PolicyCache
     from unittest.mock import patch
+
+    from app.services.cache import PolicyCache
     with patch("app.services.cache.redis") as mock_redis_module:
         mock_redis_module.from_url.return_value = mock_redis
         cache = PolicyCache(redis_url="redis://localhost")

@@ -9,11 +9,11 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse, HTMLResponse, Response
 from swagger_ui_bundle import swagger_ui_path
 
-_swagger_js = pathlib.Path(swagger_ui_path, "swagger-ui-bundle.js").read_text()
-_swagger_css = pathlib.Path(swagger_ui_path, "swagger-ui.css").read_text()
-
 from app.api.routes_policy import router
 from app.services.cache import PolicyCache
+
+_swagger_js = pathlib.Path(swagger_ui_path, "swagger-ui-bundle.js").read_text()
+_swagger_css = pathlib.Path(swagger_ui_path, "swagger-ui.css").read_text()
 
 _redis_url = os.getenv("REDIS_URL", "redis://redis:6379")
 _cache = PolicyCache(redis_url=_redis_url)
@@ -38,9 +38,9 @@ async def _invalidation_subscriber():
                         user_id = data.get("user_id", "")
                         if user_id:
                             _cache.invalidate_user(user_id)
-                    except Exception:
+                    except Exception:  # noqa: BLE001, S110 - isolate a bad event from the subscriber
                         pass
-        except Exception:
+        except Exception:  # noqa: BLE001 - reconnect after any subscriber failure
             await asyncio.sleep(5)
 
 

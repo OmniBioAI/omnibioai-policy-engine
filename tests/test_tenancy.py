@@ -49,5 +49,5 @@ def test_org_id_compared_as_string():
     """
     # A gateway/JWT could hand back an int-typed org_id; a resource_org_id
     # supplied as a string (or vice versa) must not spuriously mismatch.
-    allowed, reason = evaluate_tenancy(1, {"resource_org_id": "1"})
+    allowed, _reason = evaluate_tenancy(1, {"resource_org_id": "1"})
     assert allowed is True

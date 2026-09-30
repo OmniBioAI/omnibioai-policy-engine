@@ -1,6 +1,6 @@
-from app.core import rbac, abac, rules, permissions, tenancy
-from app.models.request import PolicyRequest
+from app.core import abac, permissions, rbac, rules, tenancy
 from app.models.decision import PolicyDecision
+from app.models.request import PolicyRequest
 from app.services.cache import PolicyCache
 
 
