@@ -73,6 +73,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          path: omnibioai-policy-engine
+
+      # The production Dockerfile intentionally consumes the audit package
+      # from a sibling directory in the parent build context. Pin this public
+      # source dependency to its already-published, validated revision.
+      - uses: actions/checkout@v4
+        with:
+          repository: OmniBioAI/omnibioai-security-audit
+          ref: 122a4592e350e97f8aabd2f91e9cf7d123742dd6
+          path: omnibioai-security-audit
+          persist-credentials: false
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
@@ -102,12 +114,13 @@ jobs:
           FULL_SHA: ${{ github.sha }}
         run: |
           test "${#FULL_SHA}" -eq 40
-          test "$FULL_SHA" = "$(git rev-parse HEAD)"
+          test "$FULL_SHA" = "$(git -C omnibioai-policy-engine rev-parse HEAD)"
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: omnibioai-policy-engine/Dockerfile
           push: true
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
