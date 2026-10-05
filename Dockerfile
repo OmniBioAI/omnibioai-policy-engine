@@ -1,5 +1,11 @@
+# OmniBioAI — Policy Engine
+# Purpose: Build the policy engine API with the shared audit package.
+# Author: Manish Kumar <manish@omnibioai.org>
+
+# Base image
 FROM python:3.11-slim
 
+# System dependencies
 RUN apt-get update \
  && apt-get install -y --no-install-recommends build-essential curl \
  && rm -rf /var/lib/apt/lists/*
@@ -12,6 +18,7 @@ WORKDIR /app
 # The pyproject.toml is currently empty, so fall back to copying the
 # audit package directly into site-packages if pip install fails.
 COPY omnibioai-security-audit /tmp/omnibioai-security-audit
+# Python dependencies
 RUN pip install --no-cache-dir /tmp/omnibioai-security-audit 2>/dev/null || \
     cp -r /tmp/omnibioai-security-audit/audit \
        "$(python -c 'import site; print(site.getsitepackages()[0])')/audit"
@@ -32,4 +39,5 @@ COPY omnibioai-policy-engine .
 
 EXPOSE 8002
 
+# Entrypoint and default command
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8002"]
