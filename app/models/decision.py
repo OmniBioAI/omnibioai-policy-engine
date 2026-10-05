@@ -1,3 +1,13 @@
+"""
+OmniBioAI app.models.decision.
+
+Purpose:
+    Defines the PolicyDecision data model for app.models.decision.
+
+Author:
+    Manish Kumar <manish@omnibioai.org>
+"""
+
 from typing import Any
 
 from pydantic import BaseModel

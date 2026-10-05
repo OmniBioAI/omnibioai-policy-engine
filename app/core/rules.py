@@ -1,3 +1,13 @@
+"""
+OmniBioAI app.core.rules.
+
+Purpose:
+    Defines evaluate_rules for app.core.rules.
+
+Author:
+    Manish Kumar <manish@omnibioai.org>
+"""
+
 def evaluate_rules(action: str, resource: str) -> tuple[bool, str]:
     # Example dataset protection rules
     if resource.startswith("human_genome") and action == "dataset.delete":

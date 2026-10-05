@@ -1,3 +1,13 @@
+"""
+OmniBioAI app.core.engine.
+
+Purpose:
+    Defines PolicyEngine with evaluate methods for app.core.engine.
+
+Author:
+    Manish Kumar <manish@omnibioai.org>
+"""
+
 from app.core import abac, permissions, rbac, rules, tenancy
 from app.models.decision import PolicyDecision
 from app.models.request import PolicyRequest

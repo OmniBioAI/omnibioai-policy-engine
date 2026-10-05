@@ -1,3 +1,13 @@
+"""
+OmniBioAI app.services.policy_service.
+
+Purpose:
+    Defines evaluate_policy for app.services.policy_service.
+
+Author:
+    Manish Kumar <manish@omnibioai.org>
+"""
+
 import os
 
 from app.core.engine import PolicyEngine

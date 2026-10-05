@@ -1,3 +1,13 @@
+"""
+OmniBioAI app.models.request.
+
+Purpose:
+    Defines the PolicyRequest data model for app.models.request.
+
+Author:
+    Manish Kumar <manish@omnibioai.org>
+"""
+
 from typing import Any, Literal
 
 from pydantic import BaseModel

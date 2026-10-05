@@ -1,3 +1,13 @@
+"""
+OmniBioAI app.services.cache.
+
+Purpose:
+    Defines PolicyCache with build_key, get, set and invalidate_user methods for app.services.cache.
+
+Author:
+    Manish Kumar <manish@omnibioai.org>
+"""
+
 import hashlib
 import json
 
