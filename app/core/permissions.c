@@ -1994,22 +1994,6 @@ static int __Pyx_PyUnicode_Tailmatch(
         PyObject_Format(s, f))
 #endif
 
-/* HasAttr.proto (used by ImportImpl) */
-#if __PYX_LIMITED_VERSION_HEX >= 0x030d0000
-#define __Pyx_HasAttr(o, n)  PyObject_HasAttrWithError(o, n)
-#else
-static CYTHON_INLINE int __Pyx_HasAttr(PyObject *, PyObject *);
-#endif
-
-/* ImportImpl.export */
-static PyObject *__Pyx__Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, PyObject *moddict, int level);
-
-/* Import.proto */
-static CYTHON_INLINE PyObject *__Pyx_Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, int level);
-
-/* ImportFrom.proto */
-static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name);
-
 /* dict_setdefault.proto (used by FetchCommonType) */
 static CYTHON_INLINE PyObject *__Pyx_PyDict_SetDefault(PyObject *d, PyObject *key, PyObject *default_value);
 
@@ -2363,7 +2347,7 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
   PyObject *__pyx_tuple[5];
   PyObject *__pyx_codeobj_tab[2];
-  PyObject *__pyx_string_tab[56];
+  PyObject *__pyx_string_tab[52];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
 PyTypeObject *__pyx_CommonTypesMetaclassType;
@@ -2405,61 +2389,57 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #endif
 /* #### Code section: constant_name_defines ### */
 #define __pyx_kp_u_ __pyx_string_tab[0]
-#define __pyx_kp_u_List_str __pyx_string_tab[1]
-#define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[2]
-#define __pyx_kp_u_Optional_str __pyx_string_tab[3]
-#define __pyx_kp_u__2 __pyx_string_tab[4]
-#define __pyx_kp_u_add_note __pyx_string_tab[5]
-#define __pyx_kp_u_admin_override __pyx_string_tab[6]
-#define __pyx_kp_u_app_core_permissions_py __pyx_string_tab[7]
-#define __pyx_kp_u_dataset_read __pyx_string_tab[8]
-#define __pyx_kp_u_missing_permission __pyx_string_tab[9]
-#define __pyx_kp_u_model_use __pyx_string_tab[10]
-#define __pyx_kp_u_no_permission_required __pyx_string_tab[11]
-#define __pyx_kp_u_permission_check_skipped_no_perm __pyx_string_tab[12]
-#define __pyx_kp_u_permission_granted __pyx_string_tab[13]
-#define __pyx_kp_u_tes __pyx_string_tab[14]
-#define __pyx_kp_u_tuple_bool_str __pyx_string_tab[15]
-#define __pyx_kp_u_workflow_execute __pyx_string_tab[16]
-#define __pyx_kp_u_workflow_manage __pyx_string_tab[17]
-#define __pyx_n_u_ACTION_PERMISSION_MAP __pyx_string_tab[18]
-#define __pyx_n_u_List __pyx_string_tab[19]
-#define __pyx_n_u_Optional __pyx_string_tab[20]
-#define __pyx_n_u_PREFIX_PERMISSION_MAP __pyx_string_tab[21]
-#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[22]
-#define __pyx_n_u_RESOURCE_ACTION_PERMISSION_MAP __pyx_string_tab[23]
-#define __pyx_n_u_action __pyx_string_tab[24]
-#define __pyx_n_u_admin __pyx_string_tab[25]
-#define __pyx_n_u_app_core_permissions __pyx_string_tab[26]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[27]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[28]
-#define __pyx_n_u_delete __pyx_string_tab[29]
-#define __pyx_n_u_evaluate_permission __pyx_string_tab[30]
-#define __pyx_n_u_func __pyx_string_tab[31]
-#define __pyx_n_u_get __pyx_string_tab[32]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[33]
-#define __pyx_n_u_items __pyx_string_tab[34]
-#define __pyx_n_u_main __pyx_string_tab[35]
-#define __pyx_n_u_model_registry __pyx_string_tab[36]
-#define __pyx_n_u_module __pyx_string_tab[37]
-#define __pyx_n_u_name __pyx_string_tab[38]
-#define __pyx_n_u_permission __pyx_string_tab[39]
-#define __pyx_n_u_permissions __pyx_string_tab[40]
-#define __pyx_n_u_pop __pyx_string_tab[41]
-#define __pyx_n_u_prefix __pyx_string_tab[42]
-#define __pyx_n_u_qualname __pyx_string_tab[43]
-#define __pyx_n_u_required_permission __pyx_string_tab[44]
-#define __pyx_n_u_resource __pyx_string_tab[45]
-#define __pyx_n_u_return __pyx_string_tab[46]
-#define __pyx_n_u_roles __pyx_string_tab[47]
-#define __pyx_n_u_set_name __pyx_string_tab[48]
-#define __pyx_n_u_setdefault __pyx_string_tab[49]
-#define __pyx_n_u_str __pyx_string_tab[50]
-#define __pyx_n_u_test __pyx_string_tab[51]
-#define __pyx_n_u_typing __pyx_string_tab[52]
-#define __pyx_n_u_values __pyx_string_tab[53]
-#define __pyx_kp_b_iso88591_6oQ_xs_vQ_t1_vQ_AXQ_Q_vQ_Q_vQ_7 __pyx_string_tab[54]
-#define __pyx_kp_b_iso88591_xq_wc_AQ_36_6_AQ_1_Rz __pyx_string_tab[55]
+#define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[1]
+#define __pyx_kp_u_add_note __pyx_string_tab[2]
+#define __pyx_kp_u_admin_override __pyx_string_tab[3]
+#define __pyx_kp_u_app_core_permissions_py __pyx_string_tab[4]
+#define __pyx_kp_u_dataset_read __pyx_string_tab[5]
+#define __pyx_kp_u_list_str __pyx_string_tab[6]
+#define __pyx_kp_u_missing_permission __pyx_string_tab[7]
+#define __pyx_kp_u_model_use __pyx_string_tab[8]
+#define __pyx_kp_u_no_permission_required __pyx_string_tab[9]
+#define __pyx_kp_u_permission_check_skipped_no_perm __pyx_string_tab[10]
+#define __pyx_kp_u_permission_granted __pyx_string_tab[11]
+#define __pyx_kp_u_str_None __pyx_string_tab[12]
+#define __pyx_kp_u_tes __pyx_string_tab[13]
+#define __pyx_kp_u_tuple_bool_str __pyx_string_tab[14]
+#define __pyx_kp_u_workflow_execute __pyx_string_tab[15]
+#define __pyx_kp_u_workflow_manage __pyx_string_tab[16]
+#define __pyx_n_u_ACTION_PERMISSION_MAP __pyx_string_tab[17]
+#define __pyx_n_u_PREFIX_PERMISSION_MAP __pyx_string_tab[18]
+#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[19]
+#define __pyx_n_u_RESOURCE_ACTION_PERMISSION_MAP __pyx_string_tab[20]
+#define __pyx_n_u_action __pyx_string_tab[21]
+#define __pyx_n_u_admin __pyx_string_tab[22]
+#define __pyx_n_u_app_core_permissions __pyx_string_tab[23]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[24]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[25]
+#define __pyx_n_u_delete __pyx_string_tab[26]
+#define __pyx_n_u_evaluate_permission __pyx_string_tab[27]
+#define __pyx_n_u_func __pyx_string_tab[28]
+#define __pyx_n_u_get __pyx_string_tab[29]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[30]
+#define __pyx_n_u_items __pyx_string_tab[31]
+#define __pyx_n_u_main __pyx_string_tab[32]
+#define __pyx_n_u_model_registry __pyx_string_tab[33]
+#define __pyx_n_u_module __pyx_string_tab[34]
+#define __pyx_n_u_name __pyx_string_tab[35]
+#define __pyx_n_u_permission __pyx_string_tab[36]
+#define __pyx_n_u_permissions __pyx_string_tab[37]
+#define __pyx_n_u_pop __pyx_string_tab[38]
+#define __pyx_n_u_prefix __pyx_string_tab[39]
+#define __pyx_n_u_qualname __pyx_string_tab[40]
+#define __pyx_n_u_required_permission __pyx_string_tab[41]
+#define __pyx_n_u_resource __pyx_string_tab[42]
+#define __pyx_n_u_return __pyx_string_tab[43]
+#define __pyx_n_u_roles __pyx_string_tab[44]
+#define __pyx_n_u_set_name __pyx_string_tab[45]
+#define __pyx_n_u_setdefault __pyx_string_tab[46]
+#define __pyx_n_u_str __pyx_string_tab[47]
+#define __pyx_n_u_test __pyx_string_tab[48]
+#define __pyx_n_u_values __pyx_string_tab[49]
+#define __pyx_kp_b_iso88591_6oQ_xs_vQ_t1_vQ_AXQ_Q_vQ_Q_vQ_7 __pyx_string_tab[50]
+#define __pyx_kp_b_iso88591_xq_wc_AQ_36_6_AQ_1_Rz __pyx_string_tab[51]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2476,7 +2456,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   #endif
   for (int i=0; i<5; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
   for (int i=0; i<2; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<56; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<52; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
 Py_CLEAR(clear_module_state->__pyx_CommonTypesMetaclassType);
@@ -2501,7 +2481,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_unicode);
   for (int i=0; i<5; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
   for (int i=0; i<2; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<56; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<52; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
 Py_VISIT(traverse_module_state->__pyx_CommonTypesMetaclassType);
@@ -2515,10 +2495,10 @@ return 0;
 #endif
 /* #### Code section: module_code ### */
 
-/* "app/core/permissions.py":69
+/* "app/core/permissions.py":68
  * 
  * 
- * def required_permission(action: str, resource: str) -> Optional[str]:             # <<<<<<<<<<<<<<
+ * def required_permission(action: str, resource: str) -> str | None:             # <<<<<<<<<<<<<<
  *     if action in ACTION_PERMISSION_MAP:
  *         return ACTION_PERMISSION_MAP[action]
 */
@@ -2563,39 +2543,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_action,&__pyx_mstate_global->__pyx_n_u_resource,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 69, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 68, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 68, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 69, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 68, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "required_permission", 0) < (0)) __PYX_ERR(0, 69, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "required_permission", 0) < (0)) __PYX_ERR(0, 68, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("required_permission", 1, 2, 2, i); __PYX_ERR(0, 69, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("required_permission", 1, 2, 2, i); __PYX_ERR(0, 68, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 69, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 68, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 69, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 68, __pyx_L3_error)
     }
     __pyx_v_action = ((PyObject*)values[0]);
     __pyx_v_resource = ((PyObject*)values[1]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("required_permission", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 69, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("required_permission", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 68, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2606,8 +2586,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_action), (&PyUnicode_Type), 0, "action", 2))) __PYX_ERR(0, 69, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_resource), (&PyUnicode_Type), 0, "resource", 2))) __PYX_ERR(0, 69, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_action), (&PyUnicode_Type), 0, "action", 2))) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_resource), (&PyUnicode_Type), 0, "resource", 2))) __PYX_ERR(0, 68, __pyx_L1_error)
   __pyx_r = __pyx_pf_3app_4core_11permissions_required_permission(__pyx_self, __pyx_v_action, __pyx_v_resource);
 
   /* function exit code */
@@ -2647,47 +2627,47 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("required_permission", 0);
 
-  /* "app/core/permissions.py":70
+  /* "app/core/permissions.py":69
  * 
- * def required_permission(action: str, resource: str) -> Optional[str]:
+ * def required_permission(action: str, resource: str) -> str | None:
  *     if action in ACTION_PERMISSION_MAP:             # <<<<<<<<<<<<<<
  *         return ACTION_PERMISSION_MAP[action]
  * 
 */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_ACTION_PERMISSION_MAP); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_ACTION_PERMISSION_MAP); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_action, __pyx_t_1, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 70, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_action, __pyx_t_1, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 69, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "app/core/permissions.py":71
- * def required_permission(action: str, resource: str) -> Optional[str]:
+    /* "app/core/permissions.py":70
+ * def required_permission(action: str, resource: str) -> str | None:
  *     if action in ACTION_PERMISSION_MAP:
  *         return ACTION_PERMISSION_MAP[action]             # <<<<<<<<<<<<<<
  * 
  *     for prefix, permission in PREFIX_PERMISSION_MAP.items():
 */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_ACTION_PERMISSION_MAP); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_ACTION_PERMISSION_MAP); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_v_action); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 71, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_v_action); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (!(likely(PyUnicode_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_3))) __PYX_ERR(0, 71, __pyx_L1_error)
+    if (!(likely(PyUnicode_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_3))) __PYX_ERR(0, 70, __pyx_L1_error)
     __pyx_r = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "app/core/permissions.py":70
+    /* "app/core/permissions.py":69
  * 
- * def required_permission(action: str, resource: str) -> Optional[str]:
+ * def required_permission(action: str, resource: str) -> str | None:
  *     if action in ACTION_PERMISSION_MAP:             # <<<<<<<<<<<<<<
  *         return ACTION_PERMISSION_MAP[action]
  * 
 */
   }
 
-  /* "app/core/permissions.py":73
+  /* "app/core/permissions.py":72
  *         return ACTION_PERMISSION_MAP[action]
  * 
  *     for prefix, permission in PREFIX_PERMISSION_MAP.items():             # <<<<<<<<<<<<<<
@@ -2695,13 +2675,13 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
  *             return permission
 */
   __pyx_t_4 = 0;
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_PREFIX_PERMISSION_MAP); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_PREFIX_PERMISSION_MAP); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (unlikely(__pyx_t_1 == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-    __PYX_ERR(0, 73, __pyx_L1_error)
+    __PYX_ERR(0, 72, __pyx_L1_error)
   }
-  __pyx_t_7 = __Pyx_dict_iterator(__pyx_t_1, 0, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_5), (&__pyx_t_6)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 73, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_dict_iterator(__pyx_t_1, 0, __pyx_mstate_global->__pyx_n_u_items, (&__pyx_t_5), (&__pyx_t_6)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 72, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_XDECREF(__pyx_t_3);
@@ -2710,7 +2690,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
   while (1) {
     __pyx_t_8 = __Pyx_dict_iter_next(__pyx_t_3, __pyx_t_5, &__pyx_t_4, &__pyx_t_7, &__pyx_t_1, NULL, __pyx_t_6);
     if (unlikely(__pyx_t_8 == 0)) break;
-    if (unlikely(__pyx_t_8 == -1)) __PYX_ERR(0, 73, __pyx_L1_error)
+    if (unlikely(__pyx_t_8 == -1)) __PYX_ERR(0, 72, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_XDECREF_SET(__pyx_v_prefix, __pyx_t_7);
@@ -2718,17 +2698,17 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
     __Pyx_XDECREF_SET(__pyx_v_permission, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "app/core/permissions.py":74
+    /* "app/core/permissions.py":73
  * 
  *     for prefix, permission in PREFIX_PERMISSION_MAP.items():
  *         if action.startswith(prefix):             # <<<<<<<<<<<<<<
  *             return permission
  * 
 */
-    __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_action, __pyx_v_prefix, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_action, __pyx_v_prefix, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 73, __pyx_L1_error)
     if (__pyx_t_2) {
 
-      /* "app/core/permissions.py":75
+      /* "app/core/permissions.py":74
  *     for prefix, permission in PREFIX_PERMISSION_MAP.items():
  *         if action.startswith(prefix):
  *             return permission             # <<<<<<<<<<<<<<
@@ -2738,13 +2718,13 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
       __Pyx_XDECREF(__pyx_r);
       __pyx_t_1 = __pyx_v_permission;
       __Pyx_INCREF(__pyx_t_1);
-      if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(0, 75, __pyx_L1_error)
+      if (!(likely(PyUnicode_CheckExact(__pyx_t_1))||((__pyx_t_1) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_1))) __PYX_ERR(0, 74, __pyx_L1_error)
       __pyx_r = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       goto __pyx_L0;
 
-      /* "app/core/permissions.py":74
+      /* "app/core/permissions.py":73
  * 
  *     for prefix, permission in PREFIX_PERMISSION_MAP.items():
  *         if action.startswith(prefix):             # <<<<<<<<<<<<<<
@@ -2755,7 +2735,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "app/core/permissions.py":77
+  /* "app/core/permissions.py":76
  *             return permission
  * 
  *     return RESOURCE_ACTION_PERMISSION_MAP.get((resource, action))             # <<<<<<<<<<<<<<
@@ -2764,19 +2744,19 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
 */
   __Pyx_XDECREF(__pyx_r);
   __pyx_t_1 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_RESOURCE_ACTION_PERMISSION_MAP); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_RESOURCE_ACTION_PERMISSION_MAP); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_mstate_global->__pyx_n_u_get); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_7 = PyTuple_New(2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_INCREF(__pyx_v_resource);
   __Pyx_GIVEREF(__pyx_v_resource);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_v_resource) != (0)) __PYX_ERR(0, 77, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_v_resource) != (0)) __PYX_ERR(0, 76, __pyx_L1_error);
   __Pyx_INCREF(__pyx_v_action);
   __Pyx_GIVEREF(__pyx_v_action);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_v_action) != (0)) __PYX_ERR(0, 77, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_v_action) != (0)) __PYX_ERR(0, 76, __pyx_L1_error);
   __pyx_t_10 = 1;
   #if CYTHON_UNPACK_METHODS
   if (unlikely(PyMethod_Check(__pyx_t_9))) {
@@ -2795,18 +2775,18 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 77, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
-  if (!(likely(PyUnicode_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_3))) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (!(likely(PyUnicode_CheckExact(__pyx_t_3))||((__pyx_t_3) == Py_None) || __Pyx_RaiseUnexpectedTypeError("str", __pyx_t_3))) __PYX_ERR(0, 76, __pyx_L1_error)
   __pyx_r = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "app/core/permissions.py":69
+  /* "app/core/permissions.py":68
  * 
  * 
- * def required_permission(action: str, resource: str) -> Optional[str]:             # <<<<<<<<<<<<<<
+ * def required_permission(action: str, resource: str) -> str | None:             # <<<<<<<<<<<<<<
  *     if action in ACTION_PERMISSION_MAP:
  *         return ACTION_PERMISSION_MAP[action]
 */
@@ -2827,11 +2807,11 @@ static PyObject *__pyx_pf_3app_4core_11permissions_required_permission(CYTHON_UN
   return __pyx_r;
 }
 
-/* "app/core/permissions.py":80
+/* "app/core/permissions.py":79
  * 
  * 
  * def evaluate_permission(             # <<<<<<<<<<<<<<
- *     roles: List[str], permissions: List[str], action: str, resource: str
+ *     roles: list[str], permissions: list[str], action: str, resource: str
  * ) -> tuple[bool, str]:
 */
 
@@ -2877,44 +2857,44 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_roles,&__pyx_mstate_global->__pyx_n_u_permissions,&__pyx_mstate_global->__pyx_n_u_action,&__pyx_mstate_global->__pyx_n_u_resource,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 80, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 79, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  4:
         values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 80, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 79, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  3:
         values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 80, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 79, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 80, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 79, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 80, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 79, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_permission", 0) < (0)) __PYX_ERR(0, 80, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_permission", 0) < (0)) __PYX_ERR(0, 79, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 4; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_permission", 1, 4, 4, i); __PYX_ERR(0, 80, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_permission", 1, 4, 4, i); __PYX_ERR(0, 79, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 4)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 80, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 79, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 80, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 79, __pyx_L3_error)
       values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 80, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 79, __pyx_L3_error)
       values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 80, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 79, __pyx_L3_error)
     }
     __pyx_v_roles = ((PyObject*)values[0]);
     __pyx_v_permissions = ((PyObject*)values[1]);
@@ -2923,7 +2903,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("evaluate_permission", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 80, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("evaluate_permission", 1, 4, 4, __pyx_nargs); __PYX_ERR(0, 79, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2934,10 +2914,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_roles), (&PyList_Type), 0, "roles", 2))) __PYX_ERR(0, 81, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_permissions), (&PyList_Type), 0, "permissions", 2))) __PYX_ERR(0, 81, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_action), (&PyUnicode_Type), 0, "action", 2))) __PYX_ERR(0, 81, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_resource), (&PyUnicode_Type), 0, "resource", 2))) __PYX_ERR(0, 81, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_roles), (&PyList_Type), 0, "roles", 2))) __PYX_ERR(0, 80, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_permissions), (&PyList_Type), 0, "permissions", 2))) __PYX_ERR(0, 80, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_action), (&PyUnicode_Type), 0, "action", 2))) __PYX_ERR(0, 80, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_resource), (&PyUnicode_Type), 0, "resource", 2))) __PYX_ERR(0, 80, __pyx_L1_error)
   __pyx_r = __pyx_pf_3app_4core_11permissions_2evaluate_permission(__pyx_self, __pyx_v_roles, __pyx_v_permissions, __pyx_v_action, __pyx_v_resource);
 
   /* function exit code */
@@ -2972,17 +2952,17 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("evaluate_permission", 0);
 
-  /* "app/core/permissions.py":83
- *     roles: List[str], permissions: List[str], action: str, resource: str
+  /* "app/core/permissions.py":82
+ *     roles: list[str], permissions: list[str], action: str, resource: str
  * ) -> tuple[bool, str]:
  *     if "admin" in roles:             # <<<<<<<<<<<<<<
  *         return True, "admin override"
  * 
 */
-  __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_admin, __pyx_v_roles, Py_EQ)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_admin, __pyx_v_roles, Py_EQ)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 82, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "app/core/permissions.py":84
+    /* "app/core/permissions.py":83
  * ) -> tuple[bool, str]:
  *     if "admin" in roles:
  *         return True, "admin override"             # <<<<<<<<<<<<<<
@@ -2994,8 +2974,8 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
     __pyx_r = __pyx_mstate_global->__pyx_tuple[0];
     goto __pyx_L0;
 
-    /* "app/core/permissions.py":83
- *     roles: List[str], permissions: List[str], action: str, resource: str
+    /* "app/core/permissions.py":82
+ *     roles: list[str], permissions: list[str], action: str, resource: str
  * ) -> tuple[bool, str]:
  *     if "admin" in roles:             # <<<<<<<<<<<<<<
  *         return True, "admin override"
@@ -3003,7 +2983,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
 */
   }
 
-  /* "app/core/permissions.py":86
+  /* "app/core/permissions.py":85
  *         return True, "admin override"
  * 
  *     if not permissions:             # <<<<<<<<<<<<<<
@@ -3012,14 +2992,14 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
 */
   {
     Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_v_permissions);
-    if (unlikely(((!CYTHON_ASSUME_SAFE_SIZE) && __pyx_temp < 0))) __PYX_ERR(0, 86, __pyx_L1_error)
+    if (unlikely(((!CYTHON_ASSUME_SAFE_SIZE) && __pyx_temp < 0))) __PYX_ERR(0, 85, __pyx_L1_error)
     __pyx_t_1 = (__pyx_temp != 0);
   }
 
   __pyx_t_2 = (!__pyx_t_1);
   if (__pyx_t_2) {
 
-    /* "app/core/permissions.py":89
+    /* "app/core/permissions.py":88
  *         # Not permission-aware traffic (see module docstring) -- defer
  *         # entirely to rbac.evaluate_rbac, which already ran before this.
  *         return True, "permission check skipped: no permissions supplied"             # <<<<<<<<<<<<<<
@@ -3031,7 +3011,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
     __pyx_r = __pyx_mstate_global->__pyx_tuple[1];
     goto __pyx_L0;
 
-    /* "app/core/permissions.py":86
+    /* "app/core/permissions.py":85
  *         return True, "admin override"
  * 
  *     if not permissions:             # <<<<<<<<<<<<<<
@@ -3040,7 +3020,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
 */
   }
 
-  /* "app/core/permissions.py":91
+  /* "app/core/permissions.py":90
  *         return True, "permission check skipped: no permissions supplied"
  * 
  *     permission = required_permission(action, resource)             # <<<<<<<<<<<<<<
@@ -3048,7 +3028,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
  *         return True, "no permission required"
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_required_permission); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_required_permission); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 90, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -3067,13 +3047,13 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
     __pyx_t_3 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_5, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
     __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 91, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
   }
   __pyx_v_permission = __pyx_t_3;
   __pyx_t_3 = 0;
 
-  /* "app/core/permissions.py":92
+  /* "app/core/permissions.py":91
  * 
  *     permission = required_permission(action, resource)
  *     if permission is None:             # <<<<<<<<<<<<<<
@@ -3083,7 +3063,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
   __pyx_t_2 = (__pyx_v_permission == Py_None);
   if (__pyx_t_2) {
 
-    /* "app/core/permissions.py":93
+    /* "app/core/permissions.py":92
  *     permission = required_permission(action, resource)
  *     if permission is None:
  *         return True, "no permission required"             # <<<<<<<<<<<<<<
@@ -3095,7 +3075,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
     __pyx_r = __pyx_mstate_global->__pyx_tuple[2];
     goto __pyx_L0;
 
-    /* "app/core/permissions.py":92
+    /* "app/core/permissions.py":91
  * 
  *     permission = required_permission(action, resource)
  *     if permission is None:             # <<<<<<<<<<<<<<
@@ -3104,17 +3084,17 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
 */
   }
 
-  /* "app/core/permissions.py":95
+  /* "app/core/permissions.py":94
  *         return True, "no permission required"
  * 
  *     if permission in permissions:             # <<<<<<<<<<<<<<
  *         return True, "permission granted"
  * 
 */
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_permission, __pyx_v_permissions, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 95, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_v_permission, __pyx_v_permissions, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 94, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "app/core/permissions.py":96
+    /* "app/core/permissions.py":95
  * 
  *     if permission in permissions:
  *         return True, "permission granted"             # <<<<<<<<<<<<<<
@@ -3126,7 +3106,7 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
     __pyx_r = __pyx_mstate_global->__pyx_tuple[3];
     goto __pyx_L0;
 
-    /* "app/core/permissions.py":95
+    /* "app/core/permissions.py":94
  *         return True, "no permission required"
  * 
  *     if permission in permissions:             # <<<<<<<<<<<<<<
@@ -3135,34 +3115,34 @@ static PyObject *__pyx_pf_3app_4core_11permissions_2evaluate_permission(CYTHON_U
 */
   }
 
-  /* "app/core/permissions.py":98
+  /* "app/core/permissions.py":97
  *         return True, "permission granted"
  * 
  *     return False, f"missing permission: {permission}"             # <<<<<<<<<<<<<<
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_permission, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_FormatSimple(__pyx_v_permission, __pyx_mstate_global->__pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_missing_permission, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyUnicode_Concat(__pyx_mstate_global->__pyx_kp_u_missing_permission, __pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 98, __pyx_L1_error)
+  __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 97, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(Py_False);
   __Pyx_GIVEREF(Py_False);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, Py_False) != (0)) __PYX_ERR(0, 98, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, Py_False) != (0)) __PYX_ERR(0, 97, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_5) != (0)) __PYX_ERR(0, 98, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_5) != (0)) __PYX_ERR(0, 97, __pyx_L1_error);
   __pyx_t_5 = 0;
   __pyx_r = ((PyObject*)__pyx_t_3);
   __pyx_t_3 = 0;
   goto __pyx_L0;
 
-  /* "app/core/permissions.py":80
+  /* "app/core/permissions.py":79
  * 
  * 
  * def evaluate_permission(             # <<<<<<<<<<<<<<
- *     roles: List[str], permissions: List[str], action: str, resource: str
+ *     roles: list[str], permissions: list[str], action: str, resource: str
  * ) -> tuple[bool, str]:
 */
 
@@ -3442,8 +3422,7 @@ static CYTHON_SMALL_CODE int __pyx_pymod_exec_permissions(PyObject *__pyx_pyinit
   __pyx_mstatetype *__pyx_mstate = NULL;
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
-  Py_ssize_t __pyx_t_3;
-  PyObject *__pyx_t_4 = NULL;
+  PyObject *__pyx_t_3 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -3530,115 +3509,91 @@ __Pyx_RefNannySetupContext("PyInit_permissions", 0);
   (void)__Pyx_modinit_function_import_code(__pyx_mstate);
   /*--- Execution code ---*/
 
-  /* "app/core/permissions.py":32
- * """
- * 
- * from typing import List, Optional             # <<<<<<<<<<<<<<
- * 
- * # action (exact match) -> required permission
-*/
-  {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_List,__pyx_mstate_global->__pyx_n_u_Optional};
-    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_typing, __pyx_imported_names, 2, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 32, __pyx_L1_error)
-  }
-  __pyx_t_2 = __pyx_t_1;
-  __Pyx_GOTREF(__pyx_t_2);
-  {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_List,__pyx_mstate_global->__pyx_n_u_Optional};
-    for (__pyx_t_3=0; __pyx_t_3 < 2; __pyx_t_3++) {
-      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 32, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 32, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-  }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-  /* "app/core/permissions.py":53
+  /* "app/core/permissions.py":52
  * # another.
  * ACTION_PERMISSION_MAP = {
  *     "dataset.read": "dataset.read",             # <<<<<<<<<<<<<<
  *     "workflow.execute": "workflow.execute",
  *     "model.use": "model.use",
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 53, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_dataset_read, __pyx_mstate_global->__pyx_kp_u_dataset_read) < (0)) __PYX_ERR(0, 53, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_workflow_execute, __pyx_mstate_global->__pyx_kp_u_workflow_execute) < (0)) __PYX_ERR(0, 53, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_model_use, __pyx_mstate_global->__pyx_kp_u_model_use) < (0)) __PYX_ERR(0, 53, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ACTION_PERMISSION_MAP, __pyx_t_2) < (0)) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_dataset_read, __pyx_mstate_global->__pyx_kp_u_dataset_read) < (0)) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_workflow_execute, __pyx_mstate_global->__pyx_kp_u_workflow_execute) < (0)) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_model_use, __pyx_mstate_global->__pyx_kp_u_model_use) < (0)) __PYX_ERR(0, 52, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_ACTION_PERMISSION_MAP, __pyx_t_2) < (0)) __PYX_ERR(0, 51, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "app/core/permissions.py":60
+  /* "app/core/permissions.py":59
  * # action prefix -> required permission
  * PREFIX_PERMISSION_MAP = {
  *     "tes.": "workflow.execute",             # <<<<<<<<<<<<<<
  * }
  * 
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 60, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 59, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_tes, __pyx_mstate_global->__pyx_kp_u_workflow_execute) < (0)) __PYX_ERR(0, 60, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_PREFIX_PERMISSION_MAP, __pyx_t_2) < (0)) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_kp_u_tes, __pyx_mstate_global->__pyx_kp_u_workflow_execute) < (0)) __PYX_ERR(0, 59, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_PREFIX_PERMISSION_MAP, __pyx_t_2) < (0)) __PYX_ERR(0, 58, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "app/core/permissions.py":65
+  /* "app/core/permissions.py":64
  * # (resource, action) -> required permission
  * RESOURCE_ACTION_PERMISSION_MAP = {
  *     ("model_registry", "delete"): "workflow.manage",             # <<<<<<<<<<<<<<
  * }
  * 
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_tuple[4], __pyx_mstate_global->__pyx_kp_u_workflow_manage) < (0)) __PYX_ERR(0, 65, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_RESOURCE_ACTION_PERMISSION_MAP, __pyx_t_2) < (0)) __PYX_ERR(0, 64, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_tuple[4], __pyx_mstate_global->__pyx_kp_u_workflow_manage) < (0)) __PYX_ERR(0, 64, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_RESOURCE_ACTION_PERMISSION_MAP, __pyx_t_2) < (0)) __PYX_ERR(0, 63, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "app/core/permissions.py":69
+  /* "app/core/permissions.py":68
  * 
  * 
- * def required_permission(action: str, resource: str) -> Optional[str]:             # <<<<<<<<<<<<<<
+ * def required_permission(action: str, resource: str) -> str | None:             # <<<<<<<<<<<<<<
  *     if action in ACTION_PERMISSION_MAP:
  *         return ACTION_PERMISSION_MAP[action]
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 69, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 68, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_action, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 69, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_resource, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 69, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_Optional_str) < (0)) __PYX_ERR(0, 69, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_11permissions_1required_permission, 0, __pyx_mstate_global->__pyx_n_u_required_permission, NULL, __pyx_mstate_global->__pyx_n_u_app_core_permissions, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 69, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_action, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_resource, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_str_None) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_11permissions_1required_permission, 0, __pyx_mstate_global->__pyx_n_u_required_permission, NULL, __pyx_mstate_global->__pyx_n_u_app_core_permissions, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
-  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
+  PyUnstable_Object_EnableDeferredRefcount(__pyx_t_3);
   #endif
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_2);
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_required_permission, __pyx_t_4) < (0)) __PYX_ERR(0, 69, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_required_permission, __pyx_t_3) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "app/core/permissions.py":80
+  /* "app/core/permissions.py":79
  * 
  * 
  * def evaluate_permission(             # <<<<<<<<<<<<<<
- *     roles: List[str], permissions: List[str], action: str, resource: str
+ *     roles: list[str], permissions: list[str], action: str, resource: str
  * ) -> tuple[bool, str]:
 */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 80, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_roles, __pyx_mstate_global->__pyx_kp_u_List_str) < (0)) __PYX_ERR(0, 80, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_permissions, __pyx_mstate_global->__pyx_kp_u_List_str) < (0)) __PYX_ERR(0, 80, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_action, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 80, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_resource, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 80, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 80, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_11permissions_3evaluate_permission, 0, __pyx_mstate_global->__pyx_n_u_evaluate_permission, NULL, __pyx_mstate_global->__pyx_n_u_app_core_permissions, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_roles, __pyx_mstate_global->__pyx_kp_u_list_str) < (0)) __PYX_ERR(0, 79, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_permissions, __pyx_mstate_global->__pyx_kp_u_list_str) < (0)) __PYX_ERR(0, 79, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_action, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 79, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_resource, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 79, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_11permissions_3evaluate_permission, 0, __pyx_mstate_global->__pyx_n_u_evaluate_permission, NULL, __pyx_mstate_global->__pyx_n_u_app_core_permissions, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_2);
   #endif
-  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_4);
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_permission, __pyx_t_2) < (0)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_2, __pyx_t_3);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_permission, __pyx_t_2) < (0)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "app/core/permissions.py":1
@@ -3656,7 +3611,7 @@ __Pyx_RefNannySetupContext("PyInit_permissions", 0);
   goto __pyx_L0;
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_XDECREF(__pyx_t_3);
   if (__pyx_m) {
     if (__pyx_mstate->__pyx_d && stringtab_initialized) {
       __Pyx_AddTraceback("init app.core.permissions", __pyx_clineno, __pyx_lineno, __pyx_filename);
@@ -3705,58 +3660,58 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "app/core/permissions.py":84
+  /* "app/core/permissions.py":83
  * ) -> tuple[bool, str]:
  *     if "admin" in roles:
  *         return True, "admin override"             # <<<<<<<<<<<<<<
  * 
  *     if not permissions:
 */
-  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_admin_override); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_admin_override); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
 
-  /* "app/core/permissions.py":89
+  /* "app/core/permissions.py":88
  *         # Not permission-aware traffic (see module docstring) -- defer
  *         # entirely to rbac.evaluate_rbac, which already ran before this.
  *         return True, "permission check skipped: no permissions supplied"             # <<<<<<<<<<<<<<
  * 
  *     permission = required_permission(action, resource)
 */
-  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_permission_check_skipped_no_perm); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 89, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_permission_check_skipped_no_perm); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 88, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
 
-  /* "app/core/permissions.py":93
+  /* "app/core/permissions.py":92
  *     permission = required_permission(action, resource)
  *     if permission is None:
  *         return True, "no permission required"             # <<<<<<<<<<<<<<
  * 
  *     if permission in permissions:
 */
-  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_no_permission_required); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_no_permission_required); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 92, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
 
-  /* "app/core/permissions.py":96
+  /* "app/core/permissions.py":95
  * 
  *     if permission in permissions:
  *         return True, "permission granted"             # <<<<<<<<<<<<<<
  * 
  *     return False, f"missing permission: {permission}"
 */
-  __pyx_mstate_global->__pyx_tuple[3] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_permission_granted); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 96, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[3] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_permission_granted); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 95, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[3]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[3]);
 
-  /* "app/core/permissions.py":65
+  /* "app/core/permissions.py":64
  * # (resource, action) -> required permission
  * RESOURCE_ACTION_PERMISSION_MAP = {
  *     ("model_registry", "delete"): "workflow.manage",             # <<<<<<<<<<<<<<
  * }
  * 
 */
-  __pyx_mstate_global->__pyx_tuple[4] = PyTuple_Pack(2, __pyx_mstate_global->__pyx_n_u_model_registry, __pyx_mstate_global->__pyx_n_u_delete); if (unlikely(!__pyx_mstate_global->__pyx_tuple[4])) __PYX_ERR(0, 65, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[4] = PyTuple_Pack(2, __pyx_mstate_global->__pyx_n_u_model_registry, __pyx_mstate_global->__pyx_n_u_delete); if (unlikely(!__pyx_mstate_global->__pyx_tuple[4])) __PYX_ERR(0, 64, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[4]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[4]);
   #if CYTHON_IMMORTAL_CONSTANTS
@@ -3789,34 +3744,34 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } index[] = {{1},{9},{179},{13},{1},{8},{14},{23},{12},{20},{9},{22},{49},{18},{4},{16},{16},{15},{21},{4},{8},{21},{20},{30},{6},{5},{20},{18},{18},{6},{19},{8},{3},{13},{5},{8},{14},{10},{8},{10},{11},{3},{6},{12},{19},{8},{6},{5},{12},{10},{3},{8},{6},{6},{103},{72}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (737 bytes) */
-const char* const cstring = "BZh91AY&SYaK\215\205\000\0006\177\377\347\355\374\tl\347\255\320\257'\376J\277\377\377\370@@@@@@@@@\000@@@\000@\000@\002C\273\251\265\262\340\3225\006\251\265\036\215OS\324\031\000=A\240\311\240\032\000\006\200\3654\365\033(\362\236\247\351A\251\251\204d\r\na\243Q\223 \000\320\000h\000\000\000\014\232\003A\004\324\310e6\243\321\003@\320\000\000\000\000\000\000\000\004\242M&S\3654\324\3624\322\017P\320\000\000\000h\000\000\000\000\014Qvi\026\262A\004R\343\204\014\202&p\352:\3109\330`\250C\306\267T\226\330\306d\316\364\221\331\216\327\242d\262\221\277*\0305\010\221\021\210\356N\331}\326\254iR\235\260\373\350\020\352\353\275ka\234\027\252\267V\\y\201\262\372\024\323\016\303\273\321t\370V\235\014\252\361\271o\310\227\264\"\357\031zG`\004xx\263\356W\303\211\322\330s#G'j\014\227\255\nv`\250\350\022K\345\030g\377Y'Ru<*\345\304\221\333[\243\322\225\002\262Gbhe\224\320\357&\037\211\3764Jp\263\355\214\227\314y\260\344\215b\014T#\277UB\210\200X'~`\364yDW\310m[\300\016k\311\265\273\002V\333\215\022\262X\226\355\205\240_\275\024?PU{-\305<_:\351\030s\3132\010%;\246\272m1\271T4\236L\235\326%\266\033\024\013\222\225\320\226\330a\377,\305B\004\313a\\}!\004\340\010\014\215\000\365\241a\214$Pq-c\307\241BR\nLj\236\325,\204\232qD\"w\021Y\0144\244!\275\020rJ\351}\363\245\002I\203\0340x\024H\3548\215\316\004\372+\312\353\366DHT\231\262\212\371$o\264y\257\302-\334\014\035R\205)\212B!3C\233!@\325\020\0300\2467\247sc\262\365\201\220H-\017\244)\250R\252>C]!\245\003J\025\004\242i\215\241GP\262Xq\025cY\303\3138\302\261\212\335W\3375G\240\246%F\022s\202\340\252#*\246\025\334Z\303\2543\026\322(\336d\313\0071\205&\250V\301\022\253T\031\3306\252O\023\205)\244\n\001+\236\322\210\021-\240\330\315\206Mm\244A\026\021\3305\014\252\206\207\032\254\035^\235I\000\242U\021>\2607\n`Da_<\nP\355\217\003\253\005\206q\0346i:\363\220\304q\024\363\036\230\0046\022\332J8>\234\271\364TmI\013q\245a\006\257\220\363o\254C\235\332Q\265\223\373R\221\203\260\\\002^\250?\002D\322\317\3176/%\017AJu\"\256\244\256\210-\321Hii""\t}$)B?\305\334\221N\024$\030R\343a@";
-    PyObject *data = __Pyx_DecompressString(cstring, 737, 2);
+    const struct { const unsigned int length: 8; } index[] = {{1},{179},{8},{14},{23},{12},{9},{20},{9},{22},{49},{18},{10},{4},{16},{16},{15},{21},{21},{20},{30},{6},{5},{20},{18},{18},{6},{19},{8},{3},{13},{5},{8},{14},{10},{8},{10},{11},{3},{6},{12},{19},{8},{6},{5},{12},{10},{3},{8},{6},{103},{72}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (731 bytes) */
+const char* const cstring = "BZh91AY&SYm\241\3017\000\000C\177\377\347\355\374\tl\347\255\320\257#\376J\277\377\377\374@@@@@@@@@\000@@@\000@\000@\002C\273\254\322\313\270j\032AM\250\3657\252=\020\364\200\017P\320=@\032h\006\206\232\007\250z\217MG\224\375S\365 \324OD\302\233\"i\251\345\031\007\251\240\000h\000\000\000\000\000=@\032\230\201&#\324\233I\35144\r\006\200\000\006\200\000\000\000\032\003D\032\246i2\033T\304\362\236\243@\000\000\000\000\001\240\000\000\321+\265E\3660\3070>\007\2360#\003\320\361T}\240T\245&Y\324L}\3248\230\032\"\2737\305\225\313\037\232/\354 qNt\226\020\220\362\020\227~\227\r\366\245\022\035u\366\362\340\200\342-k*\217e\251\274*\325\236\275\000\223\001\334m/\305\301\325l\271\030\215\010lWz;\306f\320\365\357\0264J\020\017v\363R\033\330DV\331\031@]\244\024\273}\204!s\032RFaCF\345\360y\207\230\360\2032\"\303\2062\\\205TS8\347~`\203\373\324\262\361+\214\024\211\366=\355\035\205\270\226RF\217\013CQ`\242\031Z \030\016\257x\265\326!\025k[\374\0107\322m\354\304\226IrA+e{\025\200\304\n\276^\352\230D\245\325\022\315\3519\306\032\345gDb\005]\215\247\2527)\006)\312\\\315\274\205\320\331\234WT\034\302\205\2073\362\324\2240>\027\036tM\0145\000\300\352\214\013\2367\021\n\310\024\332\256\201t \224\302\"T\2456\005|F\224\302\210D\312d\356)LG\365 Uk\306\271\313k\005g\271D\026\014\024\22449\255\000\315\2326\323\004B0\353\010\010\021\271\010\004\207\310\300{+\200*9\310\312\037n\"\022\240\244\221\223\215jP0a{\362\243i\332E\302b\003\013\205\226`A\021\200\217\r\020W(\022\223\005\006Bs\005E\213\003l\030\211\016\255\333\2057\215w\005\235\220\240\362<)\242\254(\\S\211Q2WZ\200\363\320aj\005\254)\206c#9\336\266\312\300F0jH\022XgE\210\010\253\023\020\352=\242\204$\010\002\221\256b\236\240\244\251e\262\023\tMm\2231\211B\261 \\\014\214\244D\211\251-\030\300\273\202\007\2700F\003\210#f\211\255\353\226\343\242\005zBh\251\231K\201\317 \367W)\2008\2452X\204\201\\\227&\315\251'\2563\241[\002a\3570\362w\254i\346\3344\255\344\376\324\300&\270#\002~\225~\004\n'\246\335\030\326\226\252\330\021\027\214.\241\213""\255\032\356\004\376PS\324B\341\237\370\273\222)\302\204\203m\016\t\270";
+    PyObject *data = __Pyx_DecompressString(cstring, 731, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (643 bytes) */
-const char* const cstring = "x\332mRMkSA\024mAk%b\215\272\023d\244B\025\364\225\322R\245\033\t5\205\200m\223T\241P\3120\231w\223\214\231\314L\347#\315\323M\227Y\276e\227]f\331e\227\376\204,\263\364'\370\023\274\223~\245\342\203\367\336\334\3139\347\316=\367&_\204\363\007\316\333\303\035\355\201\3706\363d3\363m\255\210p$\005)\032`\231\007\231\021\004\t\356\301F\220\"\325r\365\375\332\3075\302TJ,|\007\356\035q\241\301%s\016\034\321M\322\010Bz\241\210\317\014\270\204T\232$\323\201(\200\224xM\014\342\246\t\276\r\2128\360\361@\226\230R\3323/\264\242H\027\252\265DRa\261\210\350Ado1\351 \3315\021\301\344\344\376\237X\232Rd\001K\273XU\367\300Z\221\0023f\231k\013\313\006lW8\207\004\227\230,e\236a\265\304N\340\230V-r\213\330 ]\215\275'\301\201\322Sy\354\364(\340=\322\251\024o\003\357\020\327\021\306@\272A\356\340c\207\306Hq\207\320\262LyH=\232\342\203\221p\320\320Z\276\213\366\036\036k\333iJ}\234@\037x\360p\023w\231b-(m~\255\354\356\320j\271\276]\331\333\213\307\355R5\016\360\332\210j\275\274U\331\377\007@i5\353\343\373\031\247Gw\240\357\353\320\254\227\367v\277\3257\313\364\277\222\214O\344\242\217h_\022\355K\246\232b.S\\\350\230\327\001'\014\216K\374R\201\303\262\214C\203\361\016\272\007\036\240\307d\300\355\241\267lJ\233AqJ[\340\251p\364FCx\350:J\273\014U\350\304}j\241\205\275\331l\022\007\t\024\037\305\272\370\277\225\233\272\226\321\306Xh\212>\245G\201\311K\344\365\300\246(\026\234\016\226\203\005\037\254\262Z\002\326\305]\270\322\306S\nM\026\244\307\332\224\342\230<\275Z\302\330\r\270\223\331qaq\264\270~\256\177\325\306\367\347\306\367\036\234\364\007.\1775\236_\030\364\362\332o\214\375`\345\317\334\314\303'\227qqT|}V:\333\037\326\"\366g\276\230\327\246\260w\343\302\340\303\350\351\233\341\354\2608\232!g\013\303\376\371Q$\035\017x^D\320h!*!n~0\237?\036\275\\=_\277\300|a\260\236\2778-\235\326\306\217\236\345+\2502*\274\035>\037\326\207?.\212\177\001\024j\177o";
-    PyObject *data = __Pyx_DecompressString(cstring, 643, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (637 bytes) */
+const char* const cstring = "x\332mR\317O\023A\024\206D\021S#V\275\231\2301\230\240\211.!\0204\\L\203%\351\201\322\026MH\010\231Lg_\333\261\2633\303\374(]\365\300\261\307=r\344\330#G\216\376\t{\354\321?\301?\301\267E\241\0307\331\335yo\276\367\275\371\2767\037\352\332\003\361=\346\311v\352{Z\021\341H\014R\264\3012\0172%\316[\301=\330\002\244H\243\332x\273\361~\2030\025\023\013_\200{G\\hs\311\234\003Gt\207\264\203\220^(\342S\003.\"\265\016Iu \n &^\023\203\270\331\002\337\003E\034\370bAV\230R\3323/\264\242X.Tw\205\304\302b\0231\200\242z\207I\007\021\213c\2128`q\202}\364\000\254\02510cV\271\266\260j\300&\3029$q\221Ic\346\031\362G\026\341R8\177\210z\216\246\373\252Kn\240[$\321(;\n\016\224\236\311\243\310\343\200G\210gR\274\007\274O\\_\030\003\361\026\271\205/\304\031#\305\255\202\256e\312C\214\235\311wR\327\n<:\343\203\221p\330\326Z\276)<>:\321\266\337\221\372$\202!\360\340\341:N\230b]\250l\177\252\355\325i\243\332\332\255\355\357\027\313\335J\243\321\252\356\324\016\376IR\332H\207\370~\304\261\321:\014}\013:\255\352\376\336\347\326v\225\376\227\206\361\302\362\251\235\350bT\270\030\315Hb.U\\\350\"\257\003\216\026\034\227\370\245\002\247d\031\2076\343}\364\016U\301\200\311\200\327\206\336TS\332\t\212S\332\005O\205\243\327\034\302C\342(M\030\262\320\251\367\324B\027\007d\323i\034$P|\024K\360\177C7s,\243\215\261\320\021CJ\217\003\223W\310\277\343\232)\261\340t\260\034,\370`\225\325\022\260/^\211?\334\270\212\241\303\202\364\330\233R\034\215\247\264\320\001\356t~RZ\316\2277/\364\217\346\344\356\302\344\316\275\323\341\310e/&\213K\243A\326\374\211\261\037\255\375Z\230\273\377\350*.\347\345\227\347\225\363\203q\263\300~\313\226\263\346\014\366v\\\032\275\313\037\277\032\317\217\313\371\0349_\032\017/\216\213\242\223\021\317\312\010\312\227\n&\304-\216\026\263\207\371\363\365\213\315K\314\227F\233\331\263\263\312Ys\362\340I\266\206,y\351\365\370\351\2705\376zY\376\r:\354v2";
+    PyObject *data = __Pyx_DecompressString(cstring, 637, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (994 bytes) */
-const char* const bytes = ".List[str]Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.Optional[str]?add_noteadmin overrideapp/core/permissions.pydataset.readmissing permission: model.useno permission requiredpermission check skipped: no permissions suppliedpermission grantedtes.tuple[bool, str]workflow.executeworkflow.manageACTION_PERMISSION_MAPListOptionalPREFIX_PERMISSION_MAP__Pyx_PyDict_NextRefRESOURCE_ACTION_PERMISSION_MAPactionadminapp.core.permissionsasyncio.coroutinescline_in_tracebackdeleteevaluate_permission__func__get_is_coroutineitems__main__model_registry__module____name__permissionpermissionspopprefix__qualname__required_permissionresourcereturnroles__set_name__setdefaultstr__test__typingvalues\200\001\330\013#\320#6\260o\300Q\330\005\006\330\004\007\200x\210s\220!\330\010\017\210v\220Q\340\004\007\200t\2101\360\006\000\t\020\210v\220Q\340\004\021\320\021$\240A\240X\250Q\330\004\007\200{\220#\220Q\330\010\017\210v\220Q\340\004\007\200{\220#\220Q\330\010\017\210v\220Q\340\004\013\2107\320\022(\250\001\250\021\320\000 \240\017\250x\260q\330\004\007\200w\210c\220\021\330\010\017\320\017$\240A\240Q\340\004\010\210\010\220\016\320\0363\2606\270\021\330\010\013\2106\220\033\230A\230Q\330\014\023\2201\340\004\013\320\013)\250\024\250R\250z\270\021";
+    #else /* compression: none (972 bytes) */
+const char* const bytes = "?Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.add_noteadmin overrideapp/core/permissions.pydataset.readlist[str]missing permission: model.useno permission requiredpermission check skipped: no permissions suppliedpermission grantedstr | Nonetes.tuple[bool, str]workflow.executeworkflow.manageACTION_PERMISSION_MAPPREFIX_PERMISSION_MAP__Pyx_PyDict_NextRefRESOURCE_ACTION_PERMISSION_MAPactionadminapp.core.permissionsasyncio.coroutinescline_in_tracebackdeleteevaluate_permission__func__get_is_coroutineitems__main__model_registry__module____name__permissionpermissionspopprefix__qualname__required_permissionresourcereturnroles__set_name__setdefaultstr__test__values\200\001\330\013#\320#6\260o\300Q\330\005\006\330\004\007\200x\210s\220!\330\010\017\210v\220Q\340\004\007\200t\2101\360\006\000\t\020\210v\220Q\340\004\021\320\021$\240A\240X\250Q\330\004\007\200{\220#\220Q\330\010\017\210v\220Q\340\004\007\200{\220#\220Q\330\010\017\210v\220Q\340\004\013\2107\320\022(\250\001\250\021\320\000 \240\017\250x\260q\330\004\007\200w\210c\220\021\330\010\017\320\017$\240A\240Q\340\004\010\210\010\220\016\320\0363\2606\270\021\330\010\013\2106\220\033\230A\230Q\330\014\023\2201\340\004\013\320\013)\250\024\250R\250z\270\021";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 54; i++) {
+    for (int i = 0; i < 50; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
-      if (likely(string) && i >= 18) PyUnicode_InternInPlace(&string);
+      if (likely(string) && i >= 17) PyUnicode_InternInPlace(&string);
       if (unlikely(!string)) {
         Py_XDECREF(data);
         __PYX_ERR(0, 1, __pyx_L1_error)
@@ -3824,7 +3779,7 @@ const char* const bytes = ".List[str]Note that Cython is deliberately stricter t
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 54; i < 56; i++) {
+    for (int i = 50; i < 52; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -3835,14 +3790,14 @@ const char* const bytes = ".List[str]Note that Cython is deliberately stricter t
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 56; i++) {
+    for (Py_ssize_t i = 0; i < 52; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 54;
+      PyObject **table = stringtab + 50;
       for (Py_ssize_t i=0; i<2; ++i) {
         #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
         #if PY_VERSION_HEX < 0x030E0000
@@ -3888,12 +3843,12 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 69};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 68};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_action, __pyx_mstate->__pyx_n_u_resource, __pyx_mstate->__pyx_n_u_prefix, __pyx_mstate->__pyx_n_u_permission};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_permissions_py, __pyx_mstate->__pyx_n_u_required_permission, __pyx_mstate->__pyx_kp_b_iso88591_xq_wc_AQ_36_6_AQ_1_Rz, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 80};
+    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 79};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_roles, __pyx_mstate->__pyx_n_u_permissions, __pyx_mstate->__pyx_n_u_action, __pyx_mstate->__pyx_n_u_resource, __pyx_mstate->__pyx_n_u_permission};
     __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_permissions_py, __pyx_mstate->__pyx_n_u_evaluate_permission, __pyx_mstate->__pyx_kp_b_iso88591_6oQ_xs_vQ_t1_vQ_AXQ_Q_vQ_Q_vQ_7, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }
@@ -5730,183 +5685,6 @@ static int __Pyx_PyUnicode_Tailmatch(PyObject* s, PyObject* substr,
         return __Pyx_PyUnicode_TailmatchTuple(s, substr, start, end, direction);
     }
     return (int) PyUnicode_Tailmatch(s, substr, start, end, direction);
-}
-
-/* HasAttr (used by ImportImpl) */
-#if __PYX_LIMITED_VERSION_HEX < 0x030d0000
-static CYTHON_INLINE int __Pyx_HasAttr(PyObject *o, PyObject *n) {
-    PyObject *r;
-    if (unlikely(!PyUnicode_Check(n))) {
-        PyErr_SetString(PyExc_TypeError,
-                        "hasattr(): attribute name must be string");
-        return -1;
-    }
-    r = __Pyx_PyObject_GetAttrStrNoError(o, n);
-    if (!r) {
-        return (unlikely(PyErr_Occurred())) ? -1 : 0;
-    } else {
-        Py_DECREF(r);
-        return 1;
-    }
-}
-#endif
-
-/* ImportImpl (used by Import) */
-static int __Pyx__Import_GetModule(PyObject *qualname, PyObject **module) {
-    PyObject *imported_module = PyImport_GetModule(qualname);
-    if (unlikely(!imported_module)) {
-        *module = NULL;
-        if (PyErr_Occurred()) {
-            return -1;
-        }
-        return 0;
-    }
-    *module = imported_module;
-    return 1;
-}
-static int __Pyx__Import_Lookup(PyObject *qualname, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject **module) {
-    PyObject *imported_module;
-    PyObject *top_level_package_name;
-    Py_ssize_t i;
-    int status, module_found;
-    Py_ssize_t dot_index;
-    module_found = __Pyx__Import_GetModule(qualname, &imported_module);
-    if (unlikely(!module_found || module_found == -1)) {
-        *module = NULL;
-        return module_found;
-    }
-    if (imported_names) {
-        for (i = 0; i < len_imported_names; i++) {
-            PyObject *imported_name = imported_names[i];
-#if __PYX_LIMITED_VERSION_HEX < 0x030d0000
-            int has_imported_attribute = PyObject_HasAttr(imported_module, imported_name);
-#else
-            int has_imported_attribute = PyObject_HasAttrWithError(imported_module, imported_name);
-            if (unlikely(has_imported_attribute == -1)) goto error;
-#endif
-            if (!has_imported_attribute) {
-                goto not_found;
-            }
-        }
-        *module = imported_module;
-        return 1;
-    }
-    dot_index = PyUnicode_FindChar(qualname, '.', 0, PY_SSIZE_T_MAX, 1);
-    if (dot_index == -1) {
-        *module = imported_module;
-        return 1;
-    }
-    if (unlikely(dot_index == -2)) goto error;
-    top_level_package_name = PyUnicode_Substring(qualname, 0, dot_index);
-    if (unlikely(!top_level_package_name)) goto error;
-    Py_DECREF(imported_module);
-    status = __Pyx__Import_GetModule(top_level_package_name, module);
-    Py_DECREF(top_level_package_name);
-    return status;
-error:
-    Py_DECREF(imported_module);
-    *module = NULL;
-    return -1;
-not_found:
-    Py_DECREF(imported_module);
-    *module = NULL;
-    return 0;
-}
-static PyObject *__Pyx__Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, PyObject *moddict, int level) {
-    PyObject *module = 0;
-    PyObject *empty_dict = 0;
-    PyObject *from_list = 0;
-    int module_found;
-    if (!qualname) {
-        qualname = name;
-    }
-    module_found = __Pyx__Import_Lookup(qualname, imported_names, len_imported_names, &module);
-    if (likely(module_found == 1)) {
-        return module;
-    } else if (unlikely(module_found == -1)) {
-        return NULL;
-    }
-    empty_dict = PyDict_New();
-    if (unlikely(!empty_dict))
-        goto bad;
-    if (imported_names) {
-#if CYTHON_COMPILING_IN_CPYTHON
-        from_list = __Pyx_PyList_FromArray(imported_names, len_imported_names);
-        if (unlikely(!from_list))
-            goto bad;
-#else
-        from_list = PyList_New(len_imported_names);
-        if (unlikely(!from_list)) goto bad;
-        for (Py_ssize_t i=0; i<len_imported_names; ++i) {
-            if (PyList_SetItem(from_list, i, __Pyx_NewRef(imported_names[i])) < 0) goto bad;
-        }
-#endif
-    }
-    if (level == -1) {
-        const char* package_sep = strchr(__Pyx_MODULE_NAME, '.');
-        if (package_sep != (0)) {
-            module = PyImport_ImportModuleLevelObject(
-                name, moddict, empty_dict, from_list, 1);
-            if (unlikely(!module)) {
-                if (unlikely(!PyErr_ExceptionMatches(PyExc_ImportError)))
-                    goto bad;
-                PyErr_Clear();
-            }
-        }
-        level = 0;
-    }
-    if (!module) {
-        module = PyImport_ImportModuleLevelObject(
-            name, moddict, empty_dict, from_list, level);
-    }
-bad:
-    Py_XDECREF(from_list);
-    Py_XDECREF(empty_dict);
-    return module;
-}
-
-/* Import */
-static PyObject *__Pyx_Import(PyObject *name, PyObject *const *imported_names, Py_ssize_t len_imported_names, PyObject *qualname, int level) {
-    return __Pyx__Import(name, imported_names, len_imported_names, qualname, __pyx_mstate_global->__pyx_d, level);
-}
-
-/* ImportFrom */
-static PyObject* __Pyx_ImportFrom(PyObject* module, PyObject* name) {
-    PyObject* value = __Pyx_PyObject_GetAttrStr(module, name);
-    if (unlikely(!value) && PyErr_ExceptionMatches(PyExc_AttributeError)) {
-        const char* module_name_str = 0;
-        PyObject* module_name = 0;
-        PyObject* module_dot = 0;
-        PyObject* full_name = 0;
-        PyErr_Clear();
-        module_name_str = PyModule_GetName(module);
-        if (unlikely(!module_name_str)) { goto modbad; }
-        module_name = PyUnicode_FromString(module_name_str);
-        if (unlikely(!module_name)) { goto modbad; }
-        module_dot = PyUnicode_Concat(module_name, __pyx_mstate_global->__pyx_kp_u_);
-        if (unlikely(!module_dot)) { goto modbad; }
-        full_name = PyUnicode_Concat(module_dot, name);
-        if (unlikely(!full_name)) { goto modbad; }
-        #if (CYTHON_COMPILING_IN_PYPY && PYPY_VERSION_NUM  < 0x07030400) ||\
-                CYTHON_COMPILING_IN_GRAAL
-        {
-            PyObject *modules = PyImport_GetModuleDict();
-            if (unlikely(!modules))
-                goto modbad;
-            value = PyObject_GetItem(modules, full_name);
-        }
-        #else
-        value = PyImport_GetModule(full_name);
-        #endif
-      modbad:
-        Py_XDECREF(full_name);
-        Py_XDECREF(module_dot);
-        Py_XDECREF(module_name);
-    }
-    if (unlikely(!value)) {
-        PyErr_Format(PyExc_ImportError, "cannot import name %S", name);
-    }
-    return value;
 }
 
 /* dict_setdefault (used by FetchCommonType) */
@@ -7771,7 +7549,7 @@ __Pyx_PyType_GetFullyQualifiedName(PyTypeObject* tp)
         result = name;
         name = NULL;
     } else {
-        result = __Pyx_NewRef(__pyx_mstate_global->__pyx_kp_u__2);
+        result = __Pyx_NewRef(__pyx_mstate_global->__pyx_kp_u_);
     }
     goto done;
 }
