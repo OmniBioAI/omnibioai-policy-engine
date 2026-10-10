@@ -2231,6 +2231,7 @@ int __pyx_module_is_main_app__core__abac = 0;
 /* Implementation of "app.core.abac" */
 /* #### Code section: global_var ### */
 /* #### Code section: string_decls ### */
+static const char __pyx_k_OmniBioAI_app_core_abac_Purpose[] = "\nOmniBioAI app.core.abac.\n\nPurpose:\n    Defines evaluate_abac for app.core.abac.\n\nAuthor:\n    Manish Kumar <manish@omnibioai.org>\n";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_3app_4core_4abac_evaluate_abac(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_context, PyObject *__pyx_v_roles); /* proto */
 /* #### Code section: late_includes ### */
@@ -2336,7 +2337,7 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_setdefault __pyx_string_tab[33]
 #define __pyx_n_u_test __pyx_string_tab[34]
 #define __pyx_n_u_values __pyx_string_tab[35]
-#define __pyx_kp_b_iso88591_a_wd_1_gQ_7_wd_83fD_7_wa_6 __pyx_string_tab[36]
+#define __pyx_kp_b_iso88591_a_wd_4_wa_wd_83fD_7_wa_6 __pyx_string_tab[36]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2392,10 +2393,12 @@ return 0;
 #endif
 /* #### Code section: module_code ### */
 
-/* "app/core/abac.py":1
+/* "app/core/abac.py":11
+ * """
+ * 
  * def evaluate_abac(context: dict, roles: list[str]) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     # GPU restriction example
- *     if context.get("gpu_required"):
+ *     if context.get("gpu_required") and "gpu_user" not in roles:
 */
 
 /* Python wrapper */
@@ -2438,39 +2441,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_context,&__pyx_mstate_global->__pyx_n_u_roles,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 11, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_abac", 0) < (0)) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_abac", 0) < (0)) __PYX_ERR(0, 11, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_abac", 1, 2, 2, i); __PYX_ERR(0, 1, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_abac", 1, 2, 2, i); __PYX_ERR(0, 11, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
     }
     __pyx_v_context = ((PyObject*)values[0]);
     __pyx_v_roles = ((PyObject*)values[1]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("evaluate_abac", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 1, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("evaluate_abac", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 11, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2481,8 +2484,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_context), (&PyDict_Type), 0, "context", 2))) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_roles), (&PyList_Type), 0, "roles", 2))) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_context), (&PyDict_Type), 0, "context", 2))) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_roles), (&PyList_Type), 0, "roles", 2))) __PYX_ERR(0, 11, __pyx_L1_error)
   __pyx_r = __pyx_pf_3app_4core_4abac_evaluate_abac(__pyx_self, __pyx_v_context, __pyx_v_roles);
 
   /* function exit code */
@@ -2505,89 +2508,78 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 static PyObject *__pyx_pf_3app_4core_4abac_evaluate_abac(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_context, PyObject *__pyx_v_roles) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  int __pyx_t_2;
+  int __pyx_t_1;
+  PyObject *__pyx_t_2 = NULL;
   int __pyx_t_3;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("evaluate_abac", 0);
 
-  /* "app/core/abac.py":3
+  /* "app/core/abac.py":13
  * def evaluate_abac(context: dict, roles: list[str]) -> tuple[bool, str]:
  *     # GPU restriction example
- *     if context.get("gpu_required"):             # <<<<<<<<<<<<<<
- *         if "gpu_user" not in roles:
- *             return False, "GPU access denied"
-*/
-  __pyx_t_1 = __Pyx_PyDict_GetItemDefault(__pyx_v_context, __pyx_mstate_global->__pyx_n_u_gpu_required, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 3, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (__pyx_t_2) {
-
-    /* "app/core/abac.py":4
- *     # GPU restriction example
- *     if context.get("gpu_required"):
- *         if "gpu_user" not in roles:             # <<<<<<<<<<<<<<
- *             return False, "GPU access denied"
+ *     if context.get("gpu_required") and "gpu_user" not in roles:             # <<<<<<<<<<<<<<
+ *         return False, "GPU access denied"
  * 
 */
-    __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_gpu_user, __pyx_v_roles, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 4, __pyx_L1_error)
-    if (__pyx_t_2) {
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_context, __pyx_mstate_global->__pyx_n_u_gpu_required, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 13, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  if (__pyx_t_3) {
+  } else {
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L4_bool_binop_done;
+  }
+  __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_gpu_user, __pyx_v_roles, Py_NE)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 13, __pyx_L1_error)
+  __pyx_t_1 = __pyx_t_3;
+  __pyx_L4_bool_binop_done:;
+  if (__pyx_t_1) {
 
-      /* "app/core/abac.py":5
- *     if context.get("gpu_required"):
- *         if "gpu_user" not in roles:
- *             return False, "GPU access denied"             # <<<<<<<<<<<<<<
+    /* "app/core/abac.py":14
+ *     # GPU restriction example
+ *     if context.get("gpu_required") and "gpu_user" not in roles:
+ *         return False, "GPU access denied"             # <<<<<<<<<<<<<<
  * 
  *     # HPC node restriction
 */
-      __Pyx_XDECREF(__pyx_r);
-      __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[0]);
-      __pyx_r = __pyx_mstate_global->__pyx_tuple[0];
-      goto __pyx_L0;
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[0]);
+    __pyx_r = __pyx_mstate_global->__pyx_tuple[0];
+    goto __pyx_L0;
 
-      /* "app/core/abac.py":4
- *     # GPU restriction example
- *     if context.get("gpu_required"):
- *         if "gpu_user" not in roles:             # <<<<<<<<<<<<<<
- *             return False, "GPU access denied"
- * 
-*/
-    }
-
-    /* "app/core/abac.py":3
+    /* "app/core/abac.py":13
  * def evaluate_abac(context: dict, roles: list[str]) -> tuple[bool, str]:
  *     # GPU restriction example
- *     if context.get("gpu_required"):             # <<<<<<<<<<<<<<
- *         if "gpu_user" not in roles:
- *             return False, "GPU access denied"
+ *     if context.get("gpu_required") and "gpu_user" not in roles:             # <<<<<<<<<<<<<<
+ *         return False, "GPU access denied"
+ * 
 */
   }
 
-  /* "app/core/abac.py":8
+  /* "app/core/abac.py":17
  * 
  *     # HPC node restriction
  *     if context.get("node") == "hpc" and "hpc_user" not in roles:             # <<<<<<<<<<<<<<
  *         return False, "HPC access denied"
  * 
 */
-  __pyx_t_1 = __Pyx_PyDict_GetItemDefault(__pyx_v_context, __pyx_mstate_global->__pyx_n_u_node, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_hpc, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 8, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_2 = __Pyx_PyDict_GetItemDefault(__pyx_v_context, __pyx_mstate_global->__pyx_n_u_node, Py_None); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_hpc, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
   } else {
-    __pyx_t_2 = __pyx_t_3;
-    goto __pyx_L6_bool_binop_done;
+    __pyx_t_1 = __pyx_t_3;
+    goto __pyx_L7_bool_binop_done;
   }
-  __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_hpc_user, __pyx_v_roles, Py_NE)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 8, __pyx_L1_error)
-  __pyx_t_2 = __pyx_t_3;
-  __pyx_L6_bool_binop_done:;
-  if (__pyx_t_2) {
+  __pyx_t_3 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_hpc_user, __pyx_v_roles, Py_NE)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_1 = __pyx_t_3;
+  __pyx_L7_bool_binop_done:;
+  if (__pyx_t_1) {
 
-    /* "app/core/abac.py":9
+    /* "app/core/abac.py":18
  *     # HPC node restriction
  *     if context.get("node") == "hpc" and "hpc_user" not in roles:
  *         return False, "HPC access denied"             # <<<<<<<<<<<<<<
@@ -2599,7 +2591,7 @@ static PyObject *__pyx_pf_3app_4core_4abac_evaluate_abac(CYTHON_UNUSED PyObject 
     __pyx_r = __pyx_mstate_global->__pyx_tuple[1];
     goto __pyx_L0;
 
-    /* "app/core/abac.py":8
+    /* "app/core/abac.py":17
  * 
  *     # HPC node restriction
  *     if context.get("node") == "hpc" and "hpc_user" not in roles:             # <<<<<<<<<<<<<<
@@ -2608,7 +2600,7 @@ static PyObject *__pyx_pf_3app_4core_4abac_evaluate_abac(CYTHON_UNUSED PyObject 
 */
   }
 
-  /* "app/core/abac.py":11
+  /* "app/core/abac.py":20
  *         return False, "HPC access denied"
  * 
  *     return True, "abac passed"             # <<<<<<<<<<<<<<
@@ -2618,15 +2610,17 @@ static PyObject *__pyx_pf_3app_4core_4abac_evaluate_abac(CYTHON_UNUSED PyObject 
   __pyx_r = __pyx_mstate_global->__pyx_tuple[2];
   goto __pyx_L0;
 
-  /* "app/core/abac.py":1
+  /* "app/core/abac.py":11
+ * """
+ * 
  * def evaluate_abac(context: dict, roles: list[str]) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     # GPU restriction example
- *     if context.get("gpu_required"):
+ *     if context.get("gpu_required") and "gpu_user" not in roles:
 */
 
   /* function exit code */
   __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
   __Pyx_AddTraceback("app.core.abac.evaluate_abac", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -2742,7 +2736,7 @@ namespace {
   {
       PyModuleDef_HEAD_INIT,
       "abac",
-      0, /* m_doc */
+      __pyx_k_OmniBioAI_app_core_abac_Purpose, /* m_doc */
     #if CYTHON_USE_MODULE_STATE
       sizeof(__pyx_mstatetype), /* m_size */
     #else
@@ -2984,25 +2978,33 @@ __Pyx_RefNannySetupContext("PyInit_abac", 0);
   (void)__Pyx_modinit_function_import_code(__pyx_mstate);
   /*--- Execution code ---*/
 
-  /* "app/core/abac.py":1
+  /* "app/core/abac.py":11
+ * """
+ * 
  * def evaluate_abac(context: dict, roles: list[str]) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     # GPU restriction example
- *     if context.get("gpu_required"):
+ *     if context.get("gpu_required") and "gpu_user" not in roles:
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_context, __pyx_mstate_global->__pyx_n_u_dict) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_roles, __pyx_mstate_global->__pyx_kp_u_list_str) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_4abac_1evaluate_abac, 0, __pyx_mstate_global->__pyx_n_u_evaluate_abac, NULL, __pyx_mstate_global->__pyx_n_u_app_core_abac, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_context, __pyx_mstate_global->__pyx_n_u_dict) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_roles, __pyx_mstate_global->__pyx_kp_u_list_str) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_4abac_1evaluate_abac, 0, __pyx_mstate_global->__pyx_n_u_evaluate_abac, NULL, __pyx_mstate_global->__pyx_n_u_app_core_abac, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_3);
   #endif
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_abac, __pyx_t_3) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_abac, __pyx_t_3) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "app/core/abac.py":1
+ * """             # <<<<<<<<<<<<<<
+ * OmniBioAI app.core.abac.
+ * 
+*/
   __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test, __pyx_t_3) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -3064,34 +3066,34 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "app/core/abac.py":5
- *     if context.get("gpu_required"):
- *         if "gpu_user" not in roles:
- *             return False, "GPU access denied"             # <<<<<<<<<<<<<<
+  /* "app/core/abac.py":14
+ *     # GPU restriction example
+ *     if context.get("gpu_required") and "gpu_user" not in roles:
+ *         return False, "GPU access denied"             # <<<<<<<<<<<<<<
  * 
  *     # HPC node restriction
 */
-  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_GPU_access_denied); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_GPU_access_denied); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
 
-  /* "app/core/abac.py":9
+  /* "app/core/abac.py":18
  *     # HPC node restriction
  *     if context.get("node") == "hpc" and "hpc_user" not in roles:
  *         return False, "HPC access denied"             # <<<<<<<<<<<<<<
  * 
  *     return True, "abac passed"
 */
-  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_HPC_access_denied); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_HPC_access_denied); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
 
-  /* "app/core/abac.py":11
+  /* "app/core/abac.py":20
  *         return False, "HPC access denied"
  * 
  *     return True, "abac passed"             # <<<<<<<<<<<<<<
 */
-  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_abac_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_abac_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
   #if CYTHON_IMMORTAL_CONSTANTS
@@ -3126,23 +3128,23 @@ static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   {
     const struct { const unsigned int length: 8; } index[] = {{1},{17},{17},{179},{11},{8},{16},{9},{16},{20},{13},{18},{18},{7},{4},{13},{8},{3},{12},{8},{3},{8},{13},{5},{8},{10},{8},{4},{3},{12},{6},{5},{12},{10},{8},{6},{75}};
     #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (499 bytes) */
-const char* const cstring = "BZh91AY&SYy\354Mh\000\000(\177\373\307\315\250\010`\207\255\312\217\341r\n\277\377\377\340@@@@@@@@@@@\000@\0000\001\205 \203RmM\r4\t\224\323\321\251\2402`\215\003F\206\010\310\310zi\352z\240\324\3104\322L\022h\315\021\243CM\000\000\000\000\006\200q\223&\206#\023F\001\030\t\204\001\200\232h\323#@1o\355\034\003lq\201\343\276\266\332=Q=\223f\253Z\261\340\267\227a\272\034\332I\315\235\027)p~I!\035\327`\2301z\257\355\316\245\017\331e\"S\370\373\226\333,\234\234\305\014s\260\213\336s\340>m-\351@U\244\334=\000\360\177\246\317B\0320\260`;\344e\020G\000jn*\213\021\000\241Z\334|\346~\300J\037:j{Z\304\006\2458/\326\230]\022\272\250\346z\337U )\321\273th4\221\234\010\201\310\253\213;\354QA\3404A-\032\206\237\232#al\210\257\t\333\242;\002\310\264dB\325to\206@\227'\335f\323Q9\261\255\206q2\355\021\234B\3103q]\224\256e\254Y\216\321\302\254&\301D\324\3458DT\230%\026\213r8\246\004J IQ\005\213\\\355\271\203\357\030|\215\234\2158\233\330n\232\t\030\245\242b\206\302\202\246j\002?\002\276\026B\233+0\026\351S\020\360\262\022\017\025UP\2740\333p\266\010\212B\2613\303\236\264 K\342\0203\031\204\342\270\350\202\022\220x\234\0047b&9\244Y\0236F\351\311\347\002%I\025\t +\232p\250\361h)7\"\241\020q\005\251!\253\005D\027k\207\303\342\003\312\301rd\010p\311%h\006Dk\313\364\0306\325\306)\376i\013^\232\257/\227\027\010\326\231\370D\313`\377\342\356H\247\n\022\017=\211\255\000";
+const char* const cstring = "BZh91AY&SY\r*I\000\000\000'\377\373\307\311\250\010h\207\215\302\217\341R\n\277\377\377\350@@@@@@@@@@@\000@\0000\001\205@\203T\247\3444\323*y\243J\0314\320\323\324z\215\250\0004\332\2314=M6S\365O\312\203S#M4\223\320@b\246G\2500\231\240@dd\000\037\252\032\0344\323#\021\204\323\001\014\002i\204`\230\231\r244\005fP\320\373\241p\210\237\301\003\365\310?\225\272\261\352\357\350\247\326\327\262C\366S\347\262\016k\241\032\324\242\220\306M\002\212t\324\353lJF\265\254\245o\217k\234\234S\233\262Ea9K\233\001+&}\017\350\200c\212\202xD\001\377M\337B\033c\200\360\036$e G\020lp+\013\310@0g\277\207\254\317\354\004\3022\036\370\276\030\022\366\303\327\226e\212\204\346D\253\213\223 \330\002\014.\272X\036T\244\002@B\277P\303+\361\304\363:\260\304\354Jz+w$\036\367\361\215\220\306\313\306\003y\311B\324\231R\320\320\\\2567\233\n\033\236\370\353'l\256T\021\302.\346hdZr\270a\2731\306\322p\244\353\310\321E\213\213I\342\351\234\227\025ZD\226\302\r'\302\033\252\t\260\302L\335\354y\310\321\307\n\242\262\222\346'0|k+*\254*b\311\033\343e\367\030\r\254\254\220@\323\023\010-\266\321\260o\347\200\316\010\212b\341R\010#V\241p\021\211\230\320P-0\220!9\204\024\001N\033I\320y\027\022\352\231\302\204\207\022&Y\225k0.\252\201\225\006`\304\376&DM\001\2108\332\300]\364\325\270#\021\204\222w\nB\340\033u\251S$f\203\272\317\253Z?\0037\205\357\217k\330\314Zz\332\351\033c\260\312>y^\377\027rE8P\220\r*I\000";
     PyObject *data = __Pyx_DecompressString(cstring, 499, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (433 bytes) */
-const char* const cstring = "x\332U\220;o\0241\020\307S\3608\351\020\010Q\322\314Ui\340\"DD\"!D\221\204G\023-HTQd\315\332sw\006\237\355\330\343$\333Q^\271\345\226\224)S\3621(\257\344#\360\021\030\037\021\002k=\373\327\314\374<\217\327o\233O\200ZS\316`\310[2\357\232\203\377\035\307\201\tx\201\014\007\035/\202\007[#\316\266\224\220\311u\2209Y\315\224j\222\207\346\250y\272\273\277\013\350\r$\372L\2323\344\322j\2079S\2060\203\266X\307\326\003w\221\362\024\336\317\240\013\005<\221\001\016\020%\357_\200\027\344!\023W\001\333\350}`d\033\274\022\334\372\3716\030\233\244\210=\247J\277A\227i\212-\352\315Cd\320\030%\010a\214;:$\332\251\261i\354\234\315|\"\235\237r\211\216N\332\020\334\223:\311\251RMw)\367PfR\307t\311\037i&\360\264\302\233\2071w^\333P\035\241\310\034\224\265\023\253\254\264\224P\223\244|\321\301\263\240\246\356\345\034]\221E\251\312*5+^\354\234x\036\213JtV\244{Su\311\224\026Q\313\267\221\312f\365\267\202eZf\245\226(5\344,\203)\216\252\362\270\224\277\017\206b\210J\235\025t\177\\\211\270$\237\202#\341d{7\231\242\214\214S\034+\305\224\305\326\356(\377\330z<\274\272\272\177\215?o\335\375z\2612\375\244\177\266\036\215W/\373\371\360a}\357Q\2777L~\335\331\272=\272\t\356\017\317\207\331\267\303\253\361\365\336\367\311z\364`u\321\013:^\275\350\037\376\006\345\222\344\326";
-    PyObject *data = __Pyx_DecompressString(cstring, 433, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (431 bytes) */
+const char* const cstring = "x\332U\220\275n\0241\020\307S\004\210\024)(\242\244\231\210\342\032\270\024\234 \r\242H\370j\242U$\252(\262f\355\331;\203\317v\354q\222\025\r\345\225W^ye\312+\363\030))\363\010<\002\343K\204\300Z\317\37653?\317\307\373O\315W@\255)g0\344-\231\317\315\341\377\216\343\300\004<A\206\303\236'\301\203\255\021g[J\310\344z\310\234\254fJ5\311C\363\241y5:\030\001z\003\211\276\221\346\014\271\264\332a\316\224!t\320\026\353\330z\340>R\036\302\227\016\372P\300\023\031\340\000Q\362\376\005xB\0362q\0250@\357\003#\333\340\225\340\326\217\007`l\222\"\366\202*\375\021]\246!\266\250\327\017\221Ac\224 \2041\356\353\220h\277\306\206\261w6\363\251t~\306%::mCp/\353$gJ5\375\225\334#\231I\035\323\025\237P'\360\260\302\353\2071\367^\333P\035\241\310\034\224\265\023\253\254\264\224P\223\244|\327\301\263\240\246\356\345\002]\221E\251\312*\325\025/vL<\216E%:/\322\275\251\272dJ\223\250\345[Ke\263\372[\3012M\263RS\224\032r\246\301\024GUy\234\312\337\007C1D\245\316\013\272{W\".\311\247\340H8\331\336C\246(#\343\024\307J1e\261\265;\312\267\033\317\027\357\256wVx\267\371\344\347\345\314\314\367n\237\275X\216\226?V\203\233\335_[Og\227s\374\375x\343\321\326}p~\260x\275\350\226G\327\333\253\2677{\017\361\273\315\355\331\233\371\356\037\005W\345\204";
+    PyObject *data = __Pyx_DecompressString(cstring, 431, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
     #else /* compression: none (594 bytes) */
-const char* const bytes = "?GPU access deniedHPC access deniedNote that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.abac passedadd_noteapp/core/abac.pylist[str]tuple[bool, str]__Pyx_PyDict_NextRefapp.core.abacasyncio.coroutinescline_in_tracebackcontextdictevaluate_abac__func__getgpu_requiredgpu_userhpchpc_user_is_coroutineitems__main____module____name__nodepop__qualname__returnroles__set_name__setdefault__test__values\320\000\033\230=\250\016\260a\340\004\007\200w\210d\220!\2201\330\010\013\210;\220g\230Q\330\014\023\2207\230!\360\006\000\005\010\200w\210d\220!\2208\2303\230f\240D\250\013\2607\270!\330\010\017\210w\220a\340\004\013\2106\220\021";
+const char* const bytes = "?GPU access deniedHPC access deniedNote that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.abac passedadd_noteapp/core/abac.pylist[str]tuple[bool, str]__Pyx_PyDict_NextRefapp.core.abacasyncio.coroutinescline_in_tracebackcontextdictevaluate_abac__func__getgpu_requiredgpu_userhpchpc_user_is_coroutineitems__main____module____name__nodepop__qualname__returnroles__set_name__setdefault__test__values\320\000\033\230=\250\016\260a\340\004\007\200w\210d\220!\320\023#\2404\240{\260'\270\021\330\010\017\210w\220a\360\006\000\005\010\200w\210d\220!\2208\2303\230f\240D\250\013\2607\270!\330\010\017\210w\220a\340\004\013\2106\220\021";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
@@ -3206,7 +3208,7 @@ typedef struct {
     unsigned int num_kwonly_args : 1;
     unsigned int nlocals : 2;
     unsigned int flags : 10;
-    unsigned int first_line : 1;
+    unsigned int first_line : 4;
 } __Pyx_PyCode_New_function_description;
 /* NewCodeObj.proto */
 static PyObject* __Pyx_PyCode_New(
@@ -3223,9 +3225,9 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 11};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_context, __pyx_mstate->__pyx_n_u_roles};
-    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_abac_py, __pyx_mstate->__pyx_n_u_evaluate_abac, __pyx_mstate->__pyx_kp_b_iso88591_a_wd_1_gQ_7_wd_83fD_7_wa_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
+    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_abac_py, __pyx_mstate->__pyx_n_u_evaluate_abac, __pyx_mstate->__pyx_kp_b_iso88591_a_wd_4_wa_wd_83fD_7_wa_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;

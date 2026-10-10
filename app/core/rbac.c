@@ -2220,6 +2220,7 @@ int __pyx_module_is_main_app__core__rbac = 0;
 /* Implementation of "app.core.rbac" */
 /* #### Code section: global_var ### */
 /* #### Code section: string_decls ### */
+static const char __pyx_k_OmniBioAI_app_core_rbac_Purpose[] = "\nOmniBioAI app.core.rbac.\n\nPurpose:\n    Defines evaluate_rbac for app.core.rbac.\n\nAuthor:\n    Manish Kumar <manish@omnibioai.org>\n";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_user_roles, PyObject *__pyx_v_action); /* proto */
 /* #### Code section: late_includes ### */
@@ -2381,7 +2382,9 @@ return 0;
 #endif
 /* #### Code section: module_code ### */
 
-/* "app/core/rbac.py":1
+/* "app/core/rbac.py":11
+ * """
+ * 
  * def evaluate_rbac(user_roles: list[str], action: str) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     if "admin" in user_roles:
  *         return True, "admin override"
@@ -2427,39 +2430,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_user_roles,&__pyx_mstate_global->__pyx_n_u_action,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 11, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_rbac", 0) < (0)) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_rbac", 0) < (0)) __PYX_ERR(0, 11, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_rbac", 1, 2, 2, i); __PYX_ERR(0, 1, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_rbac", 1, 2, 2, i); __PYX_ERR(0, 11, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
     }
     __pyx_v_user_roles = ((PyObject*)values[0]);
     __pyx_v_action = ((PyObject*)values[1]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("evaluate_rbac", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 1, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("evaluate_rbac", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 11, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2470,8 +2473,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_user_roles), (&PyList_Type), 0, "user_roles", 2))) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_action), (&PyUnicode_Type), 0, "action", 2))) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_user_roles), (&PyList_Type), 0, "user_roles", 2))) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_action), (&PyUnicode_Type), 0, "action", 2))) __PYX_ERR(0, 11, __pyx_L1_error)
   __pyx_r = __pyx_pf_3app_4core_4rbac_evaluate_rbac(__pyx_self, __pyx_v_user_roles, __pyx_v_action);
 
   /* function exit code */
@@ -2501,16 +2504,17 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("evaluate_rbac", 0);
 
-  /* "app/core/rbac.py":2
+  /* "app/core/rbac.py":12
+ * 
  * def evaluate_rbac(user_roles: list[str], action: str) -> tuple[bool, str]:
  *     if "admin" in user_roles:             # <<<<<<<<<<<<<<
  *         return True, "admin override"
  * 
 */
-  __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_admin, __pyx_v_user_roles, Py_EQ)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 2, __pyx_L1_error)
+  __pyx_t_1 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_admin, __pyx_v_user_roles, Py_EQ)); if (unlikely((__pyx_t_1 < 0))) __PYX_ERR(0, 12, __pyx_L1_error)
   if (__pyx_t_1) {
 
-    /* "app/core/rbac.py":3
+    /* "app/core/rbac.py":13
  * def evaluate_rbac(user_roles: list[str], action: str) -> tuple[bool, str]:
  *     if "admin" in user_roles:
  *         return True, "admin override"             # <<<<<<<<<<<<<<
@@ -2522,7 +2526,8 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
     __pyx_r = __pyx_mstate_global->__pyx_tuple[0];
     goto __pyx_L0;
 
-    /* "app/core/rbac.py":2
+    /* "app/core/rbac.py":12
+ * 
  * def evaluate_rbac(user_roles: list[str], action: str) -> tuple[bool, str]:
  *     if "admin" in user_roles:             # <<<<<<<<<<<<<<
  *         return True, "admin override"
@@ -2530,25 +2535,25 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
 */
   }
 
-  /* "app/core/rbac.py":5
+  /* "app/core/rbac.py":15
  *         return True, "admin override"
  * 
  *     if action.startswith("tes.") and "researcher" not in user_roles:             # <<<<<<<<<<<<<<
  *         return False, "missing role: researcher"
  * 
 */
-  __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_tes, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_tes, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 15, __pyx_L1_error)
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L5_bool_binop_done;
   }
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_researcher, __pyx_v_user_roles, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 5, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_researcher, __pyx_v_user_roles, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 15, __pyx_L1_error)
   __pyx_t_1 = __pyx_t_2;
   __pyx_L5_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "app/core/rbac.py":6
+    /* "app/core/rbac.py":16
  * 
  *     if action.startswith("tes.") and "researcher" not in user_roles:
  *         return False, "missing role: researcher"             # <<<<<<<<<<<<<<
@@ -2560,7 +2565,7 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
     __pyx_r = __pyx_mstate_global->__pyx_tuple[1];
     goto __pyx_L0;
 
-    /* "app/core/rbac.py":5
+    /* "app/core/rbac.py":15
  *         return True, "admin override"
  * 
  *     if action.startswith("tes.") and "researcher" not in user_roles:             # <<<<<<<<<<<<<<
@@ -2569,46 +2574,46 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
 */
   }
 
-  /* "app/core/rbac.py":17
+  /* "app/core/rbac.py":27
  *     # still gated here exactly as before.
  *     if (
  *         action.startswith("dataset.")             # <<<<<<<<<<<<<<
  *         and action != "dataset.read"
  *         and "data_scientist" not in user_roles
 */
-  __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 27, __pyx_L1_error)
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L8_bool_binop_done;
   }
 
-  /* "app/core/rbac.py":18
+  /* "app/core/rbac.py":28
  *     if (
  *         action.startswith("dataset.")
  *         and action != "dataset.read"             # <<<<<<<<<<<<<<
  *         and "data_scientist" not in user_roles
  *     ):
 */
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset_read, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset_read, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 28, __pyx_L1_error)
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L8_bool_binop_done;
   }
 
-  /* "app/core/rbac.py":19
+  /* "app/core/rbac.py":29
  *         action.startswith("dataset.")
  *         and action != "dataset.read"
  *         and "data_scientist" not in user_roles             # <<<<<<<<<<<<<<
  *     ):
  *         return False, "missing role: data_scientist"
 */
-  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_data_scientist, __pyx_v_user_roles, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_data_scientist, __pyx_v_user_roles, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 29, __pyx_L1_error)
   __pyx_t_1 = __pyx_t_2;
   __pyx_L8_bool_binop_done:;
 
-  /* "app/core/rbac.py":16
+  /* "app/core/rbac.py":26
  *     # granting write/delete). Write/delete actions are unaffected --
  *     # still gated here exactly as before.
  *     if (             # <<<<<<<<<<<<<<
@@ -2617,7 +2622,7 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
 */
   if (__pyx_t_1) {
 
-    /* "app/core/rbac.py":21
+    /* "app/core/rbac.py":31
  *         and "data_scientist" not in user_roles
  *     ):
  *         return False, "missing role: data_scientist"             # <<<<<<<<<<<<<<
@@ -2629,7 +2634,7 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
     __pyx_r = __pyx_mstate_global->__pyx_tuple[2];
     goto __pyx_L0;
 
-    /* "app/core/rbac.py":16
+    /* "app/core/rbac.py":26
  *     # granting write/delete). Write/delete actions are unaffected --
  *     # still gated here exactly as before.
  *     if (             # <<<<<<<<<<<<<<
@@ -2638,7 +2643,7 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
 */
   }
 
-  /* "app/core/rbac.py":23
+  /* "app/core/rbac.py":33
  *         return False, "missing role: data_scientist"
  * 
  *     return True, "rbac passed"             # <<<<<<<<<<<<<<
@@ -2648,7 +2653,9 @@ static PyObject *__pyx_pf_3app_4core_4rbac_evaluate_rbac(CYTHON_UNUSED PyObject 
   __pyx_r = __pyx_mstate_global->__pyx_tuple[3];
   goto __pyx_L0;
 
-  /* "app/core/rbac.py":1
+  /* "app/core/rbac.py":11
+ * """
+ * 
  * def evaluate_rbac(user_roles: list[str], action: str) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     if "admin" in user_roles:
  *         return True, "admin override"
@@ -2771,7 +2778,7 @@ namespace {
   {
       PyModuleDef_HEAD_INIT,
       "rbac",
-      0, /* m_doc */
+      __pyx_k_OmniBioAI_app_core_rbac_Purpose, /* m_doc */
     #if CYTHON_USE_MODULE_STATE
       sizeof(__pyx_mstatetype), /* m_size */
     #else
@@ -3013,25 +3020,33 @@ __Pyx_RefNannySetupContext("PyInit_rbac", 0);
   (void)__Pyx_modinit_function_import_code(__pyx_mstate);
   /*--- Execution code ---*/
 
-  /* "app/core/rbac.py":1
+  /* "app/core/rbac.py":11
+ * """
+ * 
  * def evaluate_rbac(user_roles: list[str], action: str) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     if "admin" in user_roles:
  *         return True, "admin override"
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_user_roles, __pyx_mstate_global->__pyx_kp_u_list_str) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_action, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_4rbac_1evaluate_rbac, 0, __pyx_mstate_global->__pyx_n_u_evaluate_rbac, NULL, __pyx_mstate_global->__pyx_n_u_app_core_rbac, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_user_roles, __pyx_mstate_global->__pyx_kp_u_list_str) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_action, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_4rbac_1evaluate_rbac, 0, __pyx_mstate_global->__pyx_n_u_evaluate_rbac, NULL, __pyx_mstate_global->__pyx_n_u_app_core_rbac, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_3);
   #endif
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_rbac, __pyx_t_3) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_rbac, __pyx_t_3) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "app/core/rbac.py":1
+ * """             # <<<<<<<<<<<<<<
+ * OmniBioAI app.core.rbac.
+ * 
+*/
   __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test, __pyx_t_3) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -3091,45 +3106,45 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "app/core/rbac.py":3
+  /* "app/core/rbac.py":13
  * def evaluate_rbac(user_roles: list[str], action: str) -> tuple[bool, str]:
  *     if "admin" in user_roles:
  *         return True, "admin override"             # <<<<<<<<<<<<<<
  * 
  *     if action.startswith("tes.") and "researcher" not in user_roles:
 */
-  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_admin_override); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_admin_override); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 13, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
 
-  /* "app/core/rbac.py":6
+  /* "app/core/rbac.py":16
  * 
  *     if action.startswith("tes.") and "researcher" not in user_roles:
  *         return False, "missing role: researcher"             # <<<<<<<<<<<<<<
  * 
  *     # PR12: dataset.read is exempted from the blanket data_scientist
 */
-  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_role_researcher); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 6, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_role_researcher); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 16, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
 
-  /* "app/core/rbac.py":21
+  /* "app/core/rbac.py":31
  *         and "data_scientist" not in user_roles
  *     ):
  *         return False, "missing role: data_scientist"             # <<<<<<<<<<<<<<
  * 
  *     return True, "rbac passed"
 */
-  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_role_data_scientist); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_role_data_scientist); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 31, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
 
-  /* "app/core/rbac.py":23
+  /* "app/core/rbac.py":33
  *         return False, "missing role: data_scientist"
  * 
  *     return True, "rbac passed"             # <<<<<<<<<<<<<<
 */
-  __pyx_mstate_global->__pyx_tuple[3] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_rbac_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 23, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[3] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_rbac_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 33, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[3]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[3]);
   #if CYTHON_IMMORTAL_CONSTANTS
@@ -3244,7 +3259,7 @@ typedef struct {
     unsigned int num_kwonly_args : 1;
     unsigned int nlocals : 2;
     unsigned int flags : 10;
-    unsigned int first_line : 1;
+    unsigned int first_line : 4;
 } __Pyx_PyCode_New_function_description;
 /* NewCodeObj.proto */
 static PyObject* __Pyx_PyCode_New(
@@ -3261,7 +3276,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 11};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_user_roles, __pyx_mstate->__pyx_n_u_action};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_rbac_py, __pyx_mstate->__pyx_n_u_evaluate_rbac, __pyx_mstate->__pyx_kp_b_iso88591_1_xs_vQ_v_wa_k_G3a_WA_wa_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }

@@ -46,7 +46,11 @@ setup(
             "wraparound": False,
             "cdivision": True,
         },
-        nthreads=os.cpu_count() or 4,
+        # Default to serial generation: cythonize's multiprocessing pool uses
+        # "spawn" on macOS, which re-imports this module in each worker and
+        # crashes (BrokenProcessPool) before any extension is built. Opt into
+        # parallel generation explicitly (e.g. in Linux CI) via this env var.
+        nthreads=int(os.environ.get("CYTHON_NTHREADS", "0")),
     ),
     zip_safe=False,
 )

@@ -1821,6 +1821,12 @@ static CYTHON_INLINE PyObject* __Pyx_CallUnboundCMethod1(__Pyx_CachedCFunction* 
 #define __Pyx_CallUnboundCMethod1(cfunc, self, arg)  __Pyx__CallUnboundCMethod1(cfunc, self, arg)
 #endif
 
+/* PySequenceContains.proto */
+static CYTHON_INLINE int __Pyx_PySequence_ContainsTF(PyObject* item, PyObject* seq, int eq) {
+    int result = PySequence_Contains(seq, item);
+    return unlikely(result < 0) ? result : (result == (eq == Py_EQ));
+}
+
 /* PyObject_Unicode.proto */
 #define __Pyx_PyObject_Unicode(obj)\
     (likely(PyUnicode_CheckExact(obj)) ? __Pyx_NewRef(obj) : PyObject_Str(obj))
@@ -2247,7 +2253,7 @@ int __pyx_module_is_main_app__core__tenancy = 0;
 /* #### Code section: string_decls ### */
 static const char __pyx_k_PR12_organization_tenancy_scopin[] = "PR12: organization-tenancy scoping.\n\nNeither this service nor omnibioai-hpc-policy-engine had any concept of\norg_id before this PR -- authorization was scoped only per user_id. This\nadds an additive tenancy gate: if the request names which organization\nowns the resource being acted on (`context[\"resource_org_id\"]`, supplied\nby the caller -- this service has no database of its own to look\nresource ownership up in), the requester's own `org_id` must match it.\n\nOpt-in the same way app/core/permissions.py is: a caller that never\nsupplies `resource_org_id` in context (true of every caller today) gets\n\"no tenancy scoping required\" -- a no-op, not a new restriction on\nexisting traffic. It only activates once a caller (a fixture in these\ntests, or eventually the Gateway once it's taught which org owns a given\nresource) actually supplies it.\n";
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_3app_4core_7tenancy_evaluate_tenancy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_org_id, PyObject *__pyx_v_context); /* proto */
+static PyObject *__pyx_pf_3app_4core_7tenancy_evaluate_tenancy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_org_id, PyObject *__pyx_v_context, PyObject *__pyx_v_resource_scope, PyObject *__pyx_v_roles); /* proto */
 /* #### Code section: late_includes ### */
 /* #### Code section: module_state ### */
 /* SmallCodeConfig */
@@ -2272,9 +2278,9 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_items;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
-  PyObject *__pyx_tuple[4];
+  PyObject *__pyx_tuple[7];
   PyObject *__pyx_codeobj_tab[1];
-  PyObject *__pyx_string_tab[37];
+  PyObject *__pyx_string_tab[49];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
 PyTypeObject *__pyx_CommonTypesMetaclassType;
@@ -2316,42 +2322,54 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #endif
 /* #### Code section: constant_name_defines ### */
 #define __pyx_kp_u_ __pyx_string_tab[0]
-#define __pyx_kp_u_Dict_str_Any __pyx_string_tab[1]
-#define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[2]
-#define __pyx_kp_u__2 __pyx_string_tab[3]
-#define __pyx_kp_u_add_note __pyx_string_tab[4]
-#define __pyx_kp_u_app_core_tenancy_py __pyx_string_tab[5]
-#define __pyx_kp_u_cross_tenant_access_denied __pyx_string_tab[6]
-#define __pyx_kp_u_missing_organization_context __pyx_string_tab[7]
-#define __pyx_kp_u_no_tenancy_scoping_required __pyx_string_tab[8]
-#define __pyx_kp_u_tenancy_check_passed __pyx_string_tab[9]
-#define __pyx_kp_u_tuple_bool_str __pyx_string_tab[10]
-#define __pyx_n_u_Any __pyx_string_tab[11]
-#define __pyx_n_u_Dict __pyx_string_tab[12]
-#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[13]
-#define __pyx_n_u_app_core_tenancy __pyx_string_tab[14]
-#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[15]
-#define __pyx_n_u_cline_in_traceback __pyx_string_tab[16]
-#define __pyx_n_u_context __pyx_string_tab[17]
-#define __pyx_n_u_evaluate_tenancy __pyx_string_tab[18]
-#define __pyx_n_u_func __pyx_string_tab[19]
-#define __pyx_n_u_get __pyx_string_tab[20]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[21]
-#define __pyx_n_u_items __pyx_string_tab[22]
-#define __pyx_n_u_main __pyx_string_tab[23]
-#define __pyx_n_u_module __pyx_string_tab[24]
-#define __pyx_n_u_name __pyx_string_tab[25]
-#define __pyx_n_u_org_id __pyx_string_tab[26]
-#define __pyx_n_u_pop __pyx_string_tab[27]
-#define __pyx_n_u_qualname __pyx_string_tab[28]
-#define __pyx_n_u_resource_org_id __pyx_string_tab[29]
-#define __pyx_n_u_return __pyx_string_tab[30]
-#define __pyx_n_u_set_name __pyx_string_tab[31]
-#define __pyx_n_u_setdefault __pyx_string_tab[32]
-#define __pyx_n_u_test __pyx_string_tab[33]
-#define __pyx_n_u_typing __pyx_string_tab[34]
-#define __pyx_n_u_values __pyx_string_tab[35]
-#define __pyx_kp_b_iso88591_a_gT_s_vQ_wc_wa_s_83c_wa_6 __pyx_string_tab[36]
+#define __pyx_kp_u_Note_that_Cython_is_deliberately __pyx_string_tab[1]
+#define __pyx_kp_u__2 __pyx_string_tab[2]
+#define __pyx_kp_u_add_note __pyx_string_tab[3]
+#define __pyx_kp_u_app_core_tenancy_py __pyx_string_tab[4]
+#define __pyx_kp_u_cross_tenant_access_denied __pyx_string_tab[5]
+#define __pyx_kp_u_dict_str_Any __pyx_string_tab[6]
+#define __pyx_kp_u_global_resource __pyx_string_tab[7]
+#define __pyx_kp_u_list_str_None __pyx_string_tab[8]
+#define __pyx_kp_u_missing_organization_context __pyx_string_tab[9]
+#define __pyx_kp_u_missing_resource_organization_co __pyx_string_tab[10]
+#define __pyx_kp_u_no_tenancy_scoping_required __pyx_string_tab[11]
+#define __pyx_kp_u_platform_admin_resource __pyx_string_tab[12]
+#define __pyx_kp_u_platform_admin_role_required __pyx_string_tab[13]
+#define __pyx_kp_u_str_None __pyx_string_tab[14]
+#define __pyx_kp_u_tenancy_check_passed __pyx_string_tab[15]
+#define __pyx_kp_u_tuple_bool_str __pyx_string_tab[16]
+#define __pyx_n_u_Any __pyx_string_tab[17]
+#define __pyx_n_u_Pyx_PyDict_NextRef __pyx_string_tab[18]
+#define __pyx_n_u_admin __pyx_string_tab[19]
+#define __pyx_n_u_app_core_tenancy __pyx_string_tab[20]
+#define __pyx_n_u_asyncio_coroutines __pyx_string_tab[21]
+#define __pyx_n_u_cline_in_traceback __pyx_string_tab[22]
+#define __pyx_n_u_context __pyx_string_tab[23]
+#define __pyx_n_u_effective_scope __pyx_string_tab[24]
+#define __pyx_n_u_evaluate_tenancy __pyx_string_tab[25]
+#define __pyx_n_u_func __pyx_string_tab[26]
+#define __pyx_n_u_get __pyx_string_tab[27]
+#define __pyx_n_u_global __pyx_string_tab[28]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[29]
+#define __pyx_n_u_items __pyx_string_tab[30]
+#define __pyx_n_u_main __pyx_string_tab[31]
+#define __pyx_n_u_module __pyx_string_tab[32]
+#define __pyx_n_u_name __pyx_string_tab[33]
+#define __pyx_n_u_org_id __pyx_string_tab[34]
+#define __pyx_n_u_platform_admin __pyx_string_tab[35]
+#define __pyx_n_u_pop __pyx_string_tab[36]
+#define __pyx_n_u_qualname __pyx_string_tab[37]
+#define __pyx_n_u_resource_org_id __pyx_string_tab[38]
+#define __pyx_n_u_resource_scope __pyx_string_tab[39]
+#define __pyx_n_u_return __pyx_string_tab[40]
+#define __pyx_n_u_roles __pyx_string_tab[41]
+#define __pyx_n_u_set_name __pyx_string_tab[42]
+#define __pyx_n_u_setdefault __pyx_string_tab[43]
+#define __pyx_n_u_tenant __pyx_string_tab[44]
+#define __pyx_n_u_test __pyx_string_tab[45]
+#define __pyx_n_u_typing __pyx_string_tab[46]
+#define __pyx_n_u_values __pyx_string_tab[47]
+#define __pyx_kp_b_iso88591_A_1_oT_WD_AYYZ_s_v_N_s_6_hc_s_3 __pyx_string_tab[48]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
 static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
@@ -2366,9 +2384,9 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   #if CYTHON_PEP489_MULTI_PHASE_INIT
   __Pyx_State_RemoveModule(NULL);
   #endif
-  for (int i=0; i<4; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
+  for (int i=0; i<7; ++i) { Py_CLEAR(clear_module_state->__pyx_tuple[i]); }
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<37; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<49; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
 Py_CLEAR(clear_module_state->__pyx_CommonTypesMetaclassType);
@@ -2391,9 +2409,9 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_tuple);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_bytes);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_unicode);
-  for (int i=0; i<4; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
+  for (int i=0; i<7; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_tuple[i]); }
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<37; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<49; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
 Py_VISIT(traverse_module_state->__pyx_CommonTypesMetaclassType);
@@ -2410,9 +2428,9 @@ return 0;
 /* "app/core/tenancy.py":21
  * 
  * 
- * def evaluate_tenancy(org_id: Any, context: Dict[str, Any]) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
- *     resource_org_id = context.get("resource_org_id")
- * 
+ * def evaluate_tenancy(             # <<<<<<<<<<<<<<
+ *     org_id: Any,
+ *     context: dict[str, Any],
 */
 
 /* Python wrapper */
@@ -2433,11 +2451,13 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 ) {
   PyObject *__pyx_v_org_id = 0;
   PyObject *__pyx_v_context = 0;
+  PyObject *__pyx_v_resource_scope = 0;
+  PyObject *__pyx_v_roles = 0;
   #if !CYTHON_METH_FASTCALL
   CYTHON_UNUSED Py_ssize_t __pyx_nargs;
   #endif
   CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[2] = {0,0};
+  PyObject* values[4] = {0,0,0,0};
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -2453,11 +2473,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   #endif
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
-    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_org_id,&__pyx_mstate_global->__pyx_n_u_context,0};
+    PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_org_id,&__pyx_mstate_global->__pyx_n_u_context,&__pyx_mstate_global->__pyx_n_u_resource_scope,&__pyx_mstate_global->__pyx_n_u_roles,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
     if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 21, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
+        case  4:
+        values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 21, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 21, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
         if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 21, __pyx_L3_error)
@@ -2471,23 +2499,72 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
       if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_tenancy", 0) < (0)) __PYX_ERR(0, 21, __pyx_L3_error)
+
+      /* "app/core/tenancy.py":24
+ *     org_id: Any,
+ *     context: dict[str, Any],
+ *     resource_scope: str | None = None,             # <<<<<<<<<<<<<<
+ *     roles: list[str] | None = None,
+ * ) -> tuple[bool, str]:
+*/
+      if (!values[2]) values[2] = __Pyx_NewRef(((PyObject*)Py_None));
+
+      /* "app/core/tenancy.py":25
+ *     context: dict[str, Any],
+ *     resource_scope: str | None = None,
+ *     roles: list[str] | None = None,             # <<<<<<<<<<<<<<
+ * ) -> tuple[bool, str]:
+ *     # Compatibility for direct legacy callers: an explicit resource owner
+*/
+      if (!values[3]) values[3] = __Pyx_NewRef(((PyObject*)Py_None));
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_tenancy", 1, 2, 2, i); __PYX_ERR(0, 21, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_tenancy", 0, 2, 4, i); __PYX_ERR(0, 21, __pyx_L3_error) }
       }
-    } else if (unlikely(__pyx_nargs != 2)) {
-      goto __pyx_L5_argtuple_error;
     } else {
-      values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 21, __pyx_L3_error)
-      values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 21, __pyx_L3_error)
+      switch (__pyx_nargs) {
+        case  4:
+        values[3] = __Pyx_ArgRef_FASTCALL(__pyx_args, 3);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[3])) __PYX_ERR(0, 21, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  3:
+        values[2] = __Pyx_ArgRef_FASTCALL(__pyx_args, 2);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[2])) __PYX_ERR(0, 21, __pyx_L3_error)
+        CYTHON_FALLTHROUGH;
+        case  2:
+        values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 21, __pyx_L3_error)
+        values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 21, __pyx_L3_error)
+        break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+
+      /* "app/core/tenancy.py":24
+ *     org_id: Any,
+ *     context: dict[str, Any],
+ *     resource_scope: str | None = None,             # <<<<<<<<<<<<<<
+ *     roles: list[str] | None = None,
+ * ) -> tuple[bool, str]:
+*/
+      if (!values[2]) values[2] = __Pyx_NewRef(((PyObject*)Py_None));
+
+      /* "app/core/tenancy.py":25
+ *     context: dict[str, Any],
+ *     resource_scope: str | None = None,
+ *     roles: list[str] | None = None,             # <<<<<<<<<<<<<<
+ * ) -> tuple[bool, str]:
+ *     # Compatibility for direct legacy callers: an explicit resource owner
+*/
+      if (!values[3]) values[3] = __Pyx_NewRef(((PyObject*)Py_None));
     }
     __pyx_v_org_id = values[0];
     __pyx_v_context = ((PyObject*)values[1]);
+    __pyx_v_resource_scope = ((PyObject*)values[2]);
+    __pyx_v_roles = ((PyObject*)values[3]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("evaluate_tenancy", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 21, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("evaluate_tenancy", 0, 2, 4, __pyx_nargs); __PYX_ERR(0, 21, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2498,8 +2575,18 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_context), (&PyDict_Type), 0, "context", 2))) __PYX_ERR(0, 21, __pyx_L1_error)
-  __pyx_r = __pyx_pf_3app_4core_7tenancy_evaluate_tenancy(__pyx_self, __pyx_v_org_id, __pyx_v_context);
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_context), (&PyDict_Type), 0, "context", 2))) __PYX_ERR(0, 23, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_resource_scope), (&PyUnicode_Type), 1, "resource_scope", 2))) __PYX_ERR(0, 24, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_roles), (&PyList_Type), 1, "roles", 2))) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_r = __pyx_pf_3app_4core_7tenancy_evaluate_tenancy(__pyx_self, __pyx_v_org_id, __pyx_v_context, __pyx_v_resource_scope, __pyx_v_roles);
+
+  /* "app/core/tenancy.py":21
+ * 
+ * 
+ * def evaluate_tenancy(             # <<<<<<<<<<<<<<
+ *     org_id: Any,
+ *     context: dict[str, Any],
+*/
 
   /* function exit code */
   goto __pyx_L0;
@@ -2518,72 +2605,238 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_3app_4core_7tenancy_evaluate_tenancy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_org_id, PyObject *__pyx_v_context) {
+static PyObject *__pyx_pf_3app_4core_7tenancy_evaluate_tenancy(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_org_id, PyObject *__pyx_v_context, PyObject *__pyx_v_resource_scope, PyObject *__pyx_v_roles) {
+  PyObject *__pyx_v_effective_scope = NULL;
   PyObject *__pyx_v_resource_org_id = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   int __pyx_t_2;
   PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_t_5;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("evaluate_tenancy", 0);
 
-  /* "app/core/tenancy.py":22
+  /* "app/core/tenancy.py":29
+ *     # Compatibility for direct legacy callers: an explicit resource owner
+ *     # continues to imply tenant scope; no owner continues to mean global.
+ *     effective_scope = resource_scope or ("tenant" if context.get("resource_org_id") else "global")             # <<<<<<<<<<<<<<
  * 
- * def evaluate_tenancy(org_id: Any, context: Dict[str, Any]) -> tuple[bool, str]:
- *     resource_org_id = context.get("resource_org_id")             # <<<<<<<<<<<<<<
- * 
- *     if resource_org_id is None:
+ *     if effective_scope == "global":
 */
-  __pyx_t_1 = __Pyx_PyDict_GetItemDefault(__pyx_v_context, __pyx_mstate_global->__pyx_n_u_resource_org_id, Py_None); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 22, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_v_resource_org_id = __pyx_t_1;
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_resource_scope); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 29, __pyx_L1_error)
+  if (!__pyx_t_2) {
+  } else {
+    __Pyx_INCREF(__pyx_v_resource_scope);
+    __pyx_t_1 = __pyx_v_resource_scope;
+    goto __pyx_L3_bool_binop_done;
+  }
+  __pyx_t_4 = __Pyx_PyDict_GetItemDefault(__pyx_v_context, __pyx_mstate_global->__pyx_n_u_resource_org_id, Py_None); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 29, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__pyx_t_2) {
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_tenant);
+    __pyx_t_3 = __pyx_mstate_global->__pyx_n_u_tenant;
+  } else {
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_global);
+    __pyx_t_3 = __pyx_mstate_global->__pyx_n_u_global;
+  }
+  __Pyx_INCREF(__pyx_t_3);
+  __pyx_t_1 = __pyx_t_3;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_L3_bool_binop_done:;
+  __pyx_v_effective_scope = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "app/core/tenancy.py":24
- *     resource_org_id = context.get("resource_org_id")
+  /* "app/core/tenancy.py":31
+ *     effective_scope = resource_scope or ("tenant" if context.get("resource_org_id") else "global")
  * 
- *     if resource_org_id is None:             # <<<<<<<<<<<<<<
- *         return True, "no tenancy scoping required"
+ *     if effective_scope == "global":             # <<<<<<<<<<<<<<
+ *         return True, "global resource" if resource_scope == "global" else "no tenancy scoping required"
  * 
 */
-  __pyx_t_2 = (__pyx_v_resource_org_id == Py_None);
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_effective_scope, __pyx_mstate_global->__pyx_n_u_global, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 31, __pyx_L1_error)
   if (__pyx_t_2) {
 
-    /* "app/core/tenancy.py":25
+    /* "app/core/tenancy.py":32
  * 
- *     if resource_org_id is None:
- *         return True, "no tenancy scoping required"             # <<<<<<<<<<<<<<
+ *     if effective_scope == "global":
+ *         return True, "global resource" if resource_scope == "global" else "no tenancy scoping required"             # <<<<<<<<<<<<<<
  * 
- *     if org_id is None:
+ *     if effective_scope == "admin":
 */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[0]);
-    __pyx_r = __pyx_mstate_global->__pyx_tuple[0];
+    __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_resource_scope, __pyx_mstate_global->__pyx_n_u_global, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 32, __pyx_L1_error)
+    if (__pyx_t_2) {
+      __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_global_resource);
+      __pyx_t_1 = __pyx_mstate_global->__pyx_kp_u_global_resource;
+    } else {
+      __Pyx_INCREF(__pyx_mstate_global->__pyx_kp_u_no_tenancy_scoping_required);
+      __pyx_t_1 = __pyx_mstate_global->__pyx_kp_u_no_tenancy_scoping_required;
+    }
+    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 32, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_INCREF(Py_True);
+    __Pyx_GIVEREF(Py_True);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, Py_True) != (0)) __PYX_ERR(0, 32, __pyx_L1_error);
+    __Pyx_GIVEREF(__pyx_t_1);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_1) != (0)) __PYX_ERR(0, 32, __pyx_L1_error);
+    __pyx_t_1 = 0;
+    __pyx_r = ((PyObject*)__pyx_t_3);
+    __pyx_t_3 = 0;
     goto __pyx_L0;
 
-    /* "app/core/tenancy.py":24
- *     resource_org_id = context.get("resource_org_id")
+    /* "app/core/tenancy.py":31
+ *     effective_scope = resource_scope or ("tenant" if context.get("resource_org_id") else "global")
  * 
- *     if resource_org_id is None:             # <<<<<<<<<<<<<<
- *         return True, "no tenancy scoping required"
+ *     if effective_scope == "global":             # <<<<<<<<<<<<<<
+ *         return True, "global resource" if resource_scope == "global" else "no tenancy scoping required"
  * 
 */
   }
 
-  /* "app/core/tenancy.py":27
- *         return True, "no tenancy scoping required"
+  /* "app/core/tenancy.py":34
+ *         return True, "global resource" if resource_scope == "global" else "no tenancy scoping required"
+ * 
+ *     if effective_scope == "admin":             # <<<<<<<<<<<<<<
+ *         if roles and ("admin" in roles or "platform_admin" in roles):
+ *             return True, "platform admin resource"
+*/
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_effective_scope, __pyx_mstate_global->__pyx_n_u_admin, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 34, __pyx_L1_error)
+  if (__pyx_t_2) {
+
+    /* "app/core/tenancy.py":35
+ * 
+ *     if effective_scope == "admin":
+ *         if roles and ("admin" in roles or "platform_admin" in roles):             # <<<<<<<<<<<<<<
+ *             return True, "platform admin resource"
+ *         return False, "platform admin role required"
+*/
+    if (__pyx_v_roles == Py_None) __pyx_t_5 = 0;
+    else
+    {
+      Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_v_roles);
+      if (unlikely(((!CYTHON_ASSUME_SAFE_SIZE) && __pyx_temp < 0))) __PYX_ERR(0, 35, __pyx_L1_error)
+      __pyx_t_5 = (__pyx_temp != 0);
+    }
+
+    if (__pyx_t_5) {
+    } else {
+      __pyx_t_2 = __pyx_t_5;
+      goto __pyx_L8_bool_binop_done;
+    }
+    __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_admin, __pyx_v_roles, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 35, __pyx_L1_error)
+    if (!__pyx_t_5) {
+    } else {
+      __pyx_t_2 = __pyx_t_5;
+      goto __pyx_L8_bool_binop_done;
+    }
+    __pyx_t_5 = (__Pyx_PySequence_ContainsTF(__pyx_mstate_global->__pyx_n_u_platform_admin, __pyx_v_roles, Py_EQ)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 35, __pyx_L1_error)
+    __pyx_t_2 = __pyx_t_5;
+    __pyx_L8_bool_binop_done:;
+    if (__pyx_t_2) {
+
+      /* "app/core/tenancy.py":36
+ *     if effective_scope == "admin":
+ *         if roles and ("admin" in roles or "platform_admin" in roles):
+ *             return True, "platform admin resource"             # <<<<<<<<<<<<<<
+ *         return False, "platform admin role required"
+ * 
+*/
+      __Pyx_XDECREF(__pyx_r);
+      __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[0]);
+      __pyx_r = __pyx_mstate_global->__pyx_tuple[0];
+      goto __pyx_L0;
+
+      /* "app/core/tenancy.py":35
+ * 
+ *     if effective_scope == "admin":
+ *         if roles and ("admin" in roles or "platform_admin" in roles):             # <<<<<<<<<<<<<<
+ *             return True, "platform admin resource"
+ *         return False, "platform admin role required"
+*/
+    }
+
+    /* "app/core/tenancy.py":37
+ *         if roles and ("admin" in roles or "platform_admin" in roles):
+ *             return True, "platform admin resource"
+ *         return False, "platform admin role required"             # <<<<<<<<<<<<<<
+ * 
+ *     resource_org_id = context.get("resource_org_id")
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[1]);
+    __pyx_r = __pyx_mstate_global->__pyx_tuple[1];
+    goto __pyx_L0;
+
+    /* "app/core/tenancy.py":34
+ *         return True, "global resource" if resource_scope == "global" else "no tenancy scoping required"
+ * 
+ *     if effective_scope == "admin":             # <<<<<<<<<<<<<<
+ *         if roles and ("admin" in roles or "platform_admin" in roles):
+ *             return True, "platform admin resource"
+*/
+  }
+
+  /* "app/core/tenancy.py":39
+ *         return False, "platform admin role required"
+ * 
+ *     resource_org_id = context.get("resource_org_id")             # <<<<<<<<<<<<<<
+ * 
+ *     if not resource_org_id:
+*/
+  __pyx_t_3 = __Pyx_PyDict_GetItemDefault(__pyx_v_context, __pyx_mstate_global->__pyx_n_u_resource_org_id, Py_None); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_v_resource_org_id = __pyx_t_3;
+  __pyx_t_3 = 0;
+
+  /* "app/core/tenancy.py":41
+ *     resource_org_id = context.get("resource_org_id")
+ * 
+ *     if not resource_org_id:             # <<<<<<<<<<<<<<
+ *         return False, "missing resource organization context"
+ * 
+*/
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_resource_org_id); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 41, __pyx_L1_error)
+  __pyx_t_5 = (!__pyx_t_2);
+  if (__pyx_t_5) {
+
+    /* "app/core/tenancy.py":42
+ * 
+ *     if not resource_org_id:
+ *         return False, "missing resource organization context"             # <<<<<<<<<<<<<<
+ * 
+ *     if org_id is None:
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[2]);
+    __pyx_r = __pyx_mstate_global->__pyx_tuple[2];
+    goto __pyx_L0;
+
+    /* "app/core/tenancy.py":41
+ *     resource_org_id = context.get("resource_org_id")
+ * 
+ *     if not resource_org_id:             # <<<<<<<<<<<<<<
+ *         return False, "missing resource organization context"
+ * 
+*/
+  }
+
+  /* "app/core/tenancy.py":44
+ *         return False, "missing resource organization context"
  * 
  *     if org_id is None:             # <<<<<<<<<<<<<<
  *         return False, "missing organization context"
  * 
 */
-  __pyx_t_2 = (__pyx_v_org_id == Py_None);
-  if (__pyx_t_2) {
+  __pyx_t_5 = (__pyx_v_org_id == Py_None);
+  if (__pyx_t_5) {
 
-    /* "app/core/tenancy.py":28
+    /* "app/core/tenancy.py":45
  * 
  *     if org_id is None:
  *         return False, "missing organization context"             # <<<<<<<<<<<<<<
@@ -2591,12 +2844,12 @@ static PyObject *__pyx_pf_3app_4core_7tenancy_evaluate_tenancy(CYTHON_UNUSED PyO
  *     if str(org_id) != str(resource_org_id):
 */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[1]);
-    __pyx_r = __pyx_mstate_global->__pyx_tuple[1];
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[3]);
+    __pyx_r = __pyx_mstate_global->__pyx_tuple[3];
     goto __pyx_L0;
 
-    /* "app/core/tenancy.py":27
- *         return True, "no tenancy scoping required"
+    /* "app/core/tenancy.py":44
+ *         return False, "missing resource organization context"
  * 
  *     if org_id is None:             # <<<<<<<<<<<<<<
  *         return False, "missing organization context"
@@ -2604,23 +2857,23 @@ static PyObject *__pyx_pf_3app_4core_7tenancy_evaluate_tenancy(CYTHON_UNUSED PyO
 */
   }
 
-  /* "app/core/tenancy.py":30
+  /* "app/core/tenancy.py":47
  *         return False, "missing organization context"
  * 
  *     if str(org_id) != str(resource_org_id):             # <<<<<<<<<<<<<<
  *         return False, "cross-tenant access denied"
  * 
 */
-  __pyx_t_1 = __Pyx_PyObject_Unicode(__pyx_v_org_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_Unicode(__pyx_v_resource_org_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 30, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Unicode(__pyx_v_org_id); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_t_1, __pyx_t_3, Py_NE)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 30, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  __pyx_t_1 = __Pyx_PyObject_Unicode(__pyx_v_resource_org_id); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 47, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  __pyx_t_5 = (__Pyx_PyUnicode_Equals(__pyx_t_3, __pyx_t_1, Py_NE)); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 47, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  if (__pyx_t_2) {
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  if (__pyx_t_5) {
 
-    /* "app/core/tenancy.py":31
+    /* "app/core/tenancy.py":48
  * 
  *     if str(org_id) != str(resource_org_id):
  *         return False, "cross-tenant access denied"             # <<<<<<<<<<<<<<
@@ -2628,11 +2881,11 @@ static PyObject *__pyx_pf_3app_4core_7tenancy_evaluate_tenancy(CYTHON_UNUSED PyO
  *     return True, "tenancy check passed"
 */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[2]);
-    __pyx_r = __pyx_mstate_global->__pyx_tuple[2];
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[4]);
+    __pyx_r = __pyx_mstate_global->__pyx_tuple[4];
     goto __pyx_L0;
 
-    /* "app/core/tenancy.py":30
+    /* "app/core/tenancy.py":47
  *         return False, "missing organization context"
  * 
  *     if str(org_id) != str(resource_org_id):             # <<<<<<<<<<<<<<
@@ -2641,31 +2894,33 @@ static PyObject *__pyx_pf_3app_4core_7tenancy_evaluate_tenancy(CYTHON_UNUSED PyO
 */
   }
 
-  /* "app/core/tenancy.py":33
+  /* "app/core/tenancy.py":50
  *         return False, "cross-tenant access denied"
  * 
  *     return True, "tenancy check passed"             # <<<<<<<<<<<<<<
 */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[3]);
-  __pyx_r = __pyx_mstate_global->__pyx_tuple[3];
+  __Pyx_INCREF(__pyx_mstate_global->__pyx_tuple[5]);
+  __pyx_r = __pyx_mstate_global->__pyx_tuple[5];
   goto __pyx_L0;
 
   /* "app/core/tenancy.py":21
  * 
  * 
- * def evaluate_tenancy(org_id: Any, context: Dict[str, Any]) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
- *     resource_org_id = context.get("resource_org_id")
- * 
+ * def evaluate_tenancy(             # <<<<<<<<<<<<<<
+ *     org_id: Any,
+ *     context: dict[str, Any],
 */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
   __Pyx_AddTraceback("app.core.tenancy.evaluate_tenancy", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_effective_scope);
   __Pyx_XDECREF(__pyx_v_resource_org_id);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
@@ -3025,19 +3280,19 @@ __Pyx_RefNannySetupContext("PyInit_tenancy", 0);
   /* "app/core/tenancy.py":18
  * """
  * 
- * from typing import Any, Dict             # <<<<<<<<<<<<<<
+ * from typing import Any             # <<<<<<<<<<<<<<
  * 
  * 
 */
   {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_Any,__pyx_mstate_global->__pyx_n_u_Dict};
-    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_typing, __pyx_imported_names, 2, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
+    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_Any};
+    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_typing, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 18, __pyx_L1_error)
   }
   __pyx_t_2 = __pyx_t_1;
   __Pyx_GOTREF(__pyx_t_2);
   {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_Any,__pyx_mstate_global->__pyx_n_u_Dict};
-    for (__pyx_t_3=0; __pyx_t_3 < 2; __pyx_t_3++) {
+    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_Any};
+    __pyx_t_3 = 0; {
       __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 18, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 18, __pyx_L1_error)
@@ -3049,20 +3304,23 @@ __Pyx_RefNannySetupContext("PyInit_tenancy", 0);
   /* "app/core/tenancy.py":21
  * 
  * 
- * def evaluate_tenancy(org_id: Any, context: Dict[str, Any]) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
- *     resource_org_id = context.get("resource_org_id")
- * 
+ * def evaluate_tenancy(             # <<<<<<<<<<<<<<
+ *     org_id: Any,
+ *     context: dict[str, Any],
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_org_id, __pyx_mstate_global->__pyx_n_u_Any) < (0)) __PYX_ERR(0, 21, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_context, __pyx_mstate_global->__pyx_kp_u_Dict_str_Any) < (0)) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_context, __pyx_mstate_global->__pyx_kp_u_dict_str_Any) < (0)) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_resource_scope, __pyx_mstate_global->__pyx_kp_u_str_None) < (0)) __PYX_ERR(0, 21, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_roles, __pyx_mstate_global->__pyx_kp_u_list_str_None) < (0)) __PYX_ERR(0, 21, __pyx_L1_error)
   if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 21, __pyx_L1_error)
   __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_7tenancy_1evaluate_tenancy, 0, __pyx_mstate_global->__pyx_n_u_evaluate_tenancy, NULL, __pyx_mstate_global->__pyx_n_u_app_core_tenancy, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 21, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_mstate_global->__pyx_tuple[6]);
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_tenancy, __pyx_t_4) < (0)) __PYX_ERR(0, 21, __pyx_L1_error)
@@ -3134,51 +3392,84 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "app/core/tenancy.py":25
+  /* "app/core/tenancy.py":36
+ *     if effective_scope == "admin":
+ *         if roles and ("admin" in roles or "platform_admin" in roles):
+ *             return True, "platform admin resource"             # <<<<<<<<<<<<<<
+ *         return False, "platform admin role required"
  * 
- *     if resource_org_id is None:
- *         return True, "no tenancy scoping required"             # <<<<<<<<<<<<<<
- * 
- *     if org_id is None:
 */
-  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_no_tenancy_scoping_required); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_platform_admin_resource); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
 
-  /* "app/core/tenancy.py":28
+  /* "app/core/tenancy.py":37
+ *         if roles and ("admin" in roles or "platform_admin" in roles):
+ *             return True, "platform admin resource"
+ *         return False, "platform admin role required"             # <<<<<<<<<<<<<<
+ * 
+ *     resource_org_id = context.get("resource_org_id")
+*/
+  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_platform_admin_role_required); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 37, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
+
+  /* "app/core/tenancy.py":42
+ * 
+ *     if not resource_org_id:
+ *         return False, "missing resource organization context"             # <<<<<<<<<<<<<<
+ * 
+ *     if org_id is None:
+*/
+  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_resource_organization_co); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 42, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
+
+  /* "app/core/tenancy.py":45
  * 
  *     if org_id is None:
  *         return False, "missing organization context"             # <<<<<<<<<<<<<<
  * 
  *     if str(org_id) != str(resource_org_id):
 */
-  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_organization_context); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 28, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
-  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
+  __pyx_mstate_global->__pyx_tuple[3] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_missing_organization_context); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[3]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[3]);
 
-  /* "app/core/tenancy.py":31
+  /* "app/core/tenancy.py":48
  * 
  *     if str(org_id) != str(resource_org_id):
  *         return False, "cross-tenant access denied"             # <<<<<<<<<<<<<<
  * 
  *     return True, "tenancy check passed"
 */
-  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_cross_tenant_access_denied); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 31, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
-  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
+  __pyx_mstate_global->__pyx_tuple[4] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_cross_tenant_access_denied); if (unlikely(!__pyx_mstate_global->__pyx_tuple[4])) __PYX_ERR(0, 48, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[4]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[4]);
 
-  /* "app/core/tenancy.py":33
+  /* "app/core/tenancy.py":50
  *         return False, "cross-tenant access denied"
  * 
  *     return True, "tenancy check passed"             # <<<<<<<<<<<<<<
 */
-  __pyx_mstate_global->__pyx_tuple[3] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_tenancy_check_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[3])) __PYX_ERR(0, 33, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[3]);
-  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[3]);
+  __pyx_mstate_global->__pyx_tuple[5] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_tenancy_check_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[5])) __PYX_ERR(0, 50, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[5]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[5]);
+
+  /* "app/core/tenancy.py":21
+ * 
+ * 
+ * def evaluate_tenancy(             # <<<<<<<<<<<<<<
+ *     org_id: Any,
+ *     context: dict[str, Any],
+*/
+  __pyx_mstate_global->__pyx_tuple[6] = PyTuple_Pack(2, Py_None, Py_None); if (unlikely(!__pyx_mstate_global->__pyx_tuple[6])) __PYX_ERR(0, 21, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[6]);
+  __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[6]);
   #if CYTHON_IMMORTAL_CONSTANTS
   {
     PyObject **table = __pyx_mstate->__pyx_tuple;
-    for (Py_ssize_t i=0; i<4; ++i) {
+    for (Py_ssize_t i=0; i<7; ++i) {
       #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
       #if PY_VERSION_HEX < 0x030E0000
       if (_Py_IsOwnedByCurrentThread(table[i]) && Py_REFCNT(table[i]) == 1)
@@ -3205,34 +3496,34 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 8; } index[] = {{1},{14},{179},{1},{8},{19},{26},{28},{27},{20},{16},{3},{4},{20},{16},{18},{18},{7},{16},{8},{3},{13},{5},{8},{10},{8},{6},{3},{12},{15},{6},{12},{10},{8},{6},{6},{85}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (543 bytes) */
-const char* const cstring = "BZh91AY&SY\315\224\335\327\000\000&\177\373D\310\241\202`\217\215A\257!t\013\277\377\377\360@@@@@\000\000@@@@\000@\001\245 A\251\241\032\t\345\031M\224\365?P\232bi\246\215\001\240\301\250\323\322~\251\342\203@\215\t\244\332MOT\336\223S h\000\001\210hcB0\346\004\304\320a2d\311\221\204\3014\323#\023\000C\001\314\t\211\240\302d\311\223#\t\202i\246F&\000\206\n\364\013@\265\017\030\346%\033\372\273\016\230\242\364\237\217\006\360GO\273\223\3701\036\244m\212\235\310\201K:\202\252\272\304\236\030\027d\342u\345m\316>\313\013\311T\222\245\005\207V\231\032Zp\356\224\0361u\003\255\355hQ]\272`\231\321\242\033\265\t\014mx\377w\3273\201\270g\034\001\231O\205\024\3003\210&/\357_,\333\034!5Da\0134#;%\031\204\320\334\275]\370mh\215A\334\244\272\353\205\201)\2014\014\032\237>]\270\2173\000\210Fa\236C\243\033&Y\223\000!\246\207\261^\276\0321\231s\250\024\243\333uV\222\353\2622PL\301\"\246\2168\236\025\216\330\370\314A\267\030\313u\206\333\211\311\023G*\230\317q;\207\325\035\214\3525X\250\243\\\266KL#T\220\304\305&\313x]\364\rD*\375Yf\022\"\306\260\264\242\n~\031\202\225\214\024\024a\204\226\341\324  \370\316+\260\361\0332B\250t\032\351\241\3336\022\025\220\202\030\327\236\261\305~\360\310\2162\030\212\010\315\211\343e\017\252qD3\311\222\231\300\222\340\214/\231\223\257\221\300n\356\010.\362z\360+\352\302\246ng\\k\345\303/\225V\375A\300\317\014\305\342O\021a3k\355\010\013\177\356\220&\242\010\364Q\001\020\217$\331\350!\314\361\244\014/)\201\306\031o\260\316R\366\007\351\252\336&r\366\370\274\035\313\365\370\351k\254EoInI_#\332s\377\213\271\"\234(Hf\312n\353\200";
-    PyObject *data = __Pyx_DecompressString(cstring, 543, 2);
+    const struct { const unsigned int length: 8; } index[] = {{1},{179},{1},{8},{19},{26},{14},{15},{16},{28},{37},{27},{23},{28},{10},{20},{16},{3},{20},{5},{16},{18},{18},{7},{15},{16},{8},{3},{6},{13},{5},{8},{10},{8},{6},{14},{3},{12},{15},{14},{6},{5},{12},{10},{6},{8},{6},{6},{188}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (711 bytes) */
+const char* const cstring = "BZh91AY&SYY%\263\021\000\000?\177\377\347\317\257\204`\227\255H\257!T\272\277\377\377\364@@@@@@@@@@@@@\000@\000@\002]\020\000\203T\306\251\232(\362\236M\020\323jyG\244\0004\014\203M\001\34543Q\352l\247\246(sF\215\r0\200i\2014\320\006CC\020\006\214F\206\010\310\001\315\03244\302\001\246\004\323@\031\r\014@\0321\032\030# \002Q'\2414\t\246!M\204M\006FF\200\000\000\003@\017CH\335\303_\343b\033\025Ua\317G9J\017\021J\334\230\255\231\017\366\276G9\373'\223\335\n/9\2757%\315\301\240HR\013\371(\2603\216S\314\214\2553\371\230\210\322\2440g\016\270^d\266Ga-eZ\227\324\271[x\037\351K\271\033\r\364Oj\331 \317\270!\275\345\210\201@|W\235\265qc\265\245e\003\234\301%\032\010@\363\325\263\024\232\253\007\206\243\001\025\035D\030B\252&}\017\030\346H\341BD\"\306\332\025\335s(\242\212\264\213\205\237\337\234\306\373\353y\301\307\314P\232\325\tZqL\226^\\d\236\234l\234\346\027nt\202\236\002G/%\326\362\330\212\246\226i?1\247\273\001\311\275\307\251\331\254J\022\2248n\337\231\267q;5\203+\003HS&{\363\313n\374\243\035\024\2620X\213<tsU[\025Q\267\256\352\232\023T\314\265*#3\311\264O!m\224\020\214uE\037\273\0135\3050\326\305\352\311\252A8;\211\233C\222\305\035\212\355r\221>=\242Y\3374\230\277\005Q\253d\252F\211@\225\261*\035\"\253\325\305I2\322\347\262\277 \273Pp\326\245s& j\275\256jRD\312\216k'z#\350\334\234I\261\254\225U\0102Ql\237[\310\247\t\0220\250\272\230\310y\241s\227\246\214\216C\021#:LJ\271\326\354\3101\265Ae\002\220U3d\\\264e7m\202eA`\204\213\322\220\205\016 \360\212\244Z\214lJ\331\347s\225r+-$\262\301\0350\341\204\262J\221I\253\352\023\203\333\337y\332k_\330\307Z\263\232\265X,\035[S\275\213\016\376\025\265iBJA\227\014\243\322r\302\005\241B\264rQ\010\030]\2622\027L\304\252\323\216t\025J\2729N\265j\027\2741\226/{ \343U\330X\234\221\254a\376\224_\254T\317_\332\202\206M\216_\325@\242h\247Qu\332\021\275~\225J\006\n*9)\251\327;0]\036\026tG\335MP\013g9\325\346\234\304cVq_\370\273\222)\302\204\202\311-\230\210";
+    PyObject *data = __Pyx_DecompressString(cstring, 711, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (459 bytes) */
-const char* const cstring = "x\332MQ=o\0241\020\245\210\024$\nt\rTHsU\n\222MA\204R\201\020\037\022Mt \272(X^{\356\316\304ko<\343K6\025\345\226[^\231\237\301\317\2702%?\205\361fA\254\264\336\361\333yo\336\314T\037\234\341s\342t\010\357Bwq\026\031\201\327\232\341}\307\353\030\300\021X\364\256\306\244\031}\007\222)\004L%)\300\342\343\342\350\344\364\004t\260\220\360\007\032&\240\\\033\257\211\220 .\241\316\316\263\013\300]\213T\301\347%t1C@\264\300\021Z\311\373\237\300k\014@\310%\200\003\035Bd\315.\006%t\027V\007`]\222\"n\203\205\375I{\302\352\255\266VI\"\352\266=61\3411c\320\301tU\333\231\024\211\216\306;\2036\006\251\264\023\034\332\306\021\211\"\304\264\322\301\335\216U\300\304\300x\303!\302$\001db),\315]e)m\377\342f\215\346r\264/Xn=\236\3271\372\3032\236\013\231c\031\252R\213\356F\3361>\023\331\257\270\024\213U\261XM:\232\272`\\,X\3142&$\343\345TN:N\332`\255\315\345d\n7\332g\331\201\232\250J-s0J\255\220\225#\365O\30116\244T\243EC\236&\332\354\261DA7\362\225~\225\263ml\225\272\312\332?\200\t)\346dp\372\233\220s\022\266,bbId\305}\366\322\025#\225s\\H\361\204\264{\364b\373}\367\362\315/}\277\367lXm\277\335\315\356\346\277\367\366w\373\317\007\332\316\357\037?\3557\303\027\001~^\367f\230\225\373\365\240\313\235\372y\177:\274\032\314v\366\2207\342O\372\327\303\354\017,\330\001\254";
-    PyObject *data = __Pyx_DecompressString(cstring, 459, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (619 bytes) */
+const char* const cstring = "x\332mR1K\034A\024\216pj@M8\214\332\244xV\202\350IPDH\021$&\220\346\220 \004#2\314\315\276\275\2338;\263\356\314\250\033RX^\271\345\225WZ\246\2742e\312+\267\364'\344'\344\315\336\336!!\013\273;3\357\275\357}\3377\257\3256\016\301\365\270\203\367\271\353\031\r\322B\204Jv0\343\016U\016\326eR8\314B\222\206\323\017\247\273\007G\007\300u\004\031~C\341,X\337\021\212[\213\026L\014\035/\225\223\032\\\236\242m\301\247\030r\343A#F\340\014\244\224\367\264\300\365P\203E\027\026\260\305\2656\216;i4\243r\251\273[\020\311\214\232\310\033\014\325\037\271\262\330z\307\243\210Q\"\3624\335\023&\303=\207\232k\221\267\322\\d\306\332\335j\357\200\013\2016\310\321\022\243\210T\\\220\230\0358\326\371eW\231\016W$\301\032\237\t\322k\253\340%\374\200\266\321\230Hk\251=\230\254\313\265\374^Q\002a\264\303;7\215Mk\377\233\244\r\324\244\300\n\223N\362\257=\211\211R\305]l\262\004x\224\220OS\230\177\217\215\302Y\t1\253\211MAE\017\305U\345&F\316\247\n/:\306\250\235p[\227\244\217\261\323\374\216\336\023\022\315\332\304\3473\306\025.Y\326\n\226\265j ns-\244\tg\306\323\265\241\025\212\276L\322\rd\\`\207\213\253Z\022\306\361\344&XP\204x\303\225\247\021a5\022c\261\327\202\261.\272\211\271LZ6\203\225\016\023\313X\302\t\230\236\304D^aXi\236\320\237,dr\346\014\253\250\246&e\354\332s5I\231\372T\347\316\266\025\231\014\235\317t\360\214\232\3208\325\260\264\212H\270Wn2\021\214\310\332\360\255\206+\010@{?W.\257\224+/\312\306\253\342\270l,\365\337\224\363\013\177\026\236\315o\024fx\366\360\372\347\227\321\311\257\271\361\361\371\370\374\353ccq\274\270Q\330\301f\371\374e\377f\274\266\375\2607Z\035\265\177o>\215,\365\017\213\265\2427\020\303\365\241\035o\277\035\355\217x\271\274Z\034\016\232\241\354\266\340\217\215\365\242;8\0336\207\241\360\336Q\317i`\361\376\266/\212\346\223\275\355o\366\217\212\375B\014\232\223\276\325yh\322\374\013\026\232u\034";
+    PyObject *data = __Pyx_DecompressString(cstring, 619, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (665 bytes) */
-const char* const bytes = ".Dict[str, Any]Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.?add_noteapp/core/tenancy.pycross-tenant access deniedmissing organization contextno tenancy scoping requiredtenancy check passedtuple[bool, str]AnyDict__Pyx_PyDict_NextRefapp.core.tenancyasyncio.coroutinescline_in_tracebackcontextevaluate_tenancy__func__get_is_coroutineitems__main____module____name__org_idpop__qualname__resource_org_idreturn__set_name__setdefault__test__typingvalues\320\000\035\230^\320+>\270a\330\004\026\220g\230T\240\021\240!\340\004\007\320\007\027\220s\230!\330\010\017\210v\220Q\340\004\007\200w\210c\220\021\330\010\017\210w\220a\340\004\007\200s\210!\2108\2203\220c\230\021\230!\330\010\017\210w\220a\340\004\013\2106\220\021";
+    #else /* compression: none (958 bytes) */
+const char* const bytes = ".Note that Cython is deliberately stricter than PEP-484 and rejects subclasses of builtin types. If you need to pass subclasses then set the 'annotation_typing' directive to False.?add_noteapp/core/tenancy.pycross-tenant access denieddict[str, Any]global resourcelist[str] | Nonemissing organization contextmissing resource organization contextno tenancy scoping requiredplatform admin resourceplatform admin role requiredstr | Nonetenancy check passedtuple[bool, str]Any__Pyx_PyDict_NextRefadminapp.core.tenancyasyncio.coroutinescline_in_tracebackcontexteffective_scopeevaluate_tenancy__func__getglobal_is_coroutineitems__main____module____name__org_idplatform_adminpop__qualname__resource_org_idresource_scopereturnroles__set_name__setdefaulttenant__test__typingvalues\200\001\330\014\r\330\r\016\330\004\024\220A\330\004\013\2101\330\005\006\360\006\000\005\027\220o\240T\250\034\260W\270D\300\001\320AY\320YZ\340\004\007\320\007\027\220s\230!\330\010\017\210v\320\025*\250/\270\023\270N\310!\340\004\007\320\007\027\220s\230!\330\010\013\2106\220\025\220h\230c\240\026\240s\320*;\2703\270a\330\014\023\2206\230\021\330\010\017\210w\220a\340\004\026\220g\230T\240\021\240!\340\004\007\200t\2101\330\010\017\210w\220a\340\004\007\200w\210c\220\021\330\010\017\210w\220a\340\004\007\200s\210!\2108\2203\220c\230\021\230!\330\010\017\210w\220a\340\004\013\2106\220\021";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 36; i++) {
+    for (int i = 0; i < 48; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
-      if (likely(string) && i >= 11) PyUnicode_InternInPlace(&string);
+      if (likely(string) && i >= 17) PyUnicode_InternInPlace(&string);
       if (unlikely(!string)) {
         Py_XDECREF(data);
         __PYX_ERR(0, 1, __pyx_L1_error)
@@ -3240,7 +3531,7 @@ const char* const bytes = ".Dict[str, Any]Note that Cython is deliberately stric
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 36; i < 37; i++) {
+    for (int i = 48; i < 49; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -3251,14 +3542,14 @@ const char* const bytes = ".Dict[str, Any]Note that Cython is deliberately stric
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 37; i++) {
+    for (Py_ssize_t i = 0; i < 49; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 36;
+      PyObject **table = stringtab + 48;
       for (Py_ssize_t i=0; i<1; ++i) {
         #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
         #if PY_VERSION_HEX < 0x030E0000
@@ -3282,10 +3573,10 @@ const char* const bytes = ".Dict[str, Any]Note that Cython is deliberately stric
 }
 /* #### Code section: init_codeobjects ### */
 typedef struct {
-    unsigned int argcount : 2;
+    unsigned int argcount : 3;
     unsigned int num_posonly_args : 1;
     unsigned int num_kwonly_args : 1;
-    unsigned int nlocals : 2;
+    unsigned int nlocals : 3;
     unsigned int flags : 10;
     unsigned int first_line : 5;
 } __Pyx_PyCode_New_function_description;
@@ -3304,9 +3595,9 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 3, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 21};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_org_id, __pyx_mstate->__pyx_n_u_context, __pyx_mstate->__pyx_n_u_resource_org_id};
-    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_tenancy_py, __pyx_mstate->__pyx_n_u_evaluate_tenancy, __pyx_mstate->__pyx_kp_b_iso88591_a_gT_s_vQ_wc_wa_s_83c_wa_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {4, 0, 0, 6, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 21};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_org_id, __pyx_mstate->__pyx_n_u_context, __pyx_mstate->__pyx_n_u_resource_scope, __pyx_mstate->__pyx_n_u_roles, __pyx_mstate->__pyx_n_u_effective_scope, __pyx_mstate->__pyx_n_u_resource_org_id};
+    __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_tenancy_py, __pyx_mstate->__pyx_n_u_evaluate_tenancy, __pyx_mstate->__pyx_kp_b_iso88591_A_1_oT_WD_AYYZ_s_v_N_s_6_hc_s_3, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;

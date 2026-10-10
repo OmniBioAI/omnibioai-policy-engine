@@ -6,3 +6,11 @@ __pycache__/
 coverage.json
 htmlcov/
 .pytest_cache/
+
+# Local Cython/C-extension build byproducts (macOS). Linux ARM64 .so files
+# under app/**/*.cpython-*-linux-gnu.so and build/lib.linux-aarch64-*/ are
+# intentionally tracked in git and must not be matched by these patterns.
+*.cpython-*-darwin.so
+build/lib.macosx-*/
+build/temp.macosx-*/
+*.egg-info/

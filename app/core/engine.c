@@ -1948,18 +1948,18 @@ static int __Pyx_VectorcallBuilder_AddArgStr(const char *key, PyObject *value, P
 #define __Pyx_VectorcallBuilder_AddArgStr(key, value, builder, args, n) PyDict_SetItemString(builder, key, value)
 #endif
 
-/* PyObjectVectorCallMethodKwBuilder.proto */
-#if CYTHON_VECTORCALL && PY_VERSION_HEX >= 0x03090000
-#define __Pyx_Object_VectorcallMethod_CallFromBuilder PyObject_VectorcallMethod
-#else
-static PyObject *__Pyx_Object_VectorcallMethod_CallFromBuilder(PyObject *name, PyObject *const *args, size_t nargsf, PyObject *kwnames);
-#endif
-
 /* PyObjectFastCallMethod.proto */
 #if CYTHON_VECTORCALL && PY_VERSION_HEX >= 0x03090000
 #define __Pyx_PyObject_FastCallMethod(name, args, nargsf) PyObject_VectorcallMethod(name, args, nargsf, NULL)
 #else
 static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf);
+#endif
+
+/* PyObjectVectorCallMethodKwBuilder.proto */
+#if CYTHON_VECTORCALL && PY_VERSION_HEX >= 0x03090000
+#define __Pyx_Object_VectorcallMethod_CallFromBuilder PyObject_VectorcallMethod
+#else
+static PyObject *__Pyx_Object_VectorcallMethod_CallFromBuilder(PyObject *name, PyObject *const *args, size_t nargsf, PyObject *kwnames);
 #endif
 
 /* HasAttr.proto (used by ImportImpl) */
@@ -2317,6 +2317,7 @@ int __pyx_module_is_main_app__core__engine = 0;
 /* Implementation of "app.core.engine" */
 /* #### Code section: global_var ### */
 /* #### Code section: string_decls ### */
+static const char __pyx_k_OmniBioAI_app_core_engine_Purpo[] = "\nOmniBioAI app.core.engine.\n\nPurpose:\n    Defines PolicyEngine with evaluate methods for app.core.engine.\n\nAuthor:\n    Manish Kumar <manish@omnibioai.org>\n";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_cache); /* proto */
 static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self, PyObject *__pyx_v_req); /* proto */
@@ -2345,7 +2346,7 @@ typedef struct {
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_pop;
   __Pyx_CachedCFunction __pyx_umethod_PyDict_Type_values;
   PyObject *__pyx_codeobj_tab[3];
-  PyObject *__pyx_string_tab[79];
+  PyObject *__pyx_string_tab[83];
   PyObject *__pyx_number_tab[1];
 /* #### Code section: module_state_contents ### */
 /* CommonTypesMetaclass.module_state_decls */
@@ -2432,40 +2433,44 @@ static __pyx_mstatetype * const __pyx_mstate_global = &__pyx_mstate_global_stati
 #define __pyx_n_u_evaluate_tenancy __pyx_string_tab[42]
 #define __pyx_n_u_func __pyx_string_tab[43]
 #define __pyx_n_u_get __pyx_string_tab[44]
-#define __pyx_n_u_init __pyx_string_tab[45]
-#define __pyx_n_u_is_coroutine __pyx_string_tab[46]
-#define __pyx_n_u_items __pyx_string_tab[47]
-#define __pyx_n_u_key __pyx_string_tab[48]
-#define __pyx_n_u_main __pyx_string_tab[49]
-#define __pyx_n_u_metaclass __pyx_string_tab[50]
-#define __pyx_n_u_module __pyx_string_tab[51]
-#define __pyx_n_u_name __pyx_string_tab[52]
-#define __pyx_n_u_ok __pyx_string_tab[53]
-#define __pyx_n_u_org_id __pyx_string_tab[54]
-#define __pyx_n_u_permissions __pyx_string_tab[55]
-#define __pyx_n_u_policy_source __pyx_string_tab[56]
-#define __pyx_n_u_pop __pyx_string_tab[57]
-#define __pyx_n_u_prepare __pyx_string_tab[58]
-#define __pyx_n_u_qualname __pyx_string_tab[59]
-#define __pyx_n_u_rbac __pyx_string_tab[60]
-#define __pyx_n_u_reason __pyx_string_tab[61]
-#define __pyx_n_u_req __pyx_string_tab[62]
-#define __pyx_n_u_resource __pyx_string_tab[63]
-#define __pyx_n_u_return __pyx_string_tab[64]
-#define __pyx_n_u_roles __pyx_string_tab[65]
-#define __pyx_n_u_rules __pyx_string_tab[66]
-#define __pyx_n_u_self __pyx_string_tab[67]
-#define __pyx_n_u_set __pyx_string_tab[68]
-#define __pyx_n_u_set_name __pyx_string_tab[69]
-#define __pyx_n_u_setdefault __pyx_string_tab[70]
-#define __pyx_n_u_tenancy __pyx_string_tab[71]
-#define __pyx_n_u_test __pyx_string_tab[72]
-#define __pyx_n_u_ttl __pyx_string_tab[73]
-#define __pyx_n_u_user_id __pyx_string_tab[74]
-#define __pyx_n_u_values __pyx_string_tab[75]
-#define __pyx_kp_b_iso88591_4A_IT_q_83a_4q_q_a_I_4A_xs_9Cq __pyx_string_tab[76]
-#define __pyx_kp_b_iso88591_a_IQ __pyx_string_tab[77]
-#define __pyx_kp_b_iso88591_a_d_q_q_q_q_3a_1_V4q_1_Cx_4_aq __pyx_string_tab[78]
+#define __pyx_n_u_global __pyx_string_tab[45]
+#define __pyx_n_u_init __pyx_string_tab[46]
+#define __pyx_n_u_is_coroutine __pyx_string_tab[47]
+#define __pyx_n_u_items __pyx_string_tab[48]
+#define __pyx_n_u_key __pyx_string_tab[49]
+#define __pyx_n_u_main __pyx_string_tab[50]
+#define __pyx_n_u_metaclass __pyx_string_tab[51]
+#define __pyx_n_u_module __pyx_string_tab[52]
+#define __pyx_n_u_name __pyx_string_tab[53]
+#define __pyx_n_u_ok __pyx_string_tab[54]
+#define __pyx_n_u_org_id __pyx_string_tab[55]
+#define __pyx_n_u_permissions __pyx_string_tab[56]
+#define __pyx_n_u_policy_source __pyx_string_tab[57]
+#define __pyx_n_u_pop __pyx_string_tab[58]
+#define __pyx_n_u_prepare __pyx_string_tab[59]
+#define __pyx_n_u_qualname __pyx_string_tab[60]
+#define __pyx_n_u_rbac __pyx_string_tab[61]
+#define __pyx_n_u_reason __pyx_string_tab[62]
+#define __pyx_n_u_req __pyx_string_tab[63]
+#define __pyx_n_u_resource __pyx_string_tab[64]
+#define __pyx_n_u_resource_org_id __pyx_string_tab[65]
+#define __pyx_n_u_resource_scope __pyx_string_tab[66]
+#define __pyx_n_u_return __pyx_string_tab[67]
+#define __pyx_n_u_roles __pyx_string_tab[68]
+#define __pyx_n_u_rules __pyx_string_tab[69]
+#define __pyx_n_u_self __pyx_string_tab[70]
+#define __pyx_n_u_set __pyx_string_tab[71]
+#define __pyx_n_u_set_name __pyx_string_tab[72]
+#define __pyx_n_u_setdefault __pyx_string_tab[73]
+#define __pyx_n_u_tenancy __pyx_string_tab[74]
+#define __pyx_n_u_tenant __pyx_string_tab[75]
+#define __pyx_n_u_test __pyx_string_tab[76]
+#define __pyx_n_u_ttl __pyx_string_tab[77]
+#define __pyx_n_u_user_id __pyx_string_tab[78]
+#define __pyx_n_u_values __pyx_string_tab[79]
+#define __pyx_kp_b_iso88591_4A_IT_q_83a_4q_q_a_I_4A_xs_9Cq __pyx_string_tab[80]
+#define __pyx_kp_b_iso88591_a_A_84q_d_q_q_q_q_3a_1_1_V4q_1 __pyx_string_tab[81]
+#define __pyx_kp_b_iso88591_a_IQ __pyx_string_tab[82]
 #define __pyx_int_300 __pyx_number_tab[0]
 /* #### Code section: module_state_clear ### */
 #if CYTHON_USE_MODULE_STATE
@@ -2482,7 +2487,7 @@ static CYTHON_SMALL_CODE int __pyx_m_clear(PyObject *m) {
   __Pyx_State_RemoveModule(NULL);
   #endif
   for (int i=0; i<3; ++i) { Py_CLEAR(clear_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<79; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<83; ++i) { Py_CLEAR(clear_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<1; ++i) { Py_CLEAR(clear_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_clear_contents ### */
 /* CommonTypesMetaclass.module_state_clear */
@@ -2507,7 +2512,7 @@ static CYTHON_SMALL_CODE int __pyx_m_traverse(PyObject *m, visitproc visit, void
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_bytes);
   __Pyx_VISIT_CONST(traverse_module_state->__pyx_empty_unicode);
   for (int i=0; i<3; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_codeobj_tab[i]); }
-  for (int i=0; i<79; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
+  for (int i=0; i<83; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_string_tab[i]); }
   for (int i=0; i<1; ++i) { __Pyx_VISIT_CONST(traverse_module_state->__pyx_number_tab[i]); }
 /* #### Code section: module_state_traverse_contents ### */
 /* CommonTypesMetaclass.module_state_traverse */
@@ -2522,7 +2527,7 @@ return 0;
 #endif
 /* #### Code section: module_code ### */
 
-/* "app/core/engine.py":9
+/* "app/core/engine.py":19
  * class PolicyEngine:
  * 
  *     def __init__(self, cache: PolicyCache):             # <<<<<<<<<<<<<<
@@ -2570,39 +2575,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_self,&__pyx_mstate_global->__pyx_n_u_cache,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 9, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 19, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 9, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 19, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 9, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 19, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) < (0)) __PYX_ERR(0, 9, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "__init__", 0) < (0)) __PYX_ERR(0, 19, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, i); __PYX_ERR(0, 9, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, i); __PYX_ERR(0, 19, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 9, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 19, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 9, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 19, __pyx_L3_error)
     }
     __pyx_v_self = values[0];
     __pyx_v_cache = values[1];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 9, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("__init__", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 19, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2631,16 +2636,16 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine___init__(CYTHON_UNUS
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
 
-  /* "app/core/engine.py":10
+  /* "app/core/engine.py":20
  * 
  *     def __init__(self, cache: PolicyCache):
  *         self.cache = cache             # <<<<<<<<<<<<<<
  * 
  *     # ----------------------------
 */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache, __pyx_v_cache) < (0)) __PYX_ERR(0, 10, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache, __pyx_v_cache) < (0)) __PYX_ERR(0, 20, __pyx_L1_error)
 
-  /* "app/core/engine.py":9
+  /* "app/core/engine.py":19
  * class PolicyEngine:
  * 
  *     def __init__(self, cache: PolicyCache):             # <<<<<<<<<<<<<<
@@ -2660,7 +2665,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine___init__(CYTHON_UNUS
   return __pyx_r;
 }
 
-/* "app/core/engine.py":15
+/* "app/core/engine.py":25
  *     # CORE EVALUATION
  *     # ----------------------------
  *     def _evaluate_core(self, req: PolicyRequest) -> PolicyDecision:             # <<<<<<<<<<<<<<
@@ -2708,39 +2713,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_self,&__pyx_mstate_global->__pyx_n_u_req,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 15, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 25, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 15, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 25, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 15, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 25, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_evaluate_core", 0) < (0)) __PYX_ERR(0, 15, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "_evaluate_core", 0) < (0)) __PYX_ERR(0, 25, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_evaluate_core", 1, 2, 2, i); __PYX_ERR(0, 15, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("_evaluate_core", 1, 2, 2, i); __PYX_ERR(0, 25, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 15, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 25, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 15, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 25, __pyx_L3_error)
     }
     __pyx_v_self = values[0];
     __pyx_v_req = values[1];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_evaluate_core", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 15, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_evaluate_core", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 25, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2764,6 +2769,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self, PyObject *__pyx_v_req) {
   PyObject *__pyx_v_ok = NULL;
   PyObject *__pyx_v_reason = NULL;
+  PyObject *__pyx_v_resource_scope = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -2782,7 +2788,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("_evaluate_core", 0);
 
-  /* "app/core/engine.py":17
+  /* "app/core/engine.py":27
  *     def _evaluate_core(self, req: PolicyRequest) -> PolicyDecision:
  * 
  *         ok, reason = rbac.evaluate_rbac(req.roles, req.action)             # <<<<<<<<<<<<<<
@@ -2790,14 +2796,14 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
  *             return PolicyDecision(
 */
   __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_rbac); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_rbac); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_evaluate_rbac); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_evaluate_rbac); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_roles); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_roles); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_action); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 17, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_action); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 27, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -2818,7 +2824,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 17, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 27, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
@@ -2827,7 +2833,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 17, __pyx_L1_error)
+      __PYX_ERR(0, 27, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -2837,22 +2843,22 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
       __Pyx_INCREF(__pyx_t_5);
     } else {
       __pyx_t_4 = __Pyx_PyList_GetItemRefFast(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 17, __pyx_L1_error)
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_4);
       __pyx_t_5 = __Pyx_PyList_GetItemRefFast(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 17, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 27, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_5);
     }
     #else
-    __pyx_t_4 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 17, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 27, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 17, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 27, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 17, __pyx_L1_error)
+    __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 27, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3);
@@ -2860,7 +2866,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     __Pyx_GOTREF(__pyx_t_4);
     index = 1; __pyx_t_5 = __pyx_t_7(__pyx_t_3); if (unlikely(!__pyx_t_5)) goto __pyx_L3_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_5);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_3), 2) < (0)) __PYX_ERR(0, 17, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_3), 2) < (0)) __PYX_ERR(0, 27, __pyx_L1_error)
     __pyx_t_7 = NULL;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     goto __pyx_L4_unpacking_done;
@@ -2868,7 +2874,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_7 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 17, __pyx_L1_error)
+    __PYX_ERR(0, 27, __pyx_L1_error)
     __pyx_L4_unpacking_done:;
   }
   __pyx_v_ok = __pyx_t_4;
@@ -2876,18 +2882,18 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
   __pyx_v_reason = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "app/core/engine.py":18
+  /* "app/core/engine.py":28
  * 
  *         ok, reason = rbac.evaluate_rbac(req.roles, req.action)
  *         if not ok:             # <<<<<<<<<<<<<<
  *             return PolicyDecision(
  *                 allowed=False,
 */
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 28, __pyx_L1_error)
   __pyx_t_9 = (!__pyx_t_8);
   if (__pyx_t_9) {
 
-    /* "app/core/engine.py":19
+    /* "app/core/engine.py":29
  *         ok, reason = rbac.evaluate_rbac(req.roles, req.action)
  *         if not ok:
  *             return PolicyDecision(             # <<<<<<<<<<<<<<
@@ -2896,10 +2902,10 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
 */
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_5 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 29, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
 
-    /* "app/core/engine.py":21
+    /* "app/core/engine.py":31
  *             return PolicyDecision(
  *                 allowed=False,
  *                 reason=reason,             # <<<<<<<<<<<<<<
@@ -2920,23 +2926,23 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     #endif
     {
       PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_5, NULL};
-      __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 19, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 29, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_3, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 19, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_3, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 19, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_RBAC, __pyx_t_3, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 19, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_3, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 29, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_3, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 29, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_RBAC, __pyx_t_3, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 29, __pyx_L1_error)
       __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 19, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "app/core/engine.py":18
+    /* "app/core/engine.py":28
  * 
  *         ok, reason = rbac.evaluate_rbac(req.roles, req.action)
  *         if not ok:             # <<<<<<<<<<<<<<
@@ -2945,7 +2951,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
 */
   }
 
-  /* "app/core/engine.py":25
+  /* "app/core/engine.py":35
  *             )
  * 
  *         ok, reason = permissions.evaluate_permission(             # <<<<<<<<<<<<<<
@@ -2953,26 +2959,26 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
  *         )
 */
   __pyx_t_4 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_permissions); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_permissions); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_evaluate_permission); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_evaluate_permission); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 35, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "app/core/engine.py":26
+  /* "app/core/engine.py":36
  * 
  *         ok, reason = permissions.evaluate_permission(
  *             req.roles, req.permissions, req.action, req.resource             # <<<<<<<<<<<<<<
  *         )
  *         if not ok:
 */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_roles); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_roles); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_permissions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_permissions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_action); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_action); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_resource); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 26, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_resource); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 36, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __pyx_t_6 = 1;
   #if CYTHON_UNPACK_METHODS
@@ -2995,7 +3001,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 25, __pyx_L1_error)
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
@@ -3004,7 +3010,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 25, __pyx_L1_error)
+      __PYX_ERR(0, 35, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -3014,22 +3020,22 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
       __Pyx_INCREF(__pyx_t_11);
     } else {
       __pyx_t_5 = __Pyx_PyList_GetItemRefFast(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 25, __pyx_L1_error)
+      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 35, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_5);
       __pyx_t_11 = __Pyx_PyList_GetItemRefFast(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 25, __pyx_L1_error)
+      if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 35, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_11);
     }
     #else
-    __pyx_t_5 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 35, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_11 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 35, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_10 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 25, __pyx_L1_error)
+    __pyx_t_10 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 35, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_10);
@@ -3037,7 +3043,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     __Pyx_GOTREF(__pyx_t_5);
     index = 1; __pyx_t_11 = __pyx_t_7(__pyx_t_10); if (unlikely(!__pyx_t_11)) goto __pyx_L6_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_11);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_10), 2) < (0)) __PYX_ERR(0, 25, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_10), 2) < (0)) __PYX_ERR(0, 35, __pyx_L1_error)
     __pyx_t_7 = NULL;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     goto __pyx_L7_unpacking_done;
@@ -3045,11 +3051,11 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __pyx_t_7 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 25, __pyx_L1_error)
+    __PYX_ERR(0, 35, __pyx_L1_error)
     __pyx_L7_unpacking_done:;
   }
 
-  /* "app/core/engine.py":25
+  /* "app/core/engine.py":35
  *             )
  * 
  *         ok, reason = permissions.evaluate_permission(             # <<<<<<<<<<<<<<
@@ -3061,18 +3067,18 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
   __Pyx_DECREF_SET(__pyx_v_reason, __pyx_t_11);
   __pyx_t_11 = 0;
 
-  /* "app/core/engine.py":28
+  /* "app/core/engine.py":38
  *             req.roles, req.permissions, req.action, req.resource
  *         )
  *         if not ok:             # <<<<<<<<<<<<<<
  *             return PolicyDecision(
  *                 allowed=False,
 */
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 28, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 38, __pyx_L1_error)
   __pyx_t_8 = (!__pyx_t_9);
   if (__pyx_t_8) {
 
-    /* "app/core/engine.py":29
+    /* "app/core/engine.py":39
  *         )
  *         if not ok:
  *             return PolicyDecision(             # <<<<<<<<<<<<<<
@@ -3081,10 +3087,10 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
 */
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_11 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 29, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 39, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
 
-    /* "app/core/engine.py":31
+    /* "app/core/engine.py":41
  *             return PolicyDecision(
  *                 allowed=False,
  *                 reason=reason,             # <<<<<<<<<<<<<<
@@ -3105,23 +3111,23 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     #endif
     {
       PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_11, NULL};
-      __pyx_t_10 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 29, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 39, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_10, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 29, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_10, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 29, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_PERMISSION, __pyx_t_10, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 29, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_10, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 39, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_10, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 39, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_PERMISSION, __pyx_t_10, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 39, __pyx_L1_error)
       __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_5, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_10);
       __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 29, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 39, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "app/core/engine.py":28
+    /* "app/core/engine.py":38
  *             req.roles, req.permissions, req.action, req.resource
  *         )
  *         if not ok:             # <<<<<<<<<<<<<<
@@ -3130,43 +3136,114 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
 */
   }
 
-  /* "app/core/engine.py":35
+  /* "app/core/engine.py":45
  *             )
  * 
- *         ok, reason = tenancy.evaluate_tenancy(req.org_id, req.context)             # <<<<<<<<<<<<<<
- *         if not ok:
- *             return PolicyDecision(
+ *         resource_scope = req.resource_scope or (             # <<<<<<<<<<<<<<
+ *             "tenant" if req.context.get("resource_org_id") else "global"
+ *         )
+*/
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_resource_scope); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 45, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_5);
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 45, __pyx_L1_error)
+  if (!__pyx_t_8) {
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  } else {
+    __Pyx_INCREF(__pyx_t_5);
+    __pyx_t_1 = __pyx_t_5;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+    goto __pyx_L9_bool_binop_done;
+  }
+
+  /* "app/core/engine.py":46
+ * 
+ *         resource_scope = req.resource_scope or (
+ *             "tenant" if req.context.get("resource_org_id") else "global"             # <<<<<<<<<<<<<<
+ *         )
+ *         ok, reason = tenancy.evaluate_tenancy(
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_context); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_11 = __pyx_t_2;
+  __Pyx_INCREF(__pyx_t_11);
+  __pyx_t_6 = 0;
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_11, __pyx_mstate_global->__pyx_n_u_resource_org_id};
+    __pyx_t_10 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_6, (2-__pyx_t_6) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 46, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+  }
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 46, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  if (__pyx_t_8) {
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_tenant);
+    __pyx_t_5 = __pyx_mstate_global->__pyx_n_u_tenant;
+  } else {
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_global);
+    __pyx_t_5 = __pyx_mstate_global->__pyx_n_u_global;
+  }
+  __Pyx_INCREF(__pyx_t_5);
+  __pyx_t_1 = __pyx_t_5;
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+  __pyx_L9_bool_binop_done:;
+  __pyx_v_resource_scope = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "app/core/engine.py":48
+ *             "tenant" if req.context.get("resource_org_id") else "global"
+ *         )
+ *         ok, reason = tenancy.evaluate_tenancy(             # <<<<<<<<<<<<<<
+ *             req.org_id, req.context, resource_scope=resource_scope, roles=req.roles
+ *         )
 */
   __pyx_t_5 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_tenancy); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_tenancy); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_evaluate_tenancy); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 35, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_11);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_org_id); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 35, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_context); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_evaluate_tenancy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+
+  /* "app/core/engine.py":49
+ *         )
+ *         ok, reason = tenancy.evaluate_tenancy(
+ *             req.org_id, req.context, resource_scope=resource_scope, roles=req.roles             # <<<<<<<<<<<<<<
+ *         )
+ *         if not ok:
+*/
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_org_id); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_10);
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_context); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_roles); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 49, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_6 = 1;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_11))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_11);
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
     assert(__pyx_t_5);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_11);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
     __Pyx_INCREF(__pyx_t_5);
     __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_11, __pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
     __pyx_t_6 = 0;
   }
   #endif
   {
-    PyObject *__pyx_callargs[3] = {__pyx_t_5, __pyx_t_10, __pyx_t_2};
-    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_11, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    PyObject *__pyx_callargs[3 + ((CYTHON_VECTORCALL) ? 2 : 0)] = {__pyx_t_5, __pyx_t_10, __pyx_t_11};
+    __pyx_t_4 = __Pyx_MakeVectorcallBuilderKwds(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_resource_scope, __pyx_v_resource_scope, __pyx_t_4, __pyx_callargs+3, 0) < (0)) __PYX_ERR(0, 48, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_roles, __pyx_t_3, __pyx_t_4, __pyx_callargs+3, 1) < (0)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_4);
     __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 48, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
@@ -3175,7 +3252,341 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     if (unlikely(size != 2)) {
       if (size > 2) __Pyx_RaiseTooManyValuesError(2);
       else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 35, __pyx_L1_error)
+      __PYX_ERR(0, 48, __pyx_L1_error)
+    }
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    if (likely(PyTuple_CheckExact(sequence))) {
+      __pyx_t_2 = PyTuple_GET_ITEM(sequence, 0);
+      __Pyx_INCREF(__pyx_t_2);
+      __pyx_t_4 = PyTuple_GET_ITEM(sequence, 1);
+      __Pyx_INCREF(__pyx_t_4);
+    } else {
+      __pyx_t_2 = __Pyx_PyList_GetItemRefFast(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+      __Pyx_XGOTREF(__pyx_t_2);
+      __pyx_t_4 = __Pyx_PyList_GetItemRefFast(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
+      __Pyx_XGOTREF(__pyx_t_4);
+    }
+    #else
+    __pyx_t_2 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_4 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    #endif
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  } else {
+    Py_ssize_t index = -1;
+    __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3);
+    index = 0; __pyx_t_2 = __pyx_t_7(__pyx_t_3); if (unlikely(!__pyx_t_2)) goto __pyx_L11_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_2);
+    index = 1; __pyx_t_4 = __pyx_t_7(__pyx_t_3); if (unlikely(!__pyx_t_4)) goto __pyx_L11_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_4);
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_3), 2) < (0)) __PYX_ERR(0, 48, __pyx_L1_error)
+    __pyx_t_7 = NULL;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    goto __pyx_L12_unpacking_done;
+    __pyx_L11_unpacking_failed:;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_7 = NULL;
+    if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
+    __PYX_ERR(0, 48, __pyx_L1_error)
+    __pyx_L12_unpacking_done:;
+  }
+
+  /* "app/core/engine.py":48
+ *             "tenant" if req.context.get("resource_org_id") else "global"
+ *         )
+ *         ok, reason = tenancy.evaluate_tenancy(             # <<<<<<<<<<<<<<
+ *             req.org_id, req.context, resource_scope=resource_scope, roles=req.roles
+ *         )
+*/
+  __Pyx_DECREF_SET(__pyx_v_ok, __pyx_t_2);
+  __pyx_t_2 = 0;
+  __Pyx_DECREF_SET(__pyx_v_reason, __pyx_t_4);
+  __pyx_t_4 = 0;
+
+  /* "app/core/engine.py":51
+ *             req.org_id, req.context, resource_scope=resource_scope, roles=req.roles
+ *         )
+ *         if not ok:             # <<<<<<<<<<<<<<
+ *             return PolicyDecision(
+ *                 allowed=False,
+*/
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 51, __pyx_L1_error)
+  __pyx_t_9 = (!__pyx_t_8);
+  if (__pyx_t_9) {
+
+    /* "app/core/engine.py":52
+ *         )
+ *         if not ok:
+ *             return PolicyDecision(             # <<<<<<<<<<<<<<
+ *                 allowed=False,
+ *                 reason=reason,
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_4 = NULL;
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 52, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+
+    /* "app/core/engine.py":54
+ *             return PolicyDecision(
+ *                 allowed=False,
+ *                 reason=reason,             # <<<<<<<<<<<<<<
+ *                 policy_source="TENANCY"
+ *             )
+*/
+    __pyx_t_6 = 1;
+    #if CYTHON_UNPACK_METHODS
+    if (unlikely(PyMethod_Check(__pyx_t_2))) {
+      __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_2);
+      assert(__pyx_t_4);
+      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_4);
+      __Pyx_INCREF(__pyx__function);
+      __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
+      __pyx_t_6 = 0;
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_4, NULL};
+      __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 52, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_3, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 52, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_3, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 52, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_TENANCY, __pyx_t_3, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 52, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
+      __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 52, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+    }
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+
+    /* "app/core/engine.py":51
+ *             req.org_id, req.context, resource_scope=resource_scope, roles=req.roles
+ *         )
+ *         if not ok:             # <<<<<<<<<<<<<<
+ *             return PolicyDecision(
+ *                 allowed=False,
+*/
+  }
+
+  /* "app/core/engine.py":58
+ *             )
+ * 
+ *         ok, reason = abac.evaluate_abac(req.context, req.roles)             # <<<<<<<<<<<<<<
+ *         if not ok:
+ *             return PolicyDecision(
+*/
+  __pyx_t_2 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_abac); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_evaluate_abac); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_context); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_roles); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 58, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_6 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_4))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+    assert(__pyx_t_2);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+    __pyx_t_6 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_3, __pyx_t_11};
+    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 58, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
+    PyObject* sequence = __pyx_t_1;
+    Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
+    if (unlikely(size != 2)) {
+      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+      __PYX_ERR(0, 58, __pyx_L1_error)
+    }
+    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
+    if (likely(PyTuple_CheckExact(sequence))) {
+      __pyx_t_4 = PyTuple_GET_ITEM(sequence, 0);
+      __Pyx_INCREF(__pyx_t_4);
+      __pyx_t_11 = PyTuple_GET_ITEM(sequence, 1);
+      __Pyx_INCREF(__pyx_t_11);
+    } else {
+      __pyx_t_4 = __Pyx_PyList_GetItemRefFast(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
+      if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
+      __Pyx_XGOTREF(__pyx_t_4);
+      __pyx_t_11 = __Pyx_PyList_GetItemRefFast(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
+      if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 58, __pyx_L1_error)
+      __Pyx_XGOTREF(__pyx_t_11);
+    }
+    #else
+    __pyx_t_4 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 58, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_11 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 58, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    #endif
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+  } else {
+    Py_ssize_t index = -1;
+    __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 58, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3);
+    index = 0; __pyx_t_4 = __pyx_t_7(__pyx_t_3); if (unlikely(!__pyx_t_4)) goto __pyx_L14_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_4);
+    index = 1; __pyx_t_11 = __pyx_t_7(__pyx_t_3); if (unlikely(!__pyx_t_11)) goto __pyx_L14_unpacking_failed;
+    __Pyx_GOTREF(__pyx_t_11);
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_3), 2) < (0)) __PYX_ERR(0, 58, __pyx_L1_error)
+    __pyx_t_7 = NULL;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    goto __pyx_L15_unpacking_done;
+    __pyx_L14_unpacking_failed:;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_7 = NULL;
+    if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
+    __PYX_ERR(0, 58, __pyx_L1_error)
+    __pyx_L15_unpacking_done:;
+  }
+  __Pyx_DECREF_SET(__pyx_v_ok, __pyx_t_4);
+  __pyx_t_4 = 0;
+  __Pyx_DECREF_SET(__pyx_v_reason, __pyx_t_11);
+  __pyx_t_11 = 0;
+
+  /* "app/core/engine.py":59
+ * 
+ *         ok, reason = abac.evaluate_abac(req.context, req.roles)
+ *         if not ok:             # <<<<<<<<<<<<<<
+ *             return PolicyDecision(
+ *                 allowed=False,
+*/
+  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 59, __pyx_L1_error)
+  __pyx_t_8 = (!__pyx_t_9);
+  if (__pyx_t_8) {
+
+    /* "app/core/engine.py":60
+ *         ok, reason = abac.evaluate_abac(req.context, req.roles)
+ *         if not ok:
+ *             return PolicyDecision(             # <<<<<<<<<<<<<<
+ *                 allowed=False,
+ *                 reason=reason,
+*/
+    __Pyx_XDECREF(__pyx_r);
+    __pyx_t_11 = NULL;
+    __Pyx_GetModuleGlobalName(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 60, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+
+    /* "app/core/engine.py":62
+ *             return PolicyDecision(
+ *                 allowed=False,
+ *                 reason=reason,             # <<<<<<<<<<<<<<
+ *                 policy_source="ABAC"
+ *             )
+*/
+    __pyx_t_6 = 1;
+    #if CYTHON_UNPACK_METHODS
+    if (unlikely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_4);
+      assert(__pyx_t_11);
+      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_4);
+      __Pyx_INCREF(__pyx_t_11);
+      __Pyx_INCREF(__pyx__function);
+      __Pyx_DECREF_SET(__pyx_t_4, __pyx__function);
+      __pyx_t_6 = 0;
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_11, NULL};
+      __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 60, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_3, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 60, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_3, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 60, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_ABAC, __pyx_t_3, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 60, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_4, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
+      __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 60, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+    }
+    __pyx_r = __pyx_t_1;
+    __pyx_t_1 = 0;
+    goto __pyx_L0;
+
+    /* "app/core/engine.py":59
+ * 
+ *         ok, reason = abac.evaluate_abac(req.context, req.roles)
+ *         if not ok:             # <<<<<<<<<<<<<<
+ *             return PolicyDecision(
+ *                 allowed=False,
+*/
+  }
+
+  /* "app/core/engine.py":66
+ *             )
+ * 
+ *         ok, reason = rules.evaluate_rules(req.action, req.resource)             # <<<<<<<<<<<<<<
+ *         if not ok:
+ *             return PolicyDecision(
+*/
+  __pyx_t_4 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_rules); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_evaluate_rules); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_action); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_resource); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_6 = 1;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_11))) {
+    __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_11);
+    assert(__pyx_t_4);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_11);
+    __Pyx_INCREF(__pyx_t_4);
+    __Pyx_INCREF(__pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_11, __pyx__function);
+    __pyx_t_6 = 0;
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[3] = {__pyx_t_4, __pyx_t_3, __pyx_t_2};
+    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_11, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 66, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+  }
+  if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
+    PyObject* sequence = __pyx_t_1;
+    Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
+    if (unlikely(size != 2)) {
+      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
+      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
+      __PYX_ERR(0, 66, __pyx_L1_error)
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
     if (likely(PyTuple_CheckExact(sequence))) {
@@ -3185,58 +3596,58 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
       __Pyx_INCREF(__pyx_t_2);
     } else {
       __pyx_t_11 = __Pyx_PyList_GetItemRefFast(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 35, __pyx_L1_error)
+      if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 66, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_11);
       __pyx_t_2 = __Pyx_PyList_GetItemRefFast(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
       __Pyx_XGOTREF(__pyx_t_2);
     }
     #else
-    __pyx_t_11 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
-    __pyx_t_2 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 35, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 66, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     #endif
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   } else {
     Py_ssize_t index = -1;
-    __pyx_t_10 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 35, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
+    __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 66, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_10);
-    index = 0; __pyx_t_11 = __pyx_t_7(__pyx_t_10); if (unlikely(!__pyx_t_11)) goto __pyx_L9_unpacking_failed;
+    __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_3);
+    index = 0; __pyx_t_11 = __pyx_t_7(__pyx_t_3); if (unlikely(!__pyx_t_11)) goto __pyx_L17_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_11);
-    index = 1; __pyx_t_2 = __pyx_t_7(__pyx_t_10); if (unlikely(!__pyx_t_2)) goto __pyx_L9_unpacking_failed;
+    index = 1; __pyx_t_2 = __pyx_t_7(__pyx_t_3); if (unlikely(!__pyx_t_2)) goto __pyx_L17_unpacking_failed;
     __Pyx_GOTREF(__pyx_t_2);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_10), 2) < (0)) __PYX_ERR(0, 35, __pyx_L1_error)
+    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_3), 2) < (0)) __PYX_ERR(0, 66, __pyx_L1_error)
     __pyx_t_7 = NULL;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    goto __pyx_L10_unpacking_done;
-    __pyx_L9_unpacking_failed:;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    goto __pyx_L18_unpacking_done;
+    __pyx_L17_unpacking_failed:;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_7 = NULL;
     if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 35, __pyx_L1_error)
-    __pyx_L10_unpacking_done:;
+    __PYX_ERR(0, 66, __pyx_L1_error)
+    __pyx_L18_unpacking_done:;
   }
   __Pyx_DECREF_SET(__pyx_v_ok, __pyx_t_11);
   __pyx_t_11 = 0;
   __Pyx_DECREF_SET(__pyx_v_reason, __pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "app/core/engine.py":36
+  /* "app/core/engine.py":67
  * 
- *         ok, reason = tenancy.evaluate_tenancy(req.org_id, req.context)
+ *         ok, reason = rules.evaluate_rules(req.action, req.resource)
  *         if not ok:             # <<<<<<<<<<<<<<
  *             return PolicyDecision(
  *                 allowed=False,
 */
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 36, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 67, __pyx_L1_error)
   __pyx_t_9 = (!__pyx_t_8);
   if (__pyx_t_9) {
 
-    /* "app/core/engine.py":37
- *         ok, reason = tenancy.evaluate_tenancy(req.org_id, req.context)
+    /* "app/core/engine.py":68
+ *         ok, reason = rules.evaluate_rules(req.action, req.resource)
  *         if not ok:
  *             return PolicyDecision(             # <<<<<<<<<<<<<<
  *                 allowed=False,
@@ -3244,14 +3655,14 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
 */
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_2 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 37, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 68, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
 
-    /* "app/core/engine.py":39
+    /* "app/core/engine.py":70
  *             return PolicyDecision(
  *                 allowed=False,
  *                 reason=reason,             # <<<<<<<<<<<<<<
- *                 policy_source="TENANCY"
+ *                 policy_source="RULES"
  *             )
 */
     __pyx_t_6 = 1;
@@ -3268,349 +3679,23 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
     #endif
     {
       PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_2, NULL};
-      __pyx_t_10 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 37, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_10, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 37, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_10, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 37, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_TENANCY, __pyx_t_10, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 37, __pyx_L1_error)
-      __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_11, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_10);
+      __pyx_t_3 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 68, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_3, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_3, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_RULES, __pyx_t_3, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_11, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_3);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 37, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 68, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
     }
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "app/core/engine.py":36
- * 
- *         ok, reason = tenancy.evaluate_tenancy(req.org_id, req.context)
- *         if not ok:             # <<<<<<<<<<<<<<
- *             return PolicyDecision(
- *                 allowed=False,
-*/
-  }
-
-  /* "app/core/engine.py":43
- *             )
- * 
- *         ok, reason = abac.evaluate_abac(req.context, req.roles)             # <<<<<<<<<<<<<<
- *         if not ok:
- *             return PolicyDecision(
-*/
-  __pyx_t_11 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_abac); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_evaluate_abac); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_context); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_roles); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_6 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_2);
-    assert(__pyx_t_11);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
-    __Pyx_INCREF(__pyx_t_11);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
-    __pyx_t_6 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[3] = {__pyx_t_11, __pyx_t_10, __pyx_t_5};
-    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 43, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  }
-  if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
-    PyObject* sequence = __pyx_t_1;
-    Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
-    if (unlikely(size != 2)) {
-      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
-      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 43, __pyx_L1_error)
-    }
-    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    if (likely(PyTuple_CheckExact(sequence))) {
-      __pyx_t_2 = PyTuple_GET_ITEM(sequence, 0);
-      __Pyx_INCREF(__pyx_t_2);
-      __pyx_t_5 = PyTuple_GET_ITEM(sequence, 1);
-      __Pyx_INCREF(__pyx_t_5);
-    } else {
-      __pyx_t_2 = __Pyx_PyList_GetItemRefFast(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
-      __Pyx_XGOTREF(__pyx_t_2);
-      __pyx_t_5 = __Pyx_PyList_GetItemRefFast(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
-      __Pyx_XGOTREF(__pyx_t_5);
-    }
-    #else
-    __pyx_t_2 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 43, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 43, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    #endif
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  } else {
-    Py_ssize_t index = -1;
-    __pyx_t_10 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 43, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_10);
-    index = 0; __pyx_t_2 = __pyx_t_7(__pyx_t_10); if (unlikely(!__pyx_t_2)) goto __pyx_L12_unpacking_failed;
-    __Pyx_GOTREF(__pyx_t_2);
-    index = 1; __pyx_t_5 = __pyx_t_7(__pyx_t_10); if (unlikely(!__pyx_t_5)) goto __pyx_L12_unpacking_failed;
-    __Pyx_GOTREF(__pyx_t_5);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_10), 2) < (0)) __PYX_ERR(0, 43, __pyx_L1_error)
-    __pyx_t_7 = NULL;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    goto __pyx_L13_unpacking_done;
-    __pyx_L12_unpacking_failed:;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_7 = NULL;
-    if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 43, __pyx_L1_error)
-    __pyx_L13_unpacking_done:;
-  }
-  __Pyx_DECREF_SET(__pyx_v_ok, __pyx_t_2);
-  __pyx_t_2 = 0;
-  __Pyx_DECREF_SET(__pyx_v_reason, __pyx_t_5);
-  __pyx_t_5 = 0;
-
-  /* "app/core/engine.py":44
- * 
- *         ok, reason = abac.evaluate_abac(req.context, req.roles)
- *         if not ok:             # <<<<<<<<<<<<<<
- *             return PolicyDecision(
- *                 allowed=False,
-*/
-  __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_9 < 0))) __PYX_ERR(0, 44, __pyx_L1_error)
-  __pyx_t_8 = (!__pyx_t_9);
-  if (__pyx_t_8) {
-
-    /* "app/core/engine.py":45
- *         ok, reason = abac.evaluate_abac(req.context, req.roles)
- *         if not ok:
- *             return PolicyDecision(             # <<<<<<<<<<<<<<
- *                 allowed=False,
- *                 reason=reason,
-*/
-    __Pyx_XDECREF(__pyx_r);
-    __pyx_t_5 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 45, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-
-    /* "app/core/engine.py":47
- *             return PolicyDecision(
- *                 allowed=False,
- *                 reason=reason,             # <<<<<<<<<<<<<<
- *                 policy_source="ABAC"
- *             )
-*/
-    __pyx_t_6 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_2))) {
-      __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_2);
-      assert(__pyx_t_5);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_5);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_2, __pyx__function);
-      __pyx_t_6 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_5, NULL};
-      __pyx_t_10 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 45, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_10, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 45, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_10, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 45, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_ABAC, __pyx_t_10, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 45, __pyx_L1_error)
-      __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_2, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_10);
-      __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 45, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-    }
-    __pyx_r = __pyx_t_1;
-    __pyx_t_1 = 0;
-    goto __pyx_L0;
-
-    /* "app/core/engine.py":44
- * 
- *         ok, reason = abac.evaluate_abac(req.context, req.roles)
- *         if not ok:             # <<<<<<<<<<<<<<
- *             return PolicyDecision(
- *                 allowed=False,
-*/
-  }
-
-  /* "app/core/engine.py":51
- *             )
- * 
- *         ok, reason = rules.evaluate_rules(req.action, req.resource)             # <<<<<<<<<<<<<<
- *         if not ok:
- *             return PolicyDecision(
-*/
-  __pyx_t_2 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_rules); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_evaluate_rules); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_action); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_resource); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 51, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_6 = 1;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_5))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_5);
-    assert(__pyx_t_2);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_5);
-    __Pyx_INCREF(__pyx_t_2);
-    __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_5, __pyx__function);
-    __pyx_t_6 = 0;
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[3] = {__pyx_t_2, __pyx_t_10, __pyx_t_11};
-    __pyx_t_1 = __Pyx_PyObject_FastCall((PyObject*)__pyx_t_5, __pyx_callargs+__pyx_t_6, (3-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-  }
-  if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
-    PyObject* sequence = __pyx_t_1;
-    Py_ssize_t size = __Pyx_PySequence_SIZE(sequence);
-    if (unlikely(size != 2)) {
-      if (size > 2) __Pyx_RaiseTooManyValuesError(2);
-      else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-      __PYX_ERR(0, 51, __pyx_L1_error)
-    }
-    #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    if (likely(PyTuple_CheckExact(sequence))) {
-      __pyx_t_5 = PyTuple_GET_ITEM(sequence, 0);
-      __Pyx_INCREF(__pyx_t_5);
-      __pyx_t_11 = PyTuple_GET_ITEM(sequence, 1);
-      __Pyx_INCREF(__pyx_t_11);
-    } else {
-      __pyx_t_5 = __Pyx_PyList_GetItemRefFast(sequence, 0, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
-      __Pyx_XGOTREF(__pyx_t_5);
-      __pyx_t_11 = __Pyx_PyList_GetItemRefFast(sequence, 1, __Pyx_ReferenceSharing_SharedReference);
-      if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 51, __pyx_L1_error)
-      __Pyx_XGOTREF(__pyx_t_11);
-    }
-    #else
-    __pyx_t_5 = __Pyx_PySequence_ITEM(sequence, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_11 = __Pyx_PySequence_ITEM(sequence, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_11);
-    #endif
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  } else {
-    Py_ssize_t index = -1;
-    __pyx_t_10 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_7 = (CYTHON_COMPILING_IN_LIMITED_API) ? PyIter_Next : __Pyx_PyObject_GetIterNextFunc(__pyx_t_10);
-    index = 0; __pyx_t_5 = __pyx_t_7(__pyx_t_10); if (unlikely(!__pyx_t_5)) goto __pyx_L15_unpacking_failed;
-    __Pyx_GOTREF(__pyx_t_5);
-    index = 1; __pyx_t_11 = __pyx_t_7(__pyx_t_10); if (unlikely(!__pyx_t_11)) goto __pyx_L15_unpacking_failed;
-    __Pyx_GOTREF(__pyx_t_11);
-    if (__Pyx_IternextUnpackEndCheck(__pyx_t_7(__pyx_t_10), 2) < (0)) __PYX_ERR(0, 51, __pyx_L1_error)
-    __pyx_t_7 = NULL;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    goto __pyx_L16_unpacking_done;
-    __pyx_L15_unpacking_failed:;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_7 = NULL;
-    if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-    __PYX_ERR(0, 51, __pyx_L1_error)
-    __pyx_L16_unpacking_done:;
-  }
-  __Pyx_DECREF_SET(__pyx_v_ok, __pyx_t_5);
-  __pyx_t_5 = 0;
-  __Pyx_DECREF_SET(__pyx_v_reason, __pyx_t_11);
-  __pyx_t_11 = 0;
-
-  /* "app/core/engine.py":52
- * 
- *         ok, reason = rules.evaluate_rules(req.action, req.resource)
- *         if not ok:             # <<<<<<<<<<<<<<
- *             return PolicyDecision(
- *                 allowed=False,
-*/
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_ok); if (unlikely((__pyx_t_8 < 0))) __PYX_ERR(0, 52, __pyx_L1_error)
-  __pyx_t_9 = (!__pyx_t_8);
-  if (__pyx_t_9) {
-
-    /* "app/core/engine.py":53
- *         ok, reason = rules.evaluate_rules(req.action, req.resource)
- *         if not ok:
- *             return PolicyDecision(             # <<<<<<<<<<<<<<
- *                 allowed=False,
- *                 reason=reason,
-*/
-    __Pyx_XDECREF(__pyx_r);
-    __pyx_t_11 = NULL;
-    __Pyx_GetModuleGlobalName(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 53, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_5);
-
-    /* "app/core/engine.py":55
- *             return PolicyDecision(
- *                 allowed=False,
- *                 reason=reason,             # <<<<<<<<<<<<<<
- *                 policy_source="RULES"
- *             )
-*/
-    __pyx_t_6 = 1;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_5))) {
-      __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_5);
-      assert(__pyx_t_11);
-      PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_5);
-      __Pyx_INCREF(__pyx_t_11);
-      __Pyx_INCREF(__pyx__function);
-      __Pyx_DECREF_SET(__pyx_t_5, __pyx__function);
-      __pyx_t_6 = 0;
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_11, NULL};
-      __pyx_t_10 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 53, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_False, __pyx_t_10, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 53, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_v_reason, __pyx_t_10, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 53, __pyx_L1_error)
-      if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_RULES, __pyx_t_10, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 53, __pyx_L1_error)
-      __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_5, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_10);
-      __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 53, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-    }
-    __pyx_r = __pyx_t_1;
-    __pyx_t_1 = 0;
-    goto __pyx_L0;
-
-    /* "app/core/engine.py":52
+    /* "app/core/engine.py":67
  * 
  *         ok, reason = rules.evaluate_rules(req.action, req.resource)
  *         if not ok:             # <<<<<<<<<<<<<<
@@ -3619,7 +3704,7 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
 */
   }
 
-  /* "app/core/engine.py":59
+  /* "app/core/engine.py":74
  *             )
  * 
  *         return PolicyDecision(             # <<<<<<<<<<<<<<
@@ -3627,11 +3712,11 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
  *             reason="access granted",
 */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_5 = NULL;
-  __Pyx_GetModuleGlobalName(__pyx_t_10, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 59, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
+  __pyx_t_11 = NULL;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 74, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
 
-  /* "app/core/engine.py":60
+  /* "app/core/engine.py":75
  * 
  *         return PolicyDecision(
  *             allowed=True,             # <<<<<<<<<<<<<<
@@ -3640,35 +3725,35 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
 */
   __pyx_t_6 = 1;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_10))) {
-    __pyx_t_5 = PyMethod_GET_SELF(__pyx_t_10);
-    assert(__pyx_t_5);
-    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_10);
-    __Pyx_INCREF(__pyx_t_5);
+  if (unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_3);
+    assert(__pyx_t_11);
+    PyObject* __pyx__function = PyMethod_GET_FUNCTION(__pyx_t_3);
+    __Pyx_INCREF(__pyx_t_11);
     __Pyx_INCREF(__pyx__function);
-    __Pyx_DECREF_SET(__pyx_t_10, __pyx__function);
+    __Pyx_DECREF_SET(__pyx_t_3, __pyx__function);
     __pyx_t_6 = 0;
   }
   #endif
   {
-    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_5, NULL};
-    __pyx_t_11 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 59, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_11);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_True, __pyx_t_11, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 59, __pyx_L1_error)
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_mstate_global->__pyx_kp_u_access_granted, __pyx_t_11, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 59, __pyx_L1_error)
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_ALL_PASSED, __pyx_t_11, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 59, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_10, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_11);
-    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 59, __pyx_L1_error)
+    PyObject *__pyx_callargs[2 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_11, NULL};
+    __pyx_t_2 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_allowed, Py_True, __pyx_t_2, __pyx_callargs+1, 0) < (0)) __PYX_ERR(0, 74, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_reason, __pyx_mstate_global->__pyx_kp_u_access_granted, __pyx_t_2, __pyx_callargs+1, 1) < (0)) __PYX_ERR(0, 74, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_ALL_PASSED, __pyx_t_2, __pyx_callargs+1, 2) < (0)) __PYX_ERR(0, 74, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_Vectorcall_CallFromBuilder((PyObject*)__pyx_t_3, __pyx_callargs+__pyx_t_6, (1-__pyx_t_6) | (__pyx_t_6*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_2);
+    __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 74, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "app/core/engine.py":15
+  /* "app/core/engine.py":25
  *     # CORE EVALUATION
  *     # ----------------------------
  *     def _evaluate_core(self, req: PolicyRequest) -> PolicyDecision:             # <<<<<<<<<<<<<<
@@ -3690,17 +3775,18 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_2_evaluate_core(CYTH
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_ok);
   __Pyx_XDECREF(__pyx_v_reason);
+  __Pyx_XDECREF(__pyx_v_resource_scope);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "app/core/engine.py":68
+/* "app/core/engine.py":83
  *     # PUBLIC ENTRY (CACHE-FIRST)
  *     # ----------------------------
  *     def evaluate(self, req: PolicyRequest) -> PolicyDecision:             # <<<<<<<<<<<<<<
  * 
- *         key = self.cache.build_key(
+ *         resource_scope = req.resource_scope or (
 */
 
 /* Python wrapper */
@@ -3743,39 +3829,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_self,&__pyx_mstate_global->__pyx_n_u_req,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 68, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 83, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 68, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 83, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 68, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 83, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate", 0) < (0)) __PYX_ERR(0, 68, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate", 0) < (0)) __PYX_ERR(0, 83, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate", 1, 2, 2, i); __PYX_ERR(0, 68, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate", 1, 2, 2, i); __PYX_ERR(0, 83, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 68, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 83, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 68, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 83, __pyx_L3_error)
     }
     __pyx_v_self = values[0];
     __pyx_v_req = values[1];
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("evaluate", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 68, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("evaluate", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 83, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -3797,6 +3883,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 }
 
 static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_req) {
+  PyObject *__pyx_v_resource_scope = NULL;
   PyObject *__pyx_v_key = NULL;
   PyObject *__pyx_v_cached = NULL;
   PyObject *__pyx_v_decision = NULL;
@@ -3804,149 +3891,213 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
+  int __pyx_t_3;
   PyObject *__pyx_t_4 = NULL;
   PyObject *__pyx_t_5 = NULL;
   PyObject *__pyx_t_6 = NULL;
-  PyObject *__pyx_t_7 = NULL;
+  size_t __pyx_t_7;
   PyObject *__pyx_t_8 = NULL;
   PyObject *__pyx_t_9 = NULL;
-  size_t __pyx_t_10;
+  PyObject *__pyx_t_10 = NULL;
   PyObject *__pyx_t_11 = NULL;
-  int __pyx_t_12;
+  PyObject *__pyx_t_12 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("evaluate", 0);
 
-  /* "app/core/engine.py":70
+  /* "app/core/engine.py":85
  *     def evaluate(self, req: PolicyRequest) -> PolicyDecision:
+ * 
+ *         resource_scope = req.resource_scope or (             # <<<<<<<<<<<<<<
+ *             "tenant" if req.context.get("resource_org_id") else "global"
+ *         )
+*/
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_resource_scope); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 85, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 85, __pyx_L1_error)
+  if (!__pyx_t_3) {
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  } else {
+    __Pyx_INCREF(__pyx_t_2);
+    __pyx_t_1 = __pyx_t_2;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    goto __pyx_L3_bool_binop_done;
+  }
+
+  /* "app/core/engine.py":86
+ * 
+ *         resource_scope = req.resource_scope or (
+ *             "tenant" if req.context.get("resource_org_id") else "global"             # <<<<<<<<<<<<<<
+ *         )
+ * 
+*/
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_context); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_5 = __pyx_t_6;
+  __Pyx_INCREF(__pyx_t_5);
+  __pyx_t_7 = 0;
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_5, __pyx_mstate_global->__pyx_n_u_resource_org_id};
+    __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 86, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+  }
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 86, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__pyx_t_3) {
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_tenant);
+    __pyx_t_2 = __pyx_mstate_global->__pyx_n_u_tenant;
+  } else {
+    __Pyx_INCREF(__pyx_mstate_global->__pyx_n_u_global);
+    __pyx_t_2 = __pyx_mstate_global->__pyx_n_u_global;
+  }
+  __Pyx_INCREF(__pyx_t_2);
+  __pyx_t_1 = __pyx_t_2;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_L3_bool_binop_done:;
+  __pyx_v_resource_scope = __pyx_t_1;
+  __pyx_t_1 = 0;
+
+  /* "app/core/engine.py":89
+ *         )
  * 
  *         key = self.cache.build_key(             # <<<<<<<<<<<<<<
  *             req.user_id,
  *             req.action,
 */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 70, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __pyx_t_3;
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 89, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __pyx_t_4;
   __Pyx_INCREF(__pyx_t_2);
 
-  /* "app/core/engine.py":71
+  /* "app/core/engine.py":90
  * 
  *         key = self.cache.build_key(
  *             req.user_id,             # <<<<<<<<<<<<<<
  *             req.action,
  *             req.resource,
 */
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_user_id); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 71, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_user_id); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 90, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
 
-  /* "app/core/engine.py":72
+  /* "app/core/engine.py":91
  *         key = self.cache.build_key(
  *             req.user_id,
  *             req.action,             # <<<<<<<<<<<<<<
  *             req.resource,
  *             req.context,
 */
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_action); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 72, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_action); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 91, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "app/core/engine.py":73
+  /* "app/core/engine.py":92
  *             req.user_id,
  *             req.action,
  *             req.resource,             # <<<<<<<<<<<<<<
  *             req.context,
  *             org_id=req.org_id,
 */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_resource); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 73, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_resource); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 92, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_8);
 
-  /* "app/core/engine.py":74
+  /* "app/core/engine.py":93
  *             req.action,
  *             req.resource,
  *             req.context,             # <<<<<<<<<<<<<<
  *             org_id=req.org_id,
  *             permissions=req.permissions,
 */
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_context); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 74, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_7);
+  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_context); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_9);
 
-  /* "app/core/engine.py":75
+  /* "app/core/engine.py":94
  *             req.resource,
  *             req.context,
  *             org_id=req.org_id,             # <<<<<<<<<<<<<<
  *             permissions=req.permissions,
- *         )
+ *             resource_scope=resource_scope,
 */
-  __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_org_id); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 75, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_8);
+  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_org_id); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 94, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_10);
 
-  /* "app/core/engine.py":76
+  /* "app/core/engine.py":95
  *             req.context,
  *             org_id=req.org_id,
  *             permissions=req.permissions,             # <<<<<<<<<<<<<<
+ *             resource_scope=resource_scope,
+ *         )
+*/
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_permissions); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 95, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+
+  /* "app/core/engine.py":96
+ *             org_id=req.org_id,
+ *             permissions=req.permissions,
+ *             resource_scope=resource_scope,             # <<<<<<<<<<<<<<
  *         )
  * 
 */
-  __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_req, __pyx_mstate_global->__pyx_n_u_permissions); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 76, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_9);
-  __pyx_t_10 = 0;
+  __pyx_t_7 = 0;
   {
-    PyObject *__pyx_callargs[5 + ((CYTHON_VECTORCALL) ? 2 : 0)] = {__pyx_t_2, __pyx_t_4, __pyx_t_5, __pyx_t_6, __pyx_t_7};
-    __pyx_t_11 = __Pyx_MakeVectorcallBuilderKwds(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 70, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_11);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_org_id, __pyx_t_8, __pyx_t_11, __pyx_callargs+5, 0) < (0)) __PYX_ERR(0, 70, __pyx_L1_error)
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_permissions, __pyx_t_9, __pyx_t_11, __pyx_callargs+5, 1) < (0)) __PYX_ERR(0, 70, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_build_key, __pyx_callargs+__pyx_t_10, (5-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_11);
+    PyObject *__pyx_callargs[5 + ((CYTHON_VECTORCALL) ? 3 : 0)] = {__pyx_t_2, __pyx_t_6, __pyx_t_5, __pyx_t_8, __pyx_t_9};
+    __pyx_t_12 = __Pyx_MakeVectorcallBuilderKwds(3); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_12);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_org_id, __pyx_t_10, __pyx_t_12, __pyx_callargs+5, 0) < (0)) __PYX_ERR(0, 89, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_permissions, __pyx_t_11, __pyx_t_12, __pyx_callargs+5, 1) < (0)) __PYX_ERR(0, 89, __pyx_L1_error)
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_resource_scope, __pyx_v_resource_scope, __pyx_t_12, __pyx_callargs+5, 2) < (0)) __PYX_ERR(0, 89, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_build_key, __pyx_callargs+__pyx_t_7, (5-__pyx_t_7) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_12);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 70, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 89, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_key = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "app/core/engine.py":80
+  /* "app/core/engine.py":100
  * 
  *         # 1. CACHE HIT (sub-ms path)
  *         cached = self.cache.get(key)             # <<<<<<<<<<<<<<
  *         if cached:
  *             # `cached` is a previously stored decision.dict(), which always
 */
-  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 80, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_11);
-  __pyx_t_3 = __pyx_t_11;
-  __Pyx_INCREF(__pyx_t_3);
-  __pyx_t_10 = 0;
+  __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 100, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_12);
+  __pyx_t_4 = __pyx_t_12;
+  __Pyx_INCREF(__pyx_t_4);
+  __pyx_t_7 = 0;
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_key};
-    __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+    PyObject *__pyx_callargs[2] = {__pyx_t_4, __pyx_v_key};
+    __pyx_t_1 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_get, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 100, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
   }
   __pyx_v_cached = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "app/core/engine.py":81
+  /* "app/core/engine.py":101
  *         # 1. CACHE HIT (sub-ms path)
  *         cached = self.cache.get(key)
  *         if cached:             # <<<<<<<<<<<<<<
  *             # `cached` is a previously stored decision.dict(), which always
  *             # already has a policy_source key (RBAC/ABAC/RULES/ALL_PASSED) --
 */
-  __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_v_cached); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 81, __pyx_L1_error)
-  if (__pyx_t_12) {
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_cached); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 101, __pyx_L1_error)
+  if (__pyx_t_3) {
 
-    /* "app/core/engine.py":87
+    /* "app/core/engine.py":107
  *             # "got multiple values for keyword argument 'policy_source'".
  *             # Override it in the dict instead of passing it twice.
  *             return PolicyDecision(**{**cached, "policy_source": "CACHE"})             # <<<<<<<<<<<<<<
@@ -3954,29 +4105,29 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
  *         # 2. COMPUTE DECISION
 */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 87, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_mstate_global->__pyx_n_u_PolicyDecision); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 107, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (unlikely(__pyx_v_cached == Py_None)) {
       PyErr_SetString(PyExc_TypeError, "argument after ** must be a mapping, not NoneType");
-      __PYX_ERR(0, 87, __pyx_L1_error)
+      __PYX_ERR(0, 107, __pyx_L1_error)
     }
     if (likely(PyDict_CheckExact(__pyx_v_cached))) {
-      __pyx_t_11 = PyDict_Copy(__pyx_v_cached); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 87, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_12 = PyDict_Copy(__pyx_v_cached); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 107, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_12);
     } else {
-      __pyx_t_11 = __Pyx_PyObject_CallOneArg((PyObject*)&PyDict_Type, __pyx_v_cached); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 87, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_12 = __Pyx_PyObject_CallOneArg((PyObject*)&PyDict_Type, __pyx_v_cached); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 107, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_12);
     }
-    if (PyDict_SetItem(__pyx_t_11, __pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_CACHE) < (0)) __PYX_ERR(0, 87, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_mstate_global->__pyx_empty_tuple, __pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 87, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    if (PyDict_SetItem(__pyx_t_12, __pyx_mstate_global->__pyx_n_u_policy_source, __pyx_mstate_global->__pyx_n_u_CACHE) < (0)) __PYX_ERR(0, 107, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_mstate_global->__pyx_empty_tuple, __pyx_t_12); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 107, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __pyx_r = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
+    __pyx_r = __pyx_t_4;
+    __pyx_t_4 = 0;
     goto __pyx_L0;
 
-    /* "app/core/engine.py":81
+    /* "app/core/engine.py":101
  *         # 1. CACHE HIT (sub-ms path)
  *         cached = self.cache.get(key)
  *         if cached:             # <<<<<<<<<<<<<<
@@ -3985,64 +4136,64 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
 */
   }
 
-  /* "app/core/engine.py":90
+  /* "app/core/engine.py":110
  * 
  *         # 2. COMPUTE DECISION
  *         decision = self._evaluate_core(req)             # <<<<<<<<<<<<<<
  * 
  *         # 3. STORE IN CACHE
 */
-  __pyx_t_11 = __pyx_v_self;
-  __Pyx_INCREF(__pyx_t_11);
-  __pyx_t_10 = 0;
+  __pyx_t_12 = __pyx_v_self;
+  __Pyx_INCREF(__pyx_t_12);
+  __pyx_t_7 = 0;
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_11, __pyx_v_req};
-    __pyx_t_3 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_evaluate_core, __pyx_callargs+__pyx_t_10, (2-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 90, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    PyObject *__pyx_callargs[2] = {__pyx_t_12, __pyx_v_req};
+    __pyx_t_4 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_evaluate_core, __pyx_callargs+__pyx_t_7, (2-__pyx_t_7) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 110, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
   }
-  __pyx_v_decision = __pyx_t_3;
-  __pyx_t_3 = 0;
+  __pyx_v_decision = __pyx_t_4;
+  __pyx_t_4 = 0;
 
-  /* "app/core/engine.py":93
+  /* "app/core/engine.py":113
  * 
  *         # 3. STORE IN CACHE
  *         self.cache.set(key, decision.dict(), ttl=300)             # <<<<<<<<<<<<<<
  * 
  *         return decision
 */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 93, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_mstate_global->__pyx_n_u_cache); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 113, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_11 = __pyx_t_1;
-  __Pyx_INCREF(__pyx_t_11);
-  __pyx_t_8 = __pyx_v_decision;
-  __Pyx_INCREF(__pyx_t_8);
-  __pyx_t_10 = 0;
+  __pyx_t_12 = __pyx_t_1;
+  __Pyx_INCREF(__pyx_t_12);
+  __pyx_t_10 = __pyx_v_decision;
+  __Pyx_INCREF(__pyx_t_10);
+  __pyx_t_7 = 0;
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_8, NULL};
-    __pyx_t_9 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dict, __pyx_callargs+__pyx_t_10, (1-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
-    __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
-    if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 93, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
+    PyObject *__pyx_callargs[2] = {__pyx_t_10, NULL};
+    __pyx_t_11 = __Pyx_PyObject_FastCallMethod((PyObject*)__pyx_mstate_global->__pyx_n_u_dict, __pyx_callargs+__pyx_t_7, (1-__pyx_t_7) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET));
+    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+    if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
   }
-  __pyx_t_10 = 0;
+  __pyx_t_7 = 0;
   {
-    PyObject *__pyx_callargs[3 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_11, __pyx_v_key, __pyx_t_9};
-    __pyx_t_8 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 93, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_8);
-    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_ttl, __pyx_mstate_global->__pyx_int_300, __pyx_t_8, __pyx_callargs+3, 0) < (0)) __PYX_ERR(0, 93, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_set, __pyx_callargs+__pyx_t_10, (3-__pyx_t_10) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_8);
-    __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
-    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    PyObject *__pyx_callargs[3 + ((CYTHON_VECTORCALL) ? 1 : 0)] = {__pyx_t_12, __pyx_v_key, __pyx_t_11};
+    __pyx_t_10 = __Pyx_MakeVectorcallBuilderKwds(1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_10);
+    if (__Pyx_VectorcallBuilder_AddArg(__pyx_mstate_global->__pyx_n_u_ttl, __pyx_mstate_global->__pyx_int_300, __pyx_t_10, __pyx_callargs+3, 0) < (0)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_Object_VectorcallMethod_CallFromBuilder((PyObject*)__pyx_mstate_global->__pyx_n_u_set, __pyx_callargs+__pyx_t_7, (3-__pyx_t_7) | (1*__Pyx_PY_VECTORCALL_ARGUMENTS_OFFSET), __pyx_t_10);
+    __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 93, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 113, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
   }
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "app/core/engine.py":95
+  /* "app/core/engine.py":115
  *         self.cache.set(key, decision.dict(), ttl=300)
  * 
  *         return decision             # <<<<<<<<<<<<<<
@@ -4052,29 +4203,30 @@ static PyObject *__pyx_pf_3app_4core_6engine_12PolicyEngine_4evaluate(CYTHON_UNU
   __pyx_r = __pyx_v_decision;
   goto __pyx_L0;
 
-  /* "app/core/engine.py":68
+  /* "app/core/engine.py":83
  *     # PUBLIC ENTRY (CACHE-FIRST)
  *     # ----------------------------
  *     def evaluate(self, req: PolicyRequest) -> PolicyDecision:             # <<<<<<<<<<<<<<
  * 
- *         key = self.cache.build_key(
+ *         resource_scope = req.resource_scope or (
 */
 
   /* function exit code */
   __pyx_L1_error:;
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_5);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_7);
   __Pyx_XDECREF(__pyx_t_8);
   __Pyx_XDECREF(__pyx_t_9);
+  __Pyx_XDECREF(__pyx_t_10);
   __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_12);
   __Pyx_AddTraceback("app.core.engine.PolicyEngine.evaluate", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
+  __Pyx_XDECREF(__pyx_v_resource_scope);
   __Pyx_XDECREF(__pyx_v_key);
   __Pyx_XDECREF(__pyx_v_cached);
   __Pyx_XDECREF(__pyx_v_decision);
@@ -4190,7 +4342,7 @@ namespace {
   {
       PyModuleDef_HEAD_INIT,
       "engine",
-      0, /* m_doc */
+      __pyx_k_OmniBioAI_app_core_engine_Purpo, /* m_doc */
     #if CYTHON_USE_MODULE_STATE
       sizeof(__pyx_mstatetype), /* m_size */
     #else
@@ -4434,191 +4586,194 @@ __Pyx_RefNannySetupContext("PyInit_engine", 0);
   (void)__Pyx_modinit_function_import_code(__pyx_mstate);
   /*--- Execution code ---*/
 
-  /* "app/core/engine.py":1
- * from app.core import rbac, abac, rules, permissions, tenancy             # <<<<<<<<<<<<<<
- * from app.models.request import PolicyRequest
+  /* "app/core/engine.py":11
+ * """
+ * 
+ * from app.core import abac, permissions, rbac, rules, tenancy             # <<<<<<<<<<<<<<
  * from app.models.decision import PolicyDecision
+ * from app.models.request import PolicyRequest
 */
   {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_rbac,__pyx_mstate_global->__pyx_n_u_abac,__pyx_mstate_global->__pyx_n_u_rules,__pyx_mstate_global->__pyx_n_u_permissions,__pyx_mstate_global->__pyx_n_u_tenancy};
-    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_app_core, __pyx_imported_names, 5, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1, __pyx_L1_error)
+    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_abac,__pyx_mstate_global->__pyx_n_u_permissions,__pyx_mstate_global->__pyx_n_u_rbac,__pyx_mstate_global->__pyx_n_u_rules,__pyx_mstate_global->__pyx_n_u_tenancy};
+    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_app_core, __pyx_imported_names, 5, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 11, __pyx_L1_error)
   }
   __pyx_t_2 = __pyx_t_1;
   __Pyx_GOTREF(__pyx_t_2);
   {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_rbac,__pyx_mstate_global->__pyx_n_u_abac,__pyx_mstate_global->__pyx_n_u_rules,__pyx_mstate_global->__pyx_n_u_permissions,__pyx_mstate_global->__pyx_n_u_tenancy};
+    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_abac,__pyx_mstate_global->__pyx_n_u_permissions,__pyx_mstate_global->__pyx_n_u_rbac,__pyx_mstate_global->__pyx_n_u_rules,__pyx_mstate_global->__pyx_n_u_tenancy};
     for (__pyx_t_3=0; __pyx_t_3 < 5; __pyx_t_3++) {
-      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 11, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "app/core/engine.py":2
- * from app.core import rbac, abac, rules, permissions, tenancy
- * from app.models.request import PolicyRequest             # <<<<<<<<<<<<<<
- * from app.models.decision import PolicyDecision
+  /* "app/core/engine.py":12
+ * 
+ * from app.core import abac, permissions, rbac, rules, tenancy
+ * from app.models.decision import PolicyDecision             # <<<<<<<<<<<<<<
+ * from app.models.request import PolicyRequest
  * from app.services.cache import PolicyCache
 */
   {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyRequest};
-    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_app_models_request, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2, __pyx_L1_error)
+    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyDecision};
+    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_app_models_decision, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 12, __pyx_L1_error)
   }
   __pyx_t_2 = __pyx_t_1;
   __Pyx_GOTREF(__pyx_t_2);
   {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyRequest};
+    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyDecision};
     __pyx_t_3 = 0; {
-      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 12, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 2, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 12, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "app/core/engine.py":3
- * from app.core import rbac, abac, rules, permissions, tenancy
- * from app.models.request import PolicyRequest
- * from app.models.decision import PolicyDecision             # <<<<<<<<<<<<<<
+  /* "app/core/engine.py":13
+ * from app.core import abac, permissions, rbac, rules, tenancy
+ * from app.models.decision import PolicyDecision
+ * from app.models.request import PolicyRequest             # <<<<<<<<<<<<<<
  * from app.services.cache import PolicyCache
  * 
 */
   {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyDecision};
-    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_app_models_decision, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
+    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyRequest};
+    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_app_models_request, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 13, __pyx_L1_error)
   }
   __pyx_t_2 = __pyx_t_1;
   __Pyx_GOTREF(__pyx_t_2);
   {
-    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyDecision};
+    PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyRequest};
     __pyx_t_3 = 0; {
-      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 3, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 13, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 3, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 13, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "app/core/engine.py":4
- * from app.models.request import PolicyRequest
+  /* "app/core/engine.py":14
  * from app.models.decision import PolicyDecision
+ * from app.models.request import PolicyRequest
  * from app.services.cache import PolicyCache             # <<<<<<<<<<<<<<
  * 
  * 
 */
   {
     PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyCache};
-    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_app_services_cache, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 4, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_Import(__pyx_mstate_global->__pyx_n_u_app_services_cache, __pyx_imported_names, 1, NULL, 0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 14, __pyx_L1_error)
   }
   __pyx_t_2 = __pyx_t_1;
   __Pyx_GOTREF(__pyx_t_2);
   {
     PyObject* const __pyx_imported_names[] = {__pyx_mstate_global->__pyx_n_u_PolicyCache};
     __pyx_t_3 = 0; {
-      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 4, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_ImportFrom(__pyx_t_2, __pyx_imported_names[__pyx_t_3]); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 14, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 4, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_imported_names[__pyx_t_3], __pyx_t_4) < (0)) __PYX_ERR(0, 14, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "app/core/engine.py":7
+  /* "app/core/engine.py":17
  * 
  * 
  * class PolicyEngine:             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self, cache: PolicyCache):
 */
-  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_mstate_global->__pyx_empty_tuple, __pyx_mstate_global->__pyx_n_u_PolicyEngine, __pyx_mstate_global->__pyx_n_u_PolicyEngine, (PyObject *) NULL, __pyx_mstate_global->__pyx_n_u_app_core_engine, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_Py3MetaclassPrepare((PyObject *) NULL, __pyx_mstate_global->__pyx_empty_tuple, __pyx_mstate_global->__pyx_n_u_PolicyEngine, __pyx_mstate_global->__pyx_n_u_PolicyEngine, (PyObject *) NULL, __pyx_mstate_global->__pyx_n_u_app_core_engine, (PyObject *) NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
 
-  /* "app/core/engine.py":9
+  /* "app/core/engine.py":19
  * class PolicyEngine:
  * 
  *     def __init__(self, cache: PolicyCache):             # <<<<<<<<<<<<<<
  *         self.cache = cache
  * 
 */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 9, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_cache, __pyx_mstate_global->__pyx_n_u_PolicyCache) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_6engine_12PolicyEngine_1__init__, 0, __pyx_mstate_global->__pyx_n_u_PolicyEngine___init, NULL, __pyx_mstate_global->__pyx_n_u_app_core_engine, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_cache, __pyx_mstate_global->__pyx_n_u_PolicyCache) < (0)) __PYX_ERR(0, 19, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_6engine_12PolicyEngine_1__init__, 0, __pyx_mstate_global->__pyx_n_u_PolicyEngine___init, NULL, __pyx_mstate_global->__pyx_n_u_app_core_engine, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_5);
   #endif
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_init, __pyx_t_5) < (0)) __PYX_ERR(0, 9, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_init, __pyx_t_5) < (0)) __PYX_ERR(0, 19, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "app/core/engine.py":15
+  /* "app/core/engine.py":25
  *     # CORE EVALUATION
  *     # ----------------------------
  *     def _evaluate_core(self, req: PolicyRequest) -> PolicyDecision:             # <<<<<<<<<<<<<<
  * 
  *         ok, reason = rbac.evaluate_rbac(req.roles, req.action)
 */
-  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 15, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyDict_SetItem(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_req, __pyx_mstate_global->__pyx_n_u_PolicyRequest) < (0)) __PYX_ERR(0, 15, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_n_u_PolicyDecision) < (0)) __PYX_ERR(0, 15, __pyx_L1_error)
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_6engine_12PolicyEngine_3_evaluate_core, 0, __pyx_mstate_global->__pyx_n_u_PolicyEngine__evaluate_core, NULL, __pyx_mstate_global->__pyx_n_u_app_core_engine, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_req, __pyx_mstate_global->__pyx_n_u_PolicyRequest) < (0)) __PYX_ERR(0, 25, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_5, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_n_u_PolicyDecision) < (0)) __PYX_ERR(0, 25, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_6engine_12PolicyEngine_3_evaluate_core, 0, __pyx_mstate_global->__pyx_n_u_PolicyEngine__evaluate_core, NULL, __pyx_mstate_global->__pyx_n_u_app_core_engine, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[1])); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_4);
   #endif
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_4, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_evaluate_core, __pyx_t_4) < (0)) __PYX_ERR(0, 15, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_evaluate_core, __pyx_t_4) < (0)) __PYX_ERR(0, 25, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "app/core/engine.py":68
+  /* "app/core/engine.py":83
  *     # PUBLIC ENTRY (CACHE-FIRST)
  *     # ----------------------------
  *     def evaluate(self, req: PolicyRequest) -> PolicyDecision:             # <<<<<<<<<<<<<<
  * 
- *         key = self.cache.build_key(
+ *         resource_scope = req.resource_scope or (
 */
-  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 68, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_req, __pyx_mstate_global->__pyx_n_u_PolicyRequest) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_n_u_PolicyDecision) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_6engine_12PolicyEngine_5evaluate, 0, __pyx_mstate_global->__pyx_n_u_PolicyEngine_evaluate, NULL, __pyx_mstate_global->__pyx_n_u_app_core_engine, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_req, __pyx_mstate_global->__pyx_n_u_PolicyRequest) < (0)) __PYX_ERR(0, 83, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_4, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_n_u_PolicyDecision) < (0)) __PYX_ERR(0, 83, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_6engine_12PolicyEngine_5evaluate, 0, __pyx_mstate_global->__pyx_n_u_PolicyEngine_evaluate, NULL, __pyx_mstate_global->__pyx_n_u_app_core_engine, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[2])); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_5);
   #endif
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_5, __pyx_t_4);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_evaluate, __pyx_t_5) < (0)) __PYX_ERR(0, 68, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_evaluate, __pyx_t_5) < (0)) __PYX_ERR(0, 83, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "app/core/engine.py":7
+  /* "app/core/engine.py":17
  * 
  * 
  * class PolicyEngine:             # <<<<<<<<<<<<<<
  * 
  *     def __init__(self, cache: PolicyCache):
 */
-  __pyx_t_5 = __Pyx_Py3ClassCreate(((PyObject*)&PyType_Type), __pyx_mstate_global->__pyx_n_u_PolicyEngine, __pyx_mstate_global->__pyx_empty_tuple, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_Py3ClassCreate(((PyObject*)&PyType_Type), __pyx_mstate_global->__pyx_n_u_PolicyEngine, __pyx_mstate_global->__pyx_empty_tuple, __pyx_t_2, NULL, 0, 0); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_5);
   #endif
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_PolicyEngine, __pyx_t_5) < (0)) __PYX_ERR(0, 7, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_PolicyEngine, __pyx_t_5) < (0)) __PYX_ERR(0, 17, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "app/core/engine.py":1
- * from app.core import rbac, abac, rules, permissions, tenancy             # <<<<<<<<<<<<<<
- * from app.models.request import PolicyRequest
- * from app.models.decision import PolicyDecision
+ * """             # <<<<<<<<<<<<<<
+ * OmniBioAI app.core.engine.
+ * 
 */
   __pyx_t_2 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -4687,31 +4842,31 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
 static int __Pyx_InitConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   {
-    const struct { const unsigned int length: 9; } index[] = {{1},{1},{14},{18},{4},{10},{5},{10},{11},{14},{12},{21},{27},{21},{13},{20},{4},{5},{7},{4},{6},{7},{8},{15},{19},{18},{18},{18},{9},{5},{6},{18},{7},{8},{4},{7},{8},{13},{14},{19},{13},{14},{16},{8},{3},{8},{13},{5},{3},{8},{13},{10},{8},{2},{6},{11},{13},{3},{11},{12},{4},{6},{3},{8},{6},{5},{5},{4},{3},{12},{10},{7},{8},{3},{7},{6},{291},{12},{132}};
-    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (764 bytes) */
-const char* const cstring = "BZh91AY&SYfM[/\000\000R\377\377\355\177\374\365}\003\254q\377g\377\250\277\357\377\341\200@@@@@@@@\000@@@\000@\000@\002}\231P\004\303DI\251\355L\2321M\250\302h\r\000\000\001\220\323!\243\323D4\033Hi\202\003M\020&Hi\244\323M\252=#OSA\352\006@\000\320\000\000\000z\200\311\241\303@\0004\032\r\001\202\000hi\246@44i\220\003\0204\0002\224\331&\223O\324\232\014\201\210i\221\221\2404\030\020\r\014 \310\006\324\320\364Oj$\025\"\027@\037\217~\221\205\017\034E\200\007\313\020PV\000m`\251D\230\0019d(\274\201\310\210\325R\264\033\356\202#.6\337\216P\201\242p\014a\3100\006\374-\031\362\256c>\237p\236\221\245X0*\265\302\214\367H\357\255\212\201[G.\3728&\337?{\267\270O\217\313!\203\251\005T\022\352\232\275d\213\020\327k\3060\014?%\365@\260+2T\343i\207j\023Y\351\341'x\320'e\3519qO_~X\225%y\2532\032u\005\035(l\006^F3 \220`;E\340\260\211\303\260\321s\370\245\305\225R/\204U>\377\3102i2,I$T\253B>\272G\306\245\305Y\"9\243\002\260\342\004\020A\206\2334\251.\255\210\330 (ei\317\316L\344\020\276\033Q\315\337\225\032u\321d\210\376\352\262\010\275\024b\335\253k2\220_P%\022@\340\303\216\211\034\202\301)\324\307C\205\204\035\325X\315x\010\310\342\003)}\247k\020\336\213\2146_,\212\036\230\360\306\206F-\230*\325}\345\216i\221\236\"\303\032c\306\r)\007r\251p\210\274\371\232\202tf\006\306\256\244\200\021\030x+j\007\033\341\205V1\001\231-\027\206\006{\356k\253\014`\240\007V+p{\004\024\222\246\345\243\030X\316\200\264\344\360\351\353\3144\220\003\241 K\006\241ykp\244\341\266\211\226\010-6\261A\254C\204\005\217\tK\323\256-x#\255\327v\"63\207 \031\320q\031\372\327Le\030\022\361\304p\335gV\217\"OaU\257'P.FX\325\263\020\370$\005\327\336\372\020\306\000\242\342]\026>\242\256\014Ar\300\001\023\tZ]xT\347_2\261\220\002\017\037-\302\2748\204\342\243\014\320\tI\332\356\031u\262X3\020\217 \276\225\331\357\005N\2300+\370\020\272@\372\354_\311\262-\031\003\034\240\031\217\217\237B\024sd[\005\025a\3572\255\274:\377\261\002gc\000+\217\301\375\220\035\254\307\021\324\245u\302\275B\363\030\346m\340\2260\342\320\205""\333N<\277\365\342\226\373\254wi\367\021+M\031\022\217\310@-\245\220H\202B\201mM5\000\204\250c\027rE8P\220fM[/";
-    PyObject *data = __Pyx_DecompressString(cstring, 764, 2);
+    const struct { const unsigned int length: 9; } index[] = {{1},{1},{14},{18},{4},{10},{5},{10},{11},{14},{12},{21},{27},{21},{13},{20},{4},{5},{7},{4},{6},{7},{8},{15},{19},{18},{18},{18},{9},{5},{6},{18},{7},{8},{4},{7},{8},{13},{14},{19},{13},{14},{16},{8},{3},{6},{8},{13},{5},{3},{8},{13},{10},{8},{2},{6},{11},{13},{3},{11},{12},{4},{6},{3},{8},{15},{14},{6},{5},{5},{4},{3},{12},{10},{7},{6},{8},{3},{7},{6},{329},{165},{12}};
+    #if (CYTHON_COMPRESS_STRINGS) == 2 /* compression: bz2 (824 bytes) */
+const char* const cstring = "BZh91AY&SY\204\256\337\352\000\000_\377\377\355~\374\375}G\254q\377g\377\250\277\357\377\341\200@@@@@@@@@@@@\000@\000@\002\275\314\224\351v\\\303SSI\224\375)\232i\224\323\322y \321\352\003\020\031\000\320\321\246@\332\236\240\032i\221\243d\020h\251\207\252f\251\352\017\322\236\241\350\232h\030\231\000\304\006\203 2d\310\001\240\003\023@\323B\t\222M<E4d\365\001\220h\006\200\000\000\000\000\006@\323M\004\246\252j~\224mG\250\321\352\r\250\031\032\000\006\200\001\243@\000\000\0001\006\225\2039\022h\207\315?\246*2\nm\370\325X?\252\246I\004,\017\3023\234\314\005G\271\002\342\010\350\210\326V\324\037\347\212#P6W\377Or\0202V*1\201\224A\005\201\266\026\255\0136\352\034i\247\207\334)\2565\325\203\002\253ld\320y\221\266\270E\2202k\211\364N$\202(\300\324\267E<5zH\273\274\030B\301*\326k\244eV\224\245\203\212\257\370\367\257e@\0212\203-\254\374`h%,\323\007\203n\002N^\2009^$\203\2161\253m\r_nXbJ\223S\216#\336\251F\\\340+\202\355\024\014\010\027\3610\016>\267\035?\314\336<S\"AI\302ST\327\037\310\262l\031\226\004\222\010\242\255\247~~\333\003\347E\313\211\026\245\177kM\237\350@\241'\"I\035\007i<\242\3100\031\363\031\2338\356\244a\374\027ASt\230\214\353\212\234*\010\204-\234\301X\"\2146kMl\312A\215\001(\226\023vZ\244t\006x\215\223\014u\\g\220vUeE\335\243#\336\250K\261\213\235l\006\324\234\307R\023\310\242\000d\272U32l\310\253fsDl\034\207L60\2179\025\004\000\324\244gEP\204\0174\3507\0017\264\350\031\230\330\256\000&\227i-\310\034\3200\263=\210\014\311x\3041\264!\243G\321\2649\222\200\036\002\266\300E\302\013lT\356\3362\205\225m\005\2518#\3235\003M\000:\251\022X5L\001a\305\254\224\223\310\241B\017\233\354\030,\204\210\032\001\003\255\202S\306\230\010\313\300\231[\01316q5\t\202s\027\357:\\p\021\205\223B\242Vw2\240\264\375\220\370\211/\274A\023\222\265\013\240\316\322\246\243\210E\"4q\270\201\251\014b\n.E\325\272\026\025y:\203\005\220\001\314g\206e\204s\205#\014f\0272\000A\341\341\2441_\220\nIE\364@'7\306\344r\356%\027\210g%o!\347\312\376A\2676\304%\3126\253\010\243\317R.\223\2510\215 ""\010\205\277\317S\007\263\244{\000\034\271j\325p\223\275^\3771$i\370\256\003/B k\227\303\217\305\215\001\001\273\031<%[\236\363&\276!z\024Miq\201\227\237\225\005,&\354\242\276\006\336\315\030\256\343\272\240\331\353\304'oM\261O\227\340\250Ev\033bH$\202(\"`\357\027(\304\230\217\370\273\222)\302\204\204%v\377P";
+    PyObject *data = __Pyx_DecompressString(cstring, 824, 2);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (678 bytes) */
-const char* const cstring = "x\332\215R\277o\323@\024n\325\n\245\220BB#QPU\365\007b\303Q\325\014\300\000\2304\250\225Jh\222\026T1\234\256\347\227`\325\361\331\276sI\026X3\336\350\321\243G\217\031\371\023<z\314\237\220?\201;\233\244\255\030\250%\237\337\217\373\336\373\276\367\254\275\303\204\000c[=\017\333\034\014\3548UB=\250\202\3353m\320\234\241\376A\257\353\307\307\350D\357t\032\007u\275~\3308i\264?\035u:G\237\233'\3242\311\260\216\311w\310\315\003 &3\251\235{\215\254\310M[C\310\264M\216\320\355 \\a\313\307\034\220\352}+5\313\344\3016\270>0\005\037\016\344{`\022\216\2320\340m\350\266%\317\366\331q\243s\332h\352\315\3729\276\300\004\023.\271`\313\242?2i\232*?\373j\271D\345\366\251\001\026\323\214\277\344o\204\274\274\241\2120\360\256L9+\215(\271\230\rmbRU\211\372\\\326a\027\276i\031\350\022\206Y>;\014b\311\214T\214\270\207\tHF\227\204\3121\017\370\254\225\241\024 \203\0224\237\301|\026J\301\355\311\314\035\007\274\276\311T\201y\310\223\267\257\035\337\0026\3678\330\330&C\204\272\276-\033\365\200\317\266\200L\206\346\nL\016}&\371#\324\307\222\262|\372\3001\2610c\231C\rYUY6\356\313/\275\244^\017\231\3065\027\346dKB\214\372\036\001\207:\0109\0368\330\313P\256\217\255\034\251\250\312=0j\313\361z\220_\367\200\373\236\355QI<c\317\300\3522\305T\0359NZ\006t\261o\361\271\"\236\375\r\234[\276\\\217$\243$\003K\226w\222\235Z\254O\n\305\321\2218\r6C7Z\212^\305\3731N\013\017F\265\221\233\026\327\304\333\260\234\226\326\203\305\264\364D\270ii3\300\323{\013+\253\022\361-\331\222\350\264\370h4\020,\320$\366u\\\217\335\311]\260_\223\215\227Q+\"\361\323\361\356\270u\247v3\202o\342\316x\361N\210\263\240\032\225\243\335\350<&\343\362\177\021\245\321\317\240\225\026+BWw\366\322\342\263`;Y\226\3114\233O+Y\336H6\264\010O\n\017G\206x\021\334\017\267\225v\367\237cM\354\013\234\026\327\203\245`oZXXy,*\342KP\013\3340\243\2757-.\254V$\211\265\260\036\016\222\352\373\337\213\252}E\324\304\257\020\207n\316\376\243x.\260\360\203\303\260\021U\242\323\270<)\310\342\177\000\373%\302\261";
-    PyObject *data = __Pyx_DecompressString(cstring, 678, 1);
+    #elif (CYTHON_COMPRESS_STRINGS) != 0 /* compression: zlib (731 bytes) */
+const char* const cstring = "x\332\215R\277O\333@\024\006\025U\241\r\"i\"\225\322\010\361\243\252:\264\216\020\031(C[7\t\002\211\246\220@+\324\341t\234/\251\205\343\263}g\232,\355\232\321\243G\217\036=222z\314\230?\201?\241\357l\022@U\005\221rw\357\275\373\276\367}\357\254|\304\204P\316\227;\0166\005\325\260e\225\tsh\231\232\035\335\244\212\325W?\253Uuo\017\355\253\255V\275VU\253;\365\375z\363\313n\253\265\373\265\261\317\014\235\364\253\230\374\244\351\261F\211\316uf\246Q=!\271}V\020\322M] t7I\317\260\341bA\221\354}\2474\256\244\311&\265]\312%\274\337\203\177M'\0025hO4i\273\t:\233G{\365\326a\275\2416\252\307\370\004\023L\004h\301\206\301~%\326\024I?\336\225\324\242\014\273L\243\006W\264k\361\267RN\332Pf8u\316t\230\225B\244]\314\373&\321\231db\256\000\036~\342\352\206\206Ni?\251'\213F\014\250\200c$\034L((:%\014\306\334\023\343V\232t\2004F\320d\006\223YH\007w'3\t,\352tu.\t&)\007n\337\004\256A\371$\022\324\304&\351#\324vMh\324\241\242c\260\023l\214\337\002\351\034M|\350\202v9\270@\250\213A8\374\272T`b`\316\223\200i\300-O&\356\302\316N\231\323A\272v\243\210[\311S!\316\\\207P\213Y\010Y\016\265\260\223\240l\027\033)R\n\206\327\340\314\204!;4\275>\336Q\312:\t9a\320\201\n\3271\035\006\336\022\203\234\032mN\301\200\\RR8i\264\215]C\\\233N6\270\"\222\317F\010\303\205w\004f9\033\312\343\231\325x\265\022\251\243Lv\260\353\035\372K\201\035>\n7\243\215\010\0173O\007\225\201=\314\026\274\017A~\230[\360\247\207\271\347\236=\314-\371\370\352\361\324\354\034 ~\304\313\200\036f\347\007=\217\373\n`\337G\325\310\036\335\207]\364\013q\351m\010\310\005\377\221\277\031T\002;~\363\351b:\325\361=.\275\013\017$k\037\252[\001\212+\265\213\355\313\265\313\203\321CD\215mlE\255\363\351\007\3318\362\313a>\\\013\217#r\236\277\027\221\033\374\366A]\321S\345\235\365av\321_\211gJqI\t\361(\363\342?\326$r~\240y\257\375'\301\212\364f\377\263\024\274\r\017\2478`}\351\257_e\246f\237yE\357\233_\361\355 \361\262~\225\235\232+\202\262BP\rzq\371\232\271\350U\274?\001\016\354\324\322\266\367\312\303\236\353\357\004\365\260\030\036F\371Q""\006:\3043\340`\230\214\370\340/\362+\356\216";
+    PyObject *data = __Pyx_DecompressString(cstring, 731, 1);
     if (unlikely(!data)) __PYX_ERR(0, 1, __pyx_L1_error)
     const char* const bytes = __Pyx_PyBytes_AsString(data);
     #if !CYTHON_ASSUME_SAFE_MACROS
     if (likely(bytes)); else { Py_DECREF(data); __PYX_ERR(0, 1, __pyx_L1_error) }
     #endif
-    #else /* compression: none (1161 bytes) */
-const char* const bytes = ".?access grantedapp/core/engine.pyABACALL_PASSEDCACHEPERMISSIONPolicyCachePolicyDecisionPolicyEnginePolicyEngine.__init__PolicyEngine._evaluate_corePolicyEngine.evaluatePolicyRequest__Pyx_PyDict_NextRefRBACRULESTENANCYabacactionallowedapp.coreapp.core.engineapp.models.decisionapp.models.requestapp.services.cacheasyncio.coroutinesbuild_keycachecachedcline_in_tracebackcontextdecisiondict__doc__evaluateevaluate_abac_evaluate_coreevaluate_permissionevaluate_rbacevaluate_rulesevaluate_tenancy__func__get__init___is_coroutineitemskey__main____metaclass____module____name__okorg_idpermissionspolicy_sourcepop__prepare____qualname__rbacreasonreqresourcereturnrolesrulesselfset__set_name__setdefaulttenancy__test__ttluser_idvalues\320\004\"\320\"4\260A\340\010\014\210I\220T\230\036\240q\250\003\2508\2603\260a\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220[\320 4\260A\330\014\017\210x\220s\230.\250\003\2509\260C\260q\340\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220W\320\034-\250Q\250c\260\031\270#\270Q\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220T\230\036\240q\250\003\250:\260S\270\001\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220U\230/\250\021\250#\250Y\260c\270\021\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\020\210~\230Q\330\014\024\220A\330\014\023\2201\330\014\032\230!\320\004\036\230a\330\010\014\210I\220Q\320\004\034\320\034.\250a\340\010\016\210d\220&\230\n\240!\330\014\017\210q\330\014\017\210q\330\014\017\210q\330\014\017\210q\330\014\023\2203\220a\330\014\030\230\003\2301\360\010\000\t\022\220\024\220V\2304\230q\240\001\330\010\013\2101\360\014\000\r\024\220>\240\023\240C\240x\320/@\300""\001\360\006\000\t\024\2204\220\177\240a\240q\360\006\000\t\r\210F\220$\220a\220u\230H\240E\250\024\250T\260\021\340\010\017\210q";
+    #else /* compression: none (1273 bytes) */
+const char* const bytes = ".?access grantedapp/core/engine.pyABACALL_PASSEDCACHEPERMISSIONPolicyCachePolicyDecisionPolicyEnginePolicyEngine.__init__PolicyEngine._evaluate_corePolicyEngine.evaluatePolicyRequest__Pyx_PyDict_NextRefRBACRULESTENANCYabacactionallowedapp.coreapp.core.engineapp.models.decisionapp.models.requestapp.services.cacheasyncio.coroutinesbuild_keycachecachedcline_in_tracebackcontextdecisiondict__doc__evaluateevaluate_abac_evaluate_coreevaluate_permissionevaluate_rbacevaluate_rulesevaluate_tenancy__func__getglobal__init___is_coroutineitemskey__main____metaclass____module____name__okorg_idpermissionspolicy_sourcepop__prepare____qualname__rbacreasonreqresourceresource_org_idresource_scopereturnrolesrulesselfset__set_name__setdefaulttenancytenant__test__ttluser_idvalues\320\004\"\320\"4\260A\340\010\014\210I\220T\230\036\240q\250\003\2508\2603\260a\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220[\320 4\260A\330\014\017\210x\220s\230.\250\003\2509\260C\260q\340\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\032\230\023\320\034,\250A\330\014\030\230\003\2308\2404\240q\320(@\300\001\340\010\014\210I\220W\320\034-\250Q\330\014\017\210y\230\003\230:\240_\3204D\300F\310#\310Q\340\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220T\230\036\240q\250\003\250:\260S\270\001\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\r\210I\220U\230/\250\021\250#\250Y\260c\270\021\330\010\013\2104\210q\330\014\023\220>\240\021\330\020\030\230\001\330\020\027\220q\330\020\036\230a\360\006\000\t\020\210~\230Q\330\014\024\220A\330\014\023\2201\330\014\032\230!\320\004\034\320\034.\250a\340\010\031\230\023\320\034,\250A\330\014\030\230\003\2308\2404\240q\320(@\300\001\360\006\000\t\017\210d\220&\230\n\240!\330\014\017\210q\330\014""\017\210q\330\014\017\210q\330\014\017\210q\330\014\023\2203\220a\330\014\030\230\003\2301\330\014\033\2301\360\010\000\t\022\220\024\220V\2304\230q\240\001\330\010\013\2101\360\014\000\r\024\220>\240\023\240C\240x\320/@\300\001\360\006\000\t\024\2204\220\177\240a\240q\360\006\000\t\r\210F\220$\220a\220u\230H\240E\250\024\250T\260\021\340\010\017\210q\320\004\036\230a\330\010\014\210I\220Q";
     PyObject *data = NULL;
     CYTHON_UNUSED_VAR(__Pyx_DecompressString);
     #endif
     PyObject **stringtab = __pyx_mstate->__pyx_string_tab;
     Py_ssize_t pos = 0;
-    for (int i = 0; i < 76; i++) {
+    for (int i = 0; i < 80; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyUnicode_DecodeUTF8(bytes + pos, bytes_length, NULL);
       if (likely(string) && i >= 4) PyUnicode_InternInPlace(&string);
@@ -4722,7 +4877,7 @@ const char* const bytes = ".?access grantedapp/core/engine.pyABACALL_PASSEDCACHE
       stringtab[i] = string;
       pos += bytes_length;
     }
-    for (int i = 76; i < 79; i++) {
+    for (int i = 80; i < 83; i++) {
       Py_ssize_t bytes_length = index[i].length;
       PyObject *string = PyBytes_FromStringAndSize(bytes + pos, bytes_length);
       stringtab[i] = string;
@@ -4733,14 +4888,14 @@ const char* const bytes = ".?access grantedapp/core/engine.pyABACALL_PASSEDCACHE
       }
     }
     Py_XDECREF(data);
-    for (Py_ssize_t i = 0; i < 79; i++) {
+    for (Py_ssize_t i = 0; i < 83; i++) {
       if (unlikely(PyObject_Hash(stringtab[i]) == -1)) {
         __PYX_ERR(0, 1, __pyx_L1_error)
       }
     }
     #if CYTHON_IMMORTAL_CONSTANTS
     {
-      PyObject **table = stringtab + 76;
+      PyObject **table = stringtab + 80;
       for (Py_ssize_t i=0; i<3; ++i) {
         #if CYTHON_COMPILING_IN_CPYTHON_FREETHREADING
         #if PY_VERSION_HEX < 0x030E0000
@@ -4813,19 +4968,19 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 9};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 19};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_cache};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_engine_py, __pyx_mstate->__pyx_n_u_init, __pyx_mstate->__pyx_kp_b_iso88591_a_IQ, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 4, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 15};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_req, __pyx_mstate->__pyx_n_u_ok, __pyx_mstate->__pyx_n_u_reason};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 25};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_req, __pyx_mstate->__pyx_n_u_ok, __pyx_mstate->__pyx_n_u_reason, __pyx_mstate->__pyx_n_u_resource_scope};
     __pyx_mstate_global->__pyx_codeobj_tab[1] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_engine_py, __pyx_mstate->__pyx_n_u_evaluate_core, __pyx_mstate->__pyx_kp_b_iso88591_4A_IT_q_83a_4q_q_a_I_4A_xs_9Cq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[1])) goto bad;
   }
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 5, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 68};
-    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_req, __pyx_mstate->__pyx_n_u_key, __pyx_mstate->__pyx_n_u_cached, __pyx_mstate->__pyx_n_u_decision};
-    __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_engine_py, __pyx_mstate->__pyx_n_u_evaluate, __pyx_mstate->__pyx_kp_b_iso88591_a_d_q_q_q_q_3a_1_V4q_1_Cx_4_aq, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 6, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 83};
+    PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_self, __pyx_mstate->__pyx_n_u_req, __pyx_mstate->__pyx_n_u_resource_scope, __pyx_mstate->__pyx_n_u_key, __pyx_mstate->__pyx_n_u_cached, __pyx_mstate->__pyx_n_u_decision};
+    __pyx_mstate_global->__pyx_codeobj_tab[2] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_engine_py, __pyx_mstate->__pyx_n_u_evaluate, __pyx_mstate->__pyx_kp_b_iso88591_a_A_84q_d_q_q_q_q_3a_1_1_V4q_1, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[2])) goto bad;
   }
   Py_DECREF(tuple_dedup_map);
   return 0;
@@ -6224,19 +6379,6 @@ CYTHON_UNUSED static int __Pyx_VectorcallBuilder_AddArg_Check(PyObject *key, PyO
 }
 #endif
 
-/* PyObjectVectorCallMethodKwBuilder */
-#if !CYTHON_VECTORCALL || PY_VERSION_HEX < 0x03090000
-static PyObject *__Pyx_Object_VectorcallMethod_CallFromBuilder(PyObject *name, PyObject *const *args, size_t nargsf, PyObject *kwnames) {
-    PyObject *result;
-    PyObject *obj = PyObject_GetAttr(args[0], name);
-    if (unlikely(!obj))
-        return NULL;
-    result = __Pyx_Object_Vectorcall_CallFromBuilder(obj, args+1, nargsf-1, kwnames);
-    Py_DECREF(obj);
-    return result;
-}
-#endif
-
 /* PyObjectFastCallMethod */
 #if !CYTHON_VECTORCALL || PY_VERSION_HEX < 0x03090000
 static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *args, size_t nargsf) {
@@ -6246,6 +6388,19 @@ static PyObject *__Pyx_PyObject_FastCallMethod(PyObject *name, PyObject *const *
         return NULL;
     result = __Pyx_PyObject_FastCall(attr, args+1, nargsf - 1);
     Py_DECREF(attr);
+    return result;
+}
+#endif
+
+/* PyObjectVectorCallMethodKwBuilder */
+#if !CYTHON_VECTORCALL || PY_VERSION_HEX < 0x03090000
+static PyObject *__Pyx_Object_VectorcallMethod_CallFromBuilder(PyObject *name, PyObject *const *args, size_t nargsf, PyObject *kwnames) {
+    PyObject *result;
+    PyObject *obj = PyObject_GetAttr(args[0], name);
+    if (unlikely(!obj))
+        return NULL;
+    result = __Pyx_Object_Vectorcall_CallFromBuilder(obj, args+1, nargsf-1, kwnames);
+    Py_DECREF(obj);
     return result;
 }
 #endif

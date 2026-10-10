@@ -2214,6 +2214,7 @@ int __pyx_module_is_main_app__core__rules = 0;
 /* Implementation of "app.core.rules" */
 /* #### Code section: global_var ### */
 /* #### Code section: string_decls ### */
+static const char __pyx_k_OmniBioAI_app_core_rules_Purpos[] = "\nOmniBioAI app.core.rules.\n\nPurpose:\n    Defines evaluate_rules for app.core.rules.\n\nAuthor:\n    Manish Kumar <manish@omnibioai.org>\n";
 /* #### Code section: decls ### */
 static PyObject *__pyx_pf_3app_4core_5rules_evaluate_rules(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_action, PyObject *__pyx_v_resource); /* proto */
 /* #### Code section: late_includes ### */
@@ -2371,7 +2372,9 @@ return 0;
 #endif
 /* #### Code section: module_code ### */
 
-/* "app/core/rules.py":1
+/* "app/core/rules.py":11
+ * """
+ * 
  * def evaluate_rules(action: str, resource: str) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     # Example dataset protection rules
  *     if resource.startswith("human_genome") and action == "dataset.delete":
@@ -2417,39 +2420,39 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   {
     PyObject ** const __pyx_pyargnames[] = {&__pyx_mstate_global->__pyx_n_u_action,&__pyx_mstate_global->__pyx_n_u_resource,0};
     const Py_ssize_t __pyx_kwds_len = (__pyx_kwds) ? __Pyx_NumKwargs_FASTCALL(__pyx_kwds) : 0;
-    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 1, __pyx_L3_error)
+    if (unlikely(__pyx_kwds_len < 0)) __PYX_ERR(0, 11, __pyx_L3_error)
     if (__pyx_kwds_len > 0) {
       switch (__pyx_nargs) {
         case  2:
         values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  1:
         values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1, __pyx_L3_error)
+        if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
         CYTHON_FALLTHROUGH;
         case  0: break;
         default: goto __pyx_L5_argtuple_error;
       }
       const Py_ssize_t kwd_pos_args = __pyx_nargs;
-      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_rules", 0) < (0)) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (__Pyx_ParseKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values, kwd_pos_args, __pyx_kwds_len, "evaluate_rules", 0) < (0)) __PYX_ERR(0, 11, __pyx_L3_error)
       for (Py_ssize_t i = __pyx_nargs; i < 2; i++) {
-        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_rules", 1, 2, 2, i); __PYX_ERR(0, 1, __pyx_L3_error) }
+        if (unlikely(!values[i])) { __Pyx_RaiseArgtupleInvalid("evaluate_rules", 1, 2, 2, i); __PYX_ERR(0, 11, __pyx_L3_error) }
       }
     } else if (unlikely(__pyx_nargs != 2)) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = __Pyx_ArgRef_FASTCALL(__pyx_args, 0);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[0])) __PYX_ERR(0, 11, __pyx_L3_error)
       values[1] = __Pyx_ArgRef_FASTCALL(__pyx_args, 1);
-      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 1, __pyx_L3_error)
+      if (!CYTHON_ASSUME_SAFE_MACROS && unlikely(!values[1])) __PYX_ERR(0, 11, __pyx_L3_error)
     }
     __pyx_v_action = ((PyObject*)values[0]);
     __pyx_v_resource = ((PyObject*)values[1]);
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("evaluate_rules", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 1, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("evaluate_rules", 1, 2, 2, __pyx_nargs); __PYX_ERR(0, 11, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -2460,8 +2463,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_action), (&PyUnicode_Type), 0, "action", 2))) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_resource), (&PyUnicode_Type), 0, "resource", 2))) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_action), (&PyUnicode_Type), 0, "action", 2))) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (unlikely(!__Pyx_ArgTypeTest(((PyObject *)__pyx_v_resource), (&PyUnicode_Type), 0, "resource", 2))) __PYX_ERR(0, 11, __pyx_L1_error)
   __pyx_r = __pyx_pf_3app_4core_5rules_evaluate_rules(__pyx_self, __pyx_v_action, __pyx_v_resource);
 
   /* function exit code */
@@ -2491,25 +2494,25 @@ static PyObject *__pyx_pf_3app_4core_5rules_evaluate_rules(CYTHON_UNUSED PyObjec
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("evaluate_rules", 0);
 
-  /* "app/core/rules.py":3
+  /* "app/core/rules.py":13
  * def evaluate_rules(action: str, resource: str) -> tuple[bool, str]:
  *     # Example dataset protection rules
  *     if resource.startswith("human_genome") and action == "dataset.delete":             # <<<<<<<<<<<<<<
  *         return False, "protected dataset cannot be deleted"
  * 
 */
-  __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_resource, __pyx_mstate_global->__pyx_n_u_human_genome, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyUnicode_Tailmatch(__pyx_v_resource, __pyx_mstate_global->__pyx_n_u_human_genome, 0, PY_SSIZE_T_MAX, -1); if (unlikely(__pyx_t_2 == ((int)-1))) __PYX_ERR(0, 13, __pyx_L1_error)
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L4_bool_binop_done;
   }
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset_delete, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 3, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_action, __pyx_mstate_global->__pyx_kp_u_dataset_delete, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 13, __pyx_L1_error)
   __pyx_t_1 = __pyx_t_2;
   __pyx_L4_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "app/core/rules.py":4
+    /* "app/core/rules.py":14
  *     # Example dataset protection rules
  *     if resource.startswith("human_genome") and action == "dataset.delete":
  *         return False, "protected dataset cannot be deleted"             # <<<<<<<<<<<<<<
@@ -2521,7 +2524,7 @@ static PyObject *__pyx_pf_3app_4core_5rules_evaluate_rules(CYTHON_UNUSED PyObjec
     __pyx_r = __pyx_mstate_global->__pyx_tuple[0];
     goto __pyx_L0;
 
-    /* "app/core/rules.py":3
+    /* "app/core/rules.py":13
  * def evaluate_rules(action: str, resource: str) -> tuple[bool, str]:
  *     # Example dataset protection rules
  *     if resource.startswith("human_genome") and action == "dataset.delete":             # <<<<<<<<<<<<<<
@@ -2530,25 +2533,25 @@ static PyObject *__pyx_pf_3app_4core_5rules_evaluate_rules(CYTHON_UNUSED PyObjec
 */
   }
 
-  /* "app/core/rules.py":7
+  /* "app/core/rules.py":17
  * 
  *     # Model registry protection
  *     if resource == "model_registry" and action == "delete":             # <<<<<<<<<<<<<<
  *         return False, "model registry is immutable"
  * 
 */
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_resource, __pyx_mstate_global->__pyx_n_u_model_registry, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_resource, __pyx_mstate_global->__pyx_n_u_model_registry, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 17, __pyx_L1_error)
   if (__pyx_t_2) {
   } else {
     __pyx_t_1 = __pyx_t_2;
     goto __pyx_L7_bool_binop_done;
   }
-  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_action, __pyx_mstate_global->__pyx_n_u_delete, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 7, __pyx_L1_error)
+  __pyx_t_2 = (__Pyx_PyUnicode_Equals(__pyx_v_action, __pyx_mstate_global->__pyx_n_u_delete, Py_EQ)); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 17, __pyx_L1_error)
   __pyx_t_1 = __pyx_t_2;
   __pyx_L7_bool_binop_done:;
   if (__pyx_t_1) {
 
-    /* "app/core/rules.py":8
+    /* "app/core/rules.py":18
  *     # Model registry protection
  *     if resource == "model_registry" and action == "delete":
  *         return False, "model registry is immutable"             # <<<<<<<<<<<<<<
@@ -2560,7 +2563,7 @@ static PyObject *__pyx_pf_3app_4core_5rules_evaluate_rules(CYTHON_UNUSED PyObjec
     __pyx_r = __pyx_mstate_global->__pyx_tuple[1];
     goto __pyx_L0;
 
-    /* "app/core/rules.py":7
+    /* "app/core/rules.py":17
  * 
  *     # Model registry protection
  *     if resource == "model_registry" and action == "delete":             # <<<<<<<<<<<<<<
@@ -2569,7 +2572,7 @@ static PyObject *__pyx_pf_3app_4core_5rules_evaluate_rules(CYTHON_UNUSED PyObjec
 */
   }
 
-  /* "app/core/rules.py":10
+  /* "app/core/rules.py":20
  *         return False, "model registry is immutable"
  * 
  *     return True, "rules passed"             # <<<<<<<<<<<<<<
@@ -2579,7 +2582,9 @@ static PyObject *__pyx_pf_3app_4core_5rules_evaluate_rules(CYTHON_UNUSED PyObjec
   __pyx_r = __pyx_mstate_global->__pyx_tuple[2];
   goto __pyx_L0;
 
-  /* "app/core/rules.py":1
+  /* "app/core/rules.py":11
+ * """
+ * 
  * def evaluate_rules(action: str, resource: str) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     # Example dataset protection rules
  *     if resource.startswith("human_genome") and action == "dataset.delete":
@@ -2702,7 +2707,7 @@ namespace {
   {
       PyModuleDef_HEAD_INIT,
       "rules",
-      0, /* m_doc */
+      __pyx_k_OmniBioAI_app_core_rules_Purpos, /* m_doc */
     #if CYTHON_USE_MODULE_STATE
       sizeof(__pyx_mstatetype), /* m_size */
     #else
@@ -2944,25 +2949,33 @@ __Pyx_RefNannySetupContext("PyInit_rules", 0);
   (void)__Pyx_modinit_function_import_code(__pyx_mstate);
   /*--- Execution code ---*/
 
-  /* "app/core/rules.py":1
+  /* "app/core/rules.py":11
+ * """
+ * 
  * def evaluate_rules(action: str, resource: str) -> tuple[bool, str]:             # <<<<<<<<<<<<<<
  *     # Example dataset protection rules
  *     if resource.startswith("human_genome") and action == "dataset.delete":
 */
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_action, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_resource, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_5rules_1evaluate_rules, 0, __pyx_mstate_global->__pyx_n_u_evaluate_rules, NULL, __pyx_mstate_global->__pyx_n_u_app_core_rules, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_action, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_resource, __pyx_mstate_global->__pyx_n_u_str) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_mstate_global->__pyx_n_u_return, __pyx_mstate_global->__pyx_kp_u_tuple_bool_str) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_3app_4core_5rules_1evaluate_rules, 0, __pyx_mstate_global->__pyx_n_u_evaluate_rules, NULL, __pyx_mstate_global->__pyx_n_u_app_core_rules, __pyx_mstate_global->__pyx_d, ((PyObject *)__pyx_mstate_global->__pyx_codeobj_tab[0])); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   #if CYTHON_COMPILING_IN_CPYTHON && PY_VERSION_HEX >= 0x030E0000
   PyUnstable_Object_EnableDeferredRefcount(__pyx_t_3);
   #endif
   __Pyx_CyFunction_SetAnnotationsDict(__pyx_t_3, __pyx_t_2);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_rules, __pyx_t_3) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_evaluate_rules, __pyx_t_3) < (0)) __PYX_ERR(0, 11, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+
+  /* "app/core/rules.py":1
+ * """             # <<<<<<<<<<<<<<
+ * OmniBioAI app.core.rules.
+ * 
+*/
   __pyx_t_3 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 1, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (PyDict_SetItem(__pyx_mstate_global->__pyx_d, __pyx_mstate_global->__pyx_n_u_test, __pyx_t_3) < (0)) __PYX_ERR(0, 1, __pyx_L1_error)
@@ -3022,34 +3035,34 @@ static int __Pyx_InitCachedConstants(__pyx_mstatetype *__pyx_mstate) {
   CYTHON_UNUSED_VAR(__pyx_mstate);
   __Pyx_RefNannySetupContext("__Pyx_InitCachedConstants", 0);
 
-  /* "app/core/rules.py":4
+  /* "app/core/rules.py":14
  *     # Example dataset protection rules
  *     if resource.startswith("human_genome") and action == "dataset.delete":
  *         return False, "protected dataset cannot be deleted"             # <<<<<<<<<<<<<<
  * 
  *     # Model registry protection
 */
-  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_protected_dataset_cannot_be_dele); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 4, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[0] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_protected_dataset_cannot_be_dele); if (unlikely(!__pyx_mstate_global->__pyx_tuple[0])) __PYX_ERR(0, 14, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[0]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[0]);
 
-  /* "app/core/rules.py":8
+  /* "app/core/rules.py":18
  *     # Model registry protection
  *     if resource == "model_registry" and action == "delete":
  *         return False, "model registry is immutable"             # <<<<<<<<<<<<<<
  * 
  *     return True, "rules passed"
 */
-  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_model_registry_is_immutable); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 8, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[1] = PyTuple_Pack(2, Py_False, __pyx_mstate_global->__pyx_kp_u_model_registry_is_immutable); if (unlikely(!__pyx_mstate_global->__pyx_tuple[1])) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[1]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[1]);
 
-  /* "app/core/rules.py":10
+  /* "app/core/rules.py":20
  *         return False, "model registry is immutable"
  * 
  *     return True, "rules passed"             # <<<<<<<<<<<<<<
 */
-  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_rules_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 10, __pyx_L1_error)
+  __pyx_mstate_global->__pyx_tuple[2] = PyTuple_Pack(2, Py_True, __pyx_mstate_global->__pyx_kp_u_rules_passed); if (unlikely(!__pyx_mstate_global->__pyx_tuple[2])) __PYX_ERR(0, 20, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_mstate_global->__pyx_tuple[2]);
   __Pyx_GIVEREF(__pyx_mstate_global->__pyx_tuple[2]);
   #if CYTHON_IMMORTAL_CONSTANTS
@@ -3164,7 +3177,7 @@ typedef struct {
     unsigned int num_kwonly_args : 1;
     unsigned int nlocals : 2;
     unsigned int flags : 10;
-    unsigned int first_line : 1;
+    unsigned int first_line : 4;
 } __Pyx_PyCode_New_function_description;
 /* NewCodeObj.proto */
 static PyObject* __Pyx_PyCode_New(
@@ -3181,7 +3194,7 @@ static int __Pyx_CreateCodeObjects(__pyx_mstatetype *__pyx_mstate) {
   PyObject* tuple_dedup_map = PyDict_New();
   if (unlikely(!tuple_dedup_map)) return -1;
   {
-    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 1};
+    const __Pyx_PyCode_New_function_description descr = {2, 0, 0, 2, (unsigned int)(CO_OPTIMIZED|CO_NEWLOCALS), 11};
     PyObject* const varnames[] = {__pyx_mstate->__pyx_n_u_action, __pyx_mstate->__pyx_n_u_resource};
     __pyx_mstate_global->__pyx_codeobj_tab[0] = __Pyx_PyCode_New(descr, varnames, __pyx_mstate->__pyx_kp_u_app_core_rules_py, __pyx_mstate->__pyx_n_u_evaluate_rules, __pyx_mstate->__pyx_kp_b_iso88591_x_4wc_wa_y_D_s_wa_6, tuple_dedup_map); if (unlikely(!__pyx_mstate_global->__pyx_codeobj_tab[0])) goto bad;
   }
