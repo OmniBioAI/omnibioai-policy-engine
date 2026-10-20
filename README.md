@@ -142,7 +142,7 @@ POST /policy/evaluate
 ### Via OmniBioAI Studio (recommended)
 
 ```bash
-cd ~/Desktop/machine/omnibioai-studio
+cd ~/Desktop/omnibioai-ecosystem/omnibioai-studio
 docker compose up -d policy-engine
 ```
 
@@ -232,7 +232,7 @@ This service is used by:
 ## Testing
 
 ```bash
-cd ~/Desktop/machine/omnibioai-policy-engine
+cd ~/Desktop/omnibioai-ecosystem/omnibioai-policy-engine
 pytest tests/ -v --cov=.
 
 # The command above is the supported validation entrypoint. Test counts and

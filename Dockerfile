@@ -12,7 +12,7 @@ RUN apt-get update \
 
 WORKDIR /app
 
-# Build context is the parent directory (/home/manish/Desktop/machine).
+# Build context is the parent directory (/home/manish/Desktop/omnibioai-ecosystem).
 
 # Install security-audit package so that `audit.logger` is importable.
 # The pyproject.toml is currently empty, so fall back to copying the
