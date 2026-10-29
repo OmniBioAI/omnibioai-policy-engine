@@ -4,12 +4,13 @@ import hashlib
 import hmac
 import json
 from datetime import UTC, datetime, timedelta
-from unittest.mock import Mock
+from unittest.mock import MagicMock, Mock
 
 import fakeredis
 import pytest
 from pydantic import ValidationError
 
+from app.api import routes_policy
 from app.core.skills_policy import (
     ACTION_PERMISSION_MAP,
     APPROVED_MAPPING_DIGEST,
@@ -245,3 +246,37 @@ def test_audit_failure_turns_allow_into_deny(service):
     instance, _, _ = service
     instance.audit = lambda event: (_ for _ in ()).throw(RuntimeError("audit down"))
     assert evaluate(service).error_code == "AUDIT_FAILURE"
+
+
+def test_route_selects_v2_only_when_feature_flag_is_enabled(monkeypatch):
+    req = request()
+    expected = {"allowed": True, "schema_version": "policy-decision/v2"}
+    evaluator = MagicMock()
+    evaluator.evaluate.return_value = expected
+    monkeypatch.setattr(routes_policy, "skills_engine", evaluator)
+    monkeypatch.setenv("SKILLS_POLICY_LIVE", "true")
+
+    result = routes_policy.evaluate(
+        req.model_dump(mode="json"),
+        x_policy_workload_identity="gateway-test",
+        x_policy_workload_scope=WORKLOAD_SCOPE,
+        x_policy_request_timestamp=str(int(NOW.timestamp())),
+        x_policy_signature="fixture-signature",
+        content_length="512",
+    )
+
+    assert result == expected
+    evaluator.evaluate.assert_called_once()
+
+
+def test_route_rejects_malformed_or_oversized_v2_without_legacy_fallback(monkeypatch):
+    legacy = MagicMock()
+    monkeypatch.setattr(routes_policy, "evaluate_policy", legacy)
+    monkeypatch.setenv("SKILLS_POLICY_LIVE", "true")
+
+    malformed = routes_policy.evaluate({}, content_length="2")
+    oversized = routes_policy.evaluate({}, content_length="20000")
+
+    assert malformed["allowed"] is False and malformed["error_code"] == "MALFORMED"
+    assert oversized["allowed"] is False and oversized["error_code"] == "MALFORMED"
+    legacy.assert_not_called()
