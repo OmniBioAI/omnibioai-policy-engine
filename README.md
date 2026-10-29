@@ -175,6 +175,23 @@ curl http://localhost:8002/health
 |----------|---------|-------------|
 | `REDIS_URL` | `redis://redis:6379` | Redis for policy cache |
 | `OPA_URL` | — | Optional OPA backend URL |
+| `SKILLS_POLICY_LIVE` | `false` | Enables the strict Skills v2 path |
+| `SKILLS_POLICY_JWKS_URL` | — | Auth-service JWKS URL; HTTPS unless compose is explicitly network-isolated |
+| `SKILLS_POLICY_TOKEN_ISSUER` | — | Required auth-service issuer |
+| `SKILLS_POLICY_TOKEN_AUDIENCE` | `policy-engine` | Required workload-token audience |
+| `SKILLS_POLICY_TRUSTED_CLIENTS` | empty | Comma-separated client IDs allowed to evaluate Skills policy |
+| `SKILLS_POLICY_TRANSPORT_MODE` | empty | `tls` or `network-isolated`; empty fails closed |
+| `SKILLS_POLICY_AUDIT_RECEIPT_URL` | — | Security Audit durable-receipt endpoint |
+| `SKILLS_POLICY_AUDIT_TOKEN_FILE` | — | Runtime-mounted outbound client-credentials token file |
+| `SKILLS_POLICY_CACHE_TTL_SECONDS` | `0` | Must remain zero until Phase 3 qualification |
+
+When Skills v2 is enabled, callers must use an auth-service RS256
+client-credentials token with audience `policy-engine` and scope
+`policy.evaluate:skills`. Workload tokens and the JWKS cache are bounded by the
+60-second revocation SLO. The gateway terminates public TLS; compose traffic
+must use TLS or explicit network isolation and is never accepted anonymously.
+An authorization result is returned only after Security Audit supplies a
+matching durable receipt.
 
 ---
 

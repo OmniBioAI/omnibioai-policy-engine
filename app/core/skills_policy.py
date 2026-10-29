@@ -5,7 +5,6 @@ from __future__ import annotations
 import hashlib
 import hmac
 import json
-import logging
 import os
 import re
 import time
@@ -13,13 +12,21 @@ import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from urllib.parse import urlparse
 
+from app.core.workload_identity import (
+    REVOCATION_SLO_SECONDS,
+    JWKSWorkloadIdentityVerifier,
+    WorkloadIdentityError,
+)
 from app.models.skills_policy import SkillsPolicyDecision, SkillsPolicyRequest
+from app.services.audit_receipts import (
+    AuditReceiptPublisher,
+    SecurityAuditReceiptClient,
+)
 from app.services.cache import PolicyCache
 
-LOGGER = logging.getLogger("omnibioai.policy.skills")
 POLICY_VERSION = "skills-policy-2026-10-v2"
-WORKLOAD_SCOPE = "policy.evaluate:skills"
 RESOURCE_PATTERN = re.compile(
     r"^skill:[a-z0-9][a-z0-9_.-]*@[A-Za-z0-9][A-Za-z0-9_.+-]*$"
 )
@@ -64,8 +71,13 @@ class SkillsPolicySettings:
     owner_approval_reference: str
     mapping_digest: str
     tenant_allowlist: frozenset[str]
-    trusted_workloads: frozenset[str]
-    workload_secret: str
+    trusted_workload_clients: frozenset[str]
+    workload_jwks_url: str
+    workload_issuer: str
+    workload_audience: str
+    transport_mode: str
+    audit_receipt_url: str
+    audit_token_file: str
     request_max_age_seconds: int
     cache_ttl_seconds: int
     max_body_bytes: int
@@ -87,12 +99,19 @@ class SkillsPolicySettings:
                 for item in os.getenv("SKILLS_POLICY_TENANT_ALLOWLIST", "").split(",")
                 if item.strip()
             ),
-            trusted_workloads=frozenset(
+            trusted_workload_clients=frozenset(
                 item.strip()
-                for item in os.getenv("SKILLS_POLICY_TRUSTED_WORKLOADS", "").split(",")
+                for item in os.getenv("SKILLS_POLICY_TRUSTED_CLIENTS", "").split(",")
                 if item.strip()
             ),
-            workload_secret=os.getenv("SKILLS_POLICY_WORKLOAD_SECRET", ""),
+            workload_jwks_url=os.getenv("SKILLS_POLICY_JWKS_URL", "").strip(),
+            workload_issuer=os.getenv("SKILLS_POLICY_TOKEN_ISSUER", "").strip(),
+            workload_audience=os.getenv(
+                "SKILLS_POLICY_TOKEN_AUDIENCE", "policy-engine"
+            ).strip(),
+            transport_mode=os.getenv("SKILLS_POLICY_TRANSPORT_MODE", "").strip(),
+            audit_receipt_url=os.getenv("SKILLS_POLICY_AUDIT_RECEIPT_URL", "").strip(),
+            audit_token_file=os.getenv("SKILLS_POLICY_AUDIT_TOKEN_FILE", "").strip(),
             request_max_age_seconds=_env_int(
                 "SKILLS_POLICY_REQUEST_MAX_AGE_SECONDS", 30
             ),
@@ -119,66 +138,37 @@ class SkillsPolicySettings:
             )
         if not self.tenant_allowlist or tenant_id not in self.tenant_allowlist:
             raise SkillsPolicyError("TENANT_DENIED", "tenant is not enabled")
-        if not self.trusted_workloads or not self.workload_secret:
+        if (
+            not self.trusted_workload_clients
+            or not self.workload_jwks_url
+            or not self.workload_issuer
+            or self.workload_audience != "policy-engine"
+        ):
             raise SkillsPolicyError(
                 "WORKLOAD_UNAVAILABLE", "workload identity is not configured"
+            )
+        if self.transport_mode not in {"tls", "network-isolated"}:
+            raise SkillsPolicyError("TRANSPORT_UNSAFE", "transport guarantee is absent")
+        urls = (self.workload_jwks_url, self.audit_receipt_url)
+        if not self.audit_receipt_url or not self.audit_token_file:
+            raise SkillsPolicyError(
+                "AUDIT_FAILURE", "security-audit receipt is not configured"
+            )
+        schemes = {urlparse(url).scheme for url in urls}
+        if not schemes <= {"http", "https"}:
+            raise SkillsPolicyError("TRANSPORT_UNSAFE", "endpoint scheme is invalid")
+        if schemes != {"https"} and self.transport_mode != "network-isolated":
+            raise SkillsPolicyError(
+                "TRANSPORT_UNSAFE", "non-TLS transport is not isolated"
             )
         if self.cache_ttl_seconds != 0:
             raise SkillsPolicyError(
                 "MALFORMED", "positive decision caching is not approved"
             )
-        if not 1 <= self.request_max_age_seconds <= 300:
+        if not 1 <= self.request_max_age_seconds <= REVOCATION_SLO_SECONDS:
             raise SkillsPolicyError("MALFORMED", "request freshness limit is invalid")
         if not 1024 <= self.max_body_bytes <= 1_048_576:
             raise SkillsPolicyError("MALFORMED", "request size limit is invalid")
-
-
-class WorkloadIdentityVerifier:
-    """Verify a runtime-injected HMAC workload credential over the complete request."""
-
-    def verify(
-        self,
-        request: SkillsPolicyRequest,
-        settings: SkillsPolicySettings,
-        workload_id: str | None,
-        scope: str | None,
-        timestamp: str | None,
-        signature: str | None,
-        now: datetime,
-    ) -> None:
-        if not workload_id or workload_id not in settings.trusted_workloads:
-            raise SkillsPolicyError(
-                "WORKLOAD_UNAUTHORIZED", "workload identity is not trusted"
-            )
-        if scope != WORKLOAD_SCOPE:
-            raise SkillsPolicyError(
-                "WORKLOAD_UNAUTHORIZED", "workload scope is invalid"
-            )
-        try:
-            signed_at = int(timestamp or "")
-        except ValueError as exc:
-            raise SkillsPolicyError(
-                "WORKLOAD_UNAUTHORIZED", "workload timestamp is invalid"
-            ) from exc
-        if abs(int(now.timestamp()) - signed_at) > settings.request_max_age_seconds:
-            raise SkillsPolicyError("STALE", "workload credential is stale")
-        message = "\n".join(
-            (
-                workload_id,
-                scope,
-                str(signed_at),
-                _canonical_json(request.model_dump(mode="json")),
-            )
-        )
-        expected = hmac.new(
-            settings.workload_secret.encode("utf-8"),
-            message.encode("utf-8"),
-            hashlib.sha256,
-        ).hexdigest()
-        if not signature or not hmac.compare_digest(signature, expected):
-            raise SkillsPolicyError(
-                "WORKLOAD_UNAUTHORIZED", "workload signature is invalid"
-            )
 
 
 def permission_set_digest(permissions: list[str]) -> str:
@@ -190,62 +180,70 @@ class SkillsPolicyService:
     def __init__(
         self,
         cache: PolicyCache,
-        verifier: WorkloadIdentityVerifier | None = None,
+        verifier: JWKSWorkloadIdentityVerifier | None = None,
         clock: Callable[[], datetime] | None = None,
-        audit: Callable[[dict], None] | None = None,
+        audit: AuditReceiptPublisher | None = None,
     ) -> None:
         self.cache = cache
-        self.verifier = verifier or WorkloadIdentityVerifier()
+        self.verifier = verifier or JWKSWorkloadIdentityVerifier()
         self.clock = clock or (lambda: datetime.now(UTC))
-        self.audit = audit or (
-            lambda event: LOGGER.info("skill_authorization %s", _canonical_json(event))
-        )
+        self.audit = audit
 
     def evaluate(
         self,
         request: SkillsPolicyRequest,
         *,
         settings: SkillsPolicySettings,
-        workload_id: str | None,
-        scope: str | None,
-        timestamp: str | None,
-        signature: str | None,
+        workload_token: str | None,
     ) -> SkillsPolicyDecision:
         started = time.monotonic()
         now = self.clock()
         try:
             settings.validate_for_request(request.tenant_id, request.action)
             self._validate_request(request, settings, now)
-            self.verifier.verify(
-                request, settings, workload_id, scope, timestamp, signature, now
-            )
+            try:
+                self.verifier.verify(
+                    workload_token,
+                    jwks_url=settings.workload_jwks_url,
+                    issuer=settings.workload_issuer,
+                    audience=settings.workload_audience,
+                    trusted_clients=settings.trusted_workload_clients,
+                    tenant_id=request.tenant_id,
+                    now=now,
+                )
+            except WorkloadIdentityError as exc:
+                raise SkillsPolicyError("WORKLOAD_UNAUTHORIZED", str(exc)) from exc
             self._validate_revocation(request)
             decision = self._evaluate(request, now)
             try:
-                self._audit(decision, started, "allow" if decision.allowed else "deny")
+                receipt_id = self._audit(
+                    decision, settings, started, "allow" if decision.allowed else "deny"
+                )
             except SkillsPolicyError:
                 return self.denial(
                     request, "AUDIT_FAILURE", "authorization audit failed", now
                 )
-            return decision
+            return decision.model_copy(update={"audit_receipt_id": receipt_id})
         except SkillsPolicyError as exc:
             decision = self.denial(request, exc.code, exc.reason, now)
             try:
-                self._audit(decision, started, "fail")
+                receipt_id = self._audit(decision, settings, started, "fail")
             except SkillsPolicyError:
                 return self.denial(
                     request, "AUDIT_FAILURE", "authorization audit failed", now
                 )
-            return decision
+            return decision.model_copy(update={"audit_receipt_id": receipt_id})
         except Exception:  # noqa: BLE001 - every unexpected dependency error must deny
             decision = self.denial(
                 request, "UNAVAILABLE", "policy evaluation unavailable", now
             )
             try:
-                self._audit(decision, started, "fail")
-            except Exception:
-                LOGGER.exception("authorization denial audit failed")
-            return decision
+                receipt_id = self._audit(decision, settings, started, "fail")
+            except SkillsPolicyError:
+                return self.denial(
+                    request, "AUDIT_FAILURE", "authorization audit failed", now
+                )
+            return decision.model_copy(update={"audit_receipt_id": receipt_id})
 
     def _validate_request(
         self,
@@ -338,32 +336,47 @@ class SkillsPolicyService:
         )
 
     def _audit(
-        self, decision: SkillsPolicyDecision, started: float, outcome: str
-    ) -> None:
+        self,
+        decision: SkillsPolicyDecision,
+        settings: SkillsPolicySettings,
+        started: float,
+        outcome: str,
+    ) -> str:
         event = {
-            "event_type": "skill_authorization",
             "event_id": uuid.uuid4().hex,
-            "decision_id": decision.decision_id,
-            "correlation_id": decision.correlation_id,
-            "tenant_id": decision.tenant_id,
-            "principal_id": decision.principal_id,
+            "timestamp": decision.evaluated_at.isoformat(),
+            "service": "omnibioai-policy-engine",
+            "event_type": "skill_authorization",
+            "user_id": decision.principal_id,
+            "organization_id": decision.tenant_id,
+            "tenant_scope": "organization",
             "action": decision.action,
             "resource": decision.resource,
-            "outcome": outcome,
-            "policy_version": decision.policy_version,
-            "policy_source": decision.policy_source,
-            "enforcement": decision.enforcement,
-            "cache_age_bucket": "fresh"
-            if decision.cache_age_seconds == 0
-            else "cached",
-            "latency_bucket": "lt_100ms"
-            if time.monotonic() - started < 0.1
-            else "gte_100ms",
-            "error_code": decision.error_code,
+            "decision": outcome,
+            "reason": decision.error_code,
+            "trace_id": decision.correlation_id,
+            "context": {
+                "decision_id": decision.decision_id,
+                "policy_version": decision.policy_version,
+                "policy_source": decision.policy_source,
+                "enforcement": decision.enforcement,
+                "cache_age_bucket": "fresh"
+                if decision.cache_age_seconds == 0
+                else "cached",
+                "latency_bucket": "lt_100ms"
+                if time.monotonic() - started < 0.1
+                else "gte_100ms",
+                "error_code": decision.error_code,
+            },
         }
         try:
-            self.audit(event)
+            publisher = self.audit or SecurityAuditReceiptClient(
+                url=settings.audit_receipt_url,
+                token_file=settings.audit_token_file,
+            )
+            receipt = publisher.publish(event)
         except Exception as exc:
             raise SkillsPolicyError(
                 "AUDIT_FAILURE", "authorization audit failed"
             ) from exc
+        return receipt.receipt_id

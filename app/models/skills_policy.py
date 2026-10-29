@@ -42,3 +42,4 @@ class SkillsPolicyDecision(BaseModel):
     permission_set_digest: str
     correlation_id: str
     authorization_epoch: int
+    audit_receipt_id: str | None = None

@@ -23,10 +23,7 @@ router = APIRouter()
 @router.post("/evaluate")
 def evaluate(
     req: dict,
-    x_policy_workload_identity: str | None = Header(default=None),
-    x_policy_workload_scope: str | None = Header(default=None),
-    x_policy_request_timestamp: str | None = Header(default=None),
-    x_policy_signature: str | None = Header(default=None),
+    authorization: str | None = Header(default=None),
     content_length: str | None = Header(default=None),
 ):
     settings = SkillsPolicySettings.from_env()
@@ -67,12 +64,11 @@ def evaluate(
                 "cache_age_seconds": 0,
                 "enforcement": "enforced",
             }
+        scheme, _, token = (authorization or "").partition(" ")
+        workload_token = token if scheme.lower() == "bearer" and token else None
         return skills_engine.evaluate(
             request,
             settings=settings,
-            workload_id=x_policy_workload_identity,
-            scope=x_policy_workload_scope,
-            timestamp=x_policy_request_timestamp,
-            signature=x_policy_signature,
+            workload_token=workload_token,
         )
     return evaluate_policy(req)

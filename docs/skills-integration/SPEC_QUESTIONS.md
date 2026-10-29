@@ -8,22 +8,28 @@
    `skill.evaluate`, `skill.execute`, and `skill.admin`. This lane implements
    only the four names in the authoritative IAM spec.
 
-## Owner decisions still required
+## Owner answers applied
 
-1. The policy-engine repository has no injected mTLS/workload-identity port.
-   The disabled-by-default v2 implementation therefore supplies a narrow HMAC
-   workload verifier whose secret is runtime-only. Confirm whether production
-   activation must replace it with a platform mTLS verifier before approval.
-2. The spec requires a revocation SLO but does not assign a numeric value. The
-   implementation rejects every nonzero positive-cache TTL and checks the
-   synchronous authorization epoch before every evaluation. Confirm the
-   approved maximum cache age before enabling positive caching.
-3. The timeout/retry/circuit-breaker guarantees describe a client calling this
-   service. The policy engine itself exposes a local FastAPI handler and makes
-   no remote policy call. Confirm that those transport guarantees remain the
-   caller/adapter owner's responsibility.
-4. The spec requires an audit failure to block the operation, but no approved
-   Security Audit publisher is present in this repository. The v2 service uses
-   an injected audit callable and converts publisher errors to
-   `AUDIT_FAILURE`; production activation needs the approved publisher binding.
+1. **Workload identity:** v2 accepts only short-lived auth-service
+   `client_credentials` access tokens with audience `policy-engine`, scope
+   `policy.evaluate:skills`, an allowlisted `client_id`, and the request tenant.
+   Tokens are RS256-verified against the configured auth-service JWKS. User
+   tokens, anonymous calls, missing `kid`, other algorithms, and tokens lasting
+   more than 60 seconds deny.
+2. **Revocation:** the approved SLO is 60 seconds. Workload token lifetime and
+   JWKS cache lifetime are capped at 60 seconds, and the principal authorization
+   epoch is checked synchronously before every decision. Positive decision
+   caching remains rejected until separately qualified in Phase 3.
+3. **Transport:** the gateway terminates TLS. Internal calls require workload
+   tokens and either TLS endpoints or an explicit `network-isolated` compose
+   deployment mode. An absent transport guarantee or anonymous v2 request
+   denies.
+4. **Audit:** v2 publishes `skill_authorization` to Security Audit using a
+   runtime-mounted client-credentials token and accepts only a matching receipt
+   with `source=security-audit` and `durable=true`. A missing, malformed,
+   mismatched, non-durable, or unavailable receipt changes the result to an
+   `AUDIT_FAILURE` denial.
+
+No policy-engine spec questions remain open. Phase 3 must qualify positive
+caching and the deployed Security Audit receipt endpoint before activation.
 

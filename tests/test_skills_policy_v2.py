@@ -1,13 +1,14 @@
 """Contract and security tests for the opt-in Skills policy-decision/v2 path."""
 
-import hashlib
-import hmac
-import json
+import time
 from datetime import UTC, datetime, timedelta
+from types import SimpleNamespace
 from unittest.mock import MagicMock, Mock
 
 import fakeredis
+import jwt
 import pytest
+from cryptography.hazmat.primitives.asymmetric import rsa
 from pydantic import ValidationError
 
 from app.api import routes_policy
@@ -15,16 +16,44 @@ from app.core.skills_policy import (
     ACTION_PERMISSION_MAP,
     APPROVED_MAPPING_DIGEST,
     POLICY_VERSION,
-    WORKLOAD_SCOPE,
     SkillsPolicyService,
     SkillsPolicySettings,
     permission_set_digest,
 )
+from app.core.workload_identity import (
+    REVOCATION_SLO_SECONDS,
+    WORKLOAD_SCOPE,
+    JWKSWorkloadIdentityVerifier,
+    WorkloadIdentityError,
+)
 from app.models.skills_policy import SkillsPolicyRequest
+from app.services.audit_receipts import AuditReceipt, SecurityAuditReceiptClient
 from app.services.cache import PolicyCache
 
 NOW = datetime(2026, 10, 29, 12, 0, tzinfo=UTC)
-SECRET = "fixture-only-workload-secret"
+VALID_WORKLOAD_TOKEN = "fixture-client-credentials-token"
+
+
+class AllowingVerifier:
+    def verify(self, token, **_kwargs):
+        if token != VALID_WORKLOAD_TOKEN:
+            raise WorkloadIdentityError("workload token verification failed")
+        return "gateway-test"
+
+
+class FakeAuditPublisher:
+    def __init__(self):
+        self.events = []
+
+    def publish(self, event):
+        self.events.append(event)
+        return AuditReceipt(
+            receipt_id=f"receipt-{event['event_id']}",
+            event_id=event["event_id"],
+            source="security-audit",
+            durable=True,
+            persisted_at=NOW,
+        )
 
 
 def settings(**changes):
@@ -35,8 +64,13 @@ def settings(**changes):
         "owner_approval_reference": "approval:test-only",
         "mapping_digest": APPROVED_MAPPING_DIGEST,
         "tenant_allowlist": frozenset({"tenant-a"}),
-        "trusted_workloads": frozenset({"gateway-test"}),
-        "workload_secret": SECRET,
+        "trusted_workload_clients": frozenset({"gateway-test"}),
+        "workload_jwks_url": "http://auth/.well-known/jwks.json",
+        "workload_issuer": "omnibioai-auth",
+        "workload_audience": "policy-engine",
+        "transport_mode": "network-isolated",
+        "audit_receipt_url": "http://security-audit/audit/receipts",
+        "audit_token_file": "/runtime/secrets/security-audit.token",
         "request_max_age_seconds": 30,
         "cache_ttl_seconds": 0,
         "max_body_bytes": 16384,
@@ -64,41 +98,28 @@ def request(**changes):
     return SkillsPolicyRequest(**values)
 
 
-def signature(req, *, workload="gateway-test", scope=WORKLOAD_SCOPE, timestamp=None):
-    timestamp = int(NOW.timestamp()) if timestamp is None else timestamp
-    canonical = json.dumps(
-        req.model_dump(mode="json"),
-        sort_keys=True,
-        separators=(",", ":"),
-        ensure_ascii=True,
-    )
-    message = "\n".join((workload, scope, str(timestamp), canonical))
-    return hmac.new(SECRET.encode(), message.encode(), hashlib.sha256).hexdigest()
-
-
 @pytest.fixture
 def service():
     cache = PolicyCache.__new__(PolicyCache)
     cache.redis = fakeredis.FakeRedis(decode_responses=True)
-    audit_events = []
+    audit = FakeAuditPublisher()
     instance = SkillsPolicyService(
-        cache=cache, clock=lambda: NOW, audit=audit_events.append
+        cache=cache,
+        verifier=AllowingVerifier(),
+        clock=lambda: NOW,
+        audit=audit,
     )
     cache.redis.set(cache.authorization_epoch_key("tenant-a", "principal-a"), 7)
-    return instance, cache, audit_events
+    return instance, cache, audit
 
 
-def evaluate(service, req=None, configured=None, **identity):
+def evaluate(service, req=None, configured=None, workload_token=VALID_WORKLOAD_TOKEN):
     instance, _, _ = service
     req = req or request()
-    timestamp = identity.pop("timestamp", str(int(NOW.timestamp())))
     return instance.evaluate(
         req,
         settings=configured or settings(),
-        workload_id=identity.pop("workload_id", "gateway-test"),
-        scope=identity.pop("scope", WORKLOAD_SCOPE),
-        timestamp=timestamp,
-        signature=identity.pop("signature", signature(req, timestamp=int(timestamp))),
+        workload_token=workload_token,
     )
 
 
@@ -121,8 +142,9 @@ def test_bound_allow_has_v2_identity_metadata_and_audit(service):
     assert decision.tenant_id == "tenant-a"
     assert decision.action == "skill.plan"
     assert decision.resource == "skill:variant-annotation@1.2.3"
-    assert service[2][0]["event_type"] == "skill_authorization"
-    assert "verified_permissions" not in service[2][0]
+    assert decision.audit_receipt_id.startswith("receipt-")
+    assert service[2].events[0]["event_type"] == "skill_authorization"
+    assert "verified_permissions" not in service[2].events[0]
 
 
 @pytest.mark.parametrize(
@@ -149,22 +171,82 @@ def test_admin_role_or_wildcard_cannot_be_asserted_or_grant(service):
     assert evaluate(service, req=req).error_code == "DENIED"
 
 
-def test_workload_authentication_binds_complete_request(service):
-    req = request()
-    assert (
-        evaluate(service, req=req, signature="bad").error_code
-        == "WORKLOAD_UNAUTHORIZED"
+def test_missing_workload_token_denies(service):
+    assert evaluate(service, workload_token=None).error_code == "WORKLOAD_UNAUTHORIZED"
+
+
+def _workload_token(**changes):
+    private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
+    now = int(time.time())
+    ttl = changes.pop("_ttl", REVOCATION_SLO_SECONDS)
+    claims = {
+        "aud": "policy-engine",
+        "iss": "omnibioai-auth",
+        "iat": now,
+        "exp": now + ttl,
+        "jti": "fixture-jti",
+        "type": "access",
+        "auth_method": "client_credentials",
+        "client_id": "gateway-test",
+        "org_id": "tenant-a",
+        "scopes": [WORKLOAD_SCOPE],
+    }
+    claims.update(changes)
+    token = jwt.encode(
+        claims, private_key, algorithm="RS256", headers={"kid": "test-key"}
     )
-    assert (
-        evaluate(service, req=req, workload_id="unknown").error_code
-        == "WORKLOAD_UNAUTHORIZED"
+    return token, private_key.public_key(), datetime.fromtimestamp(now, tz=UTC)
+
+
+def _verify_workload(token, public_key, now, **changes):
+    jwks_client = MagicMock()
+    jwks_client.get_signing_key_from_jwt.return_value = SimpleNamespace(key=public_key)
+    verifier = JWKSWorkloadIdentityVerifier(
+        jwks_client_factory=lambda _url: jwks_client
     )
-    assert (
-        evaluate(service, req=req, scope="policy.admin").error_code
-        == "WORKLOAD_UNAUTHORIZED"
+    values = {
+        "jwks_url": "https://auth/.well-known/jwks.json",
+        "issuer": "omnibioai-auth",
+        "audience": "policy-engine",
+        "trusted_clients": frozenset({"gateway-test"}),
+        "tenant_id": "tenant-a",
+        "now": now,
+    }
+    values.update(changes)
+    return verifier.verify(token, **values)
+
+
+def test_jwks_verifier_accepts_short_lived_bound_client_credentials_token():
+    token, public_key, now = _workload_token()
+    assert _verify_workload(token, public_key, now) == "gateway-test"
+
+
+@pytest.mark.parametrize(
+    "changes",
+    [
+        {"aud": "wrong-audience"},
+        {"auth_method": "password"},
+        {"scopes": ["policy.admin"]},
+        {"org_id": "tenant-b"},
+        {"_ttl": REVOCATION_SLO_SECONDS + 1},
+        {"sub": "user-1"},
+    ],
+)
+def test_jwks_verifier_rejects_wrong_or_overlong_workload_tokens(changes):
+    token, public_key, now = _workload_token(**changes)
+    with pytest.raises(WorkloadIdentityError):
+        _verify_workload(token, public_key, now)
+
+
+def test_transport_requires_tls_or_explicit_network_isolation(service):
+    unsafe = settings(transport_mode="tls")
+    assert evaluate(service, configured=unsafe).error_code == "TRANSPORT_UNSAFE"
+    tls = settings(
+        transport_mode="tls",
+        workload_jwks_url="https://auth/.well-known/jwks.json",
+        audit_receipt_url="https://security-audit/audit/receipts",
     )
-    stale = str(int((NOW - timedelta(seconds=31)).timestamp()))
-    assert evaluate(service, req=req, timestamp=stale).error_code == "STALE"
+    assert evaluate(service, configured=tls).allowed is True
 
 
 @pytest.mark.parametrize(
@@ -248,6 +330,35 @@ def test_audit_failure_turns_allow_into_deny(service):
     assert evaluate(service).error_code == "AUDIT_FAILURE"
 
 
+def test_security_audit_client_requires_matching_durable_receipt(tmp_path):
+    token_file = tmp_path / "audit.token"
+    token_file.write_text("fixture-audit-token", encoding="utf-8")
+    event = {"event_id": "event-12345678"}
+
+    response = MagicMock()
+    response.json.return_value = {
+        "receipt_id": "receipt-12345678",
+        "event_id": event["event_id"],
+        "source": "security-audit",
+        "durable": True,
+        "persisted_at": NOW.isoformat(),
+    }
+    post = MagicMock(return_value=response)
+    client = SecurityAuditReceiptClient(
+        url="https://security-audit/audit/receipts",
+        token_file=str(token_file),
+        post=post,
+    )
+    assert client.publish(event).receipt_id == "receipt-12345678"
+    assert post.call_args.kwargs["headers"] == {
+        "Authorization": "Bearer fixture-audit-token"
+    }
+
+    response.json.return_value["durable"] = False
+    with pytest.raises(RuntimeError, match="durable receipt"):
+        client.publish(event)
+
+
 def test_route_selects_v2_only_when_feature_flag_is_enabled(monkeypatch):
     req = request()
     expected = {"allowed": True, "schema_version": "policy-decision/v2"}
@@ -258,15 +369,13 @@ def test_route_selects_v2_only_when_feature_flag_is_enabled(monkeypatch):
 
     result = routes_policy.evaluate(
         req.model_dump(mode="json"),
-        x_policy_workload_identity="gateway-test",
-        x_policy_workload_scope=WORKLOAD_SCOPE,
-        x_policy_request_timestamp=str(int(NOW.timestamp())),
-        x_policy_signature="fixture-signature",
+        authorization="Bearer fixture-client-credentials-token",
         content_length="512",
     )
 
     assert result == expected
     evaluator.evaluate.assert_called_once()
+    assert evaluator.evaluate.call_args.kwargs["workload_token"] == VALID_WORKLOAD_TOKEN
 
 
 def test_route_rejects_malformed_or_oversized_v2_without_legacy_fallback(monkeypatch):
