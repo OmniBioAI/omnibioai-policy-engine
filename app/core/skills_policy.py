@@ -8,7 +8,6 @@ import json
 import logging
 import os
 import re
-import secrets
 import time
 import uuid
 from collections.abc import Callable
@@ -39,7 +38,6 @@ def _canonical_json(value: object) -> str:
 APPROVED_MAPPING_DIGEST = hashlib.sha256(
     _canonical_json(ACTION_PERMISSION_MAP).encode("utf-8")
 ).hexdigest()
-_ACTIVATION_NONCE = secrets.token_hex(16)
 
 
 def _env_int(name: str, default: int) -> int:
@@ -125,9 +123,9 @@ class SkillsPolicySettings:
             raise SkillsPolicyError(
                 "WORKLOAD_UNAVAILABLE", "workload identity is not configured"
             )
-        if not 0 <= self.cache_ttl_seconds <= 30:
+        if self.cache_ttl_seconds != 0:
             raise SkillsPolicyError(
-                "MALFORMED", "cache TTL is outside the revocation SLO"
+                "MALFORMED", "positive decision caching is not approved"
             )
         if not 1 <= self.request_max_age_seconds <= 300:
             raise SkillsPolicyError("MALFORMED", "request freshness limit is invalid")
@@ -222,7 +220,7 @@ class SkillsPolicyService:
                 request, settings, workload_id, scope, timestamp, signature, now
             )
             self._validate_revocation(request)
-            decision = self._evaluate_or_cache(request, settings, now)
+            decision = self._evaluate(request, now)
             try:
                 self._audit(decision, started, "allow" if decision.allowed else "deny")
             except SkillsPolicyError:
@@ -289,29 +287,9 @@ class SkillsPolicyService:
         if current != request.authorization_epoch:
             raise SkillsPolicyError("STALE", "authorization evidence is stale")
 
-    def _evaluate_or_cache(
-        self,
-        request: SkillsPolicyRequest,
-        settings: SkillsPolicySettings,
-        now: datetime,
+    def _evaluate(
+        self, request: SkillsPolicyRequest, now: datetime
     ) -> SkillsPolicyDecision:
-        key = self.cache.build_skills_key(
-            tenant_id=request.tenant_id,
-            principal_id=request.principal_id,
-            action=request.action,
-            resource=request.resource,
-            permission_set_digest=request.permission_set_digest,
-            authorization_epoch=request.authorization_epoch,
-            policy_version=POLICY_VERSION,
-            activation_nonce=_ACTIVATION_NONCE,
-        )
-        if settings.cache_ttl_seconds:
-            cached = self.cache.get(key)
-            if cached:
-                decision = SkillsPolicyDecision(**cached)
-                age = (now - decision.evaluated_at).total_seconds()
-                if 0 <= age <= settings.cache_ttl_seconds:
-                    return decision.model_copy(update={"cache_age_seconds": age})
         required = ACTION_PERMISSION_MAP[request.action]
         if required not in request.verified_permissions:
             decision = self.denial(
@@ -334,10 +312,6 @@ class SkillsPolicyService:
                 permission_set_digest=request.permission_set_digest,
                 correlation_id=request.correlation_id,
                 authorization_epoch=request.authorization_epoch,
-            )
-        if settings.cache_ttl_seconds and decision.allowed:
-            self.cache.set(
-                key, decision.model_dump(mode="json"), ttl=settings.cache_ttl_seconds
             )
         return decision
 

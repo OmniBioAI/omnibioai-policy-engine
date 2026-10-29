@@ -188,17 +188,24 @@ def test_execution_has_independent_default_off_kill_switch(service):
     )
 
 
-def test_revocation_epoch_is_checked_before_every_cache_hit(service):
+def test_revocation_epoch_is_checked_before_every_decision(service):
     _, cache, _ = service
-    configured = settings(cache_ttl_seconds=30)
-    first = evaluate(service, configured=configured)
-    second = evaluate(service, configured=configured)
-    assert second.allowed and second.decision_id == first.decision_id
-    assert second.cache_age_seconds >= 0
+    first = evaluate(service)
+    second = evaluate(service)
+    assert first.allowed and second.allowed
+    assert second.decision_id != first.decision_id
+    assert second.cache_age_seconds == 0
     cache.redis.set(cache.authorization_epoch_key("tenant-a", "principal-a"), 8)
-    revoked = evaluate(service, configured=configured)
+    revoked = evaluate(service)
     assert revoked.allowed is False
     assert revoked.error_code == "STALE"
+
+
+def test_positive_decision_caching_fails_closed_until_slo_is_approved(service):
+    assert (
+        evaluate(service, configured=settings(cache_ttl_seconds=1)).error_code
+        == "MALFORMED"
+    )
 
 
 def test_cache_key_partitions_every_authorization_binding(service):
