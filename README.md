@@ -152,9 +152,15 @@ Access (internal only — not exposed externally):
 ### Standalone (development)
 
 ```bash
-pip install -r requirements.txt
+python3.11 -m venv .venv
+. .venv/bin/activate
+python -m pip install -e ".[test]"
 uvicorn app.main:app --host 0.0.0.0 --port 8002 --reload
 ```
+
+The normal editable install is pure Python and does not create or prefer local
+compiled modules. Release builders that intentionally need the repository's
+Cython extensions must set `OMNIBIOAI_BUILD_EXTENSIONS=1` during the build.
 
 ### Health check
 
@@ -232,13 +238,16 @@ This service is used by:
 ## Testing
 
 ```bash
-cd ~/Desktop/omnibioai-ecosystem/omnibioai-policy-engine
-pytest tests/ -v --cov=.
+git clone https://github.com/OmniBioAI/omnibioai-policy-engine.git
+cd omnibioai-policy-engine
+python3.11 -m venv .venv
+. .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ".[test]"
+pytest
 
-# The command above is the supported validation entrypoint. Test counts and
-# coverage figures from earlier dated runs are historical snapshots and are
-# not asserted as current status here.
-# It covers RBAC, ABAC, rule evaluation, cache, policy service, and routes.
+# Keep all route tests enabled. They are part of the supported fresh-clone
+# validation command and must not be skipped by repository configuration.
 ```
 
 ---

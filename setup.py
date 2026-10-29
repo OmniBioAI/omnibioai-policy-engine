@@ -35,18 +35,24 @@ def make_extensions(paths):
     return exts
 
 
+build_extensions = os.getenv("OMNIBIOAI_BUILD_EXTENSIONS", "0") == "1"
+
+
 setup(
-    name="omnibioai-policy-engine",
     packages=find_packages(exclude=["tests*", "migrations*"]),
-    ext_modules=cythonize(
-        make_extensions(EXTENSIONS),
-        compiler_directives={
-            "language_level": "3",
-            "boundscheck": False,
-            "wraparound": False,
-            "cdivision": True,
-        },
-        nthreads=os.cpu_count() or 4,
+    ext_modules=(
+        cythonize(
+            make_extensions(EXTENSIONS),
+            compiler_directives={
+                "language_level": "3",
+                "boundscheck": False,
+                "wraparound": False,
+                "cdivision": True,
+            },
+            nthreads=os.cpu_count() or 4,
+        )
+        if build_extensions
+        else []
     ),
     zip_safe=False,
 )
