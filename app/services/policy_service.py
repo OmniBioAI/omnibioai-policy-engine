@@ -11,6 +11,7 @@ Author:
 import os
 
 from app.core.engine import PolicyEngine
+from app.core.skills_policy import SkillsPolicyService
 from app.models.request import PolicyRequest
 from app.services.cache import PolicyCache
 
@@ -19,6 +20,7 @@ cache = PolicyCache(
 )
 
 engine = PolicyEngine(cache)
+skills_engine = SkillsPolicyService(cache)
 
 
 def evaluate_policy(data: dict):

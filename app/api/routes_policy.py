@@ -8,13 +8,71 @@ Author:
     Manish Kumar <manish@omnibioai.org>
 """
 
-from fastapi import APIRouter
+from datetime import UTC, datetime
 
-from app.services.policy_service import evaluate_policy
+from fastapi import APIRouter, Header
+from pydantic import ValidationError
+
+from app.core.skills_policy import SkillsPolicySettings
+from app.models.skills_policy import SkillsPolicyRequest
+from app.services.policy_service import evaluate_policy, skills_engine
 
 router = APIRouter()
 
 
 @router.post("/evaluate")
-def evaluate(req: dict):
+def evaluate(
+    req: dict,
+    x_policy_workload_identity: str | None = Header(default=None),
+    x_policy_workload_scope: str | None = Header(default=None),
+    x_policy_request_timestamp: str | None = Header(default=None),
+    x_policy_signature: str | None = Header(default=None),
+    content_length: str | None = Header(default=None),
+):
+    settings = SkillsPolicySettings.from_env()
+    if settings.live:
+        try:
+            body_size = int(content_length or "0")
+        except ValueError:
+            body_size = settings.max_body_bytes + 1
+        if body_size > settings.max_body_bytes:
+            return {
+                "schema_version": "policy-decision/v2",
+                "decision_id": "oversized-"
+                + datetime.now(UTC).strftime("%Y%m%d%H%M%S%f"),
+                "allowed": False,
+                "reason": "policy request exceeds the configured size limit",
+                "error_code": "MALFORMED",
+                "policy_version": "skills-policy-2026-10-v2",
+                "policy_source": "SKILLS_POLICY",
+                "evaluated_at": datetime.now(UTC).isoformat(),
+                "cache_age_seconds": 0,
+                "enforcement": "enforced",
+            }
+        try:
+            request = SkillsPolicyRequest(**req)
+        except ValidationError:
+            # The legacy route is unreachable while v2 is enabled. A malformed
+            # body cannot be safely bound, so return a bounded non-decision.
+            return {
+                "schema_version": "policy-decision/v2",
+                "decision_id": "malformed-"
+                + datetime.now(UTC).strftime("%Y%m%d%H%M%S%f"),
+                "allowed": False,
+                "reason": "malformed policy-decision/v2 request",
+                "error_code": "MALFORMED",
+                "policy_version": "skills-policy-2026-10-v2",
+                "policy_source": "SKILLS_POLICY",
+                "evaluated_at": datetime.now(UTC).isoformat(),
+                "cache_age_seconds": 0,
+                "enforcement": "enforced",
+            }
+        return skills_engine.evaluate(
+            request,
+            settings=settings,
+            workload_id=x_policy_workload_identity,
+            scope=x_policy_workload_scope,
+            timestamp=x_policy_request_timestamp,
+            signature=x_policy_signature,
+        )
     return evaluate_policy(req)
