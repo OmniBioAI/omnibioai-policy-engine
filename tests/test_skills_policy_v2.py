@@ -26,12 +26,39 @@ from app.core.workload_identity import (
     JWKSWorkloadIdentityVerifier,
     WorkloadIdentityError,
 )
-from app.models.skills_policy import SkillsPolicyRequest
+from app.models.skills_policy import (
+    ERROR_CODE_CONTRACT_VERSION,
+    SkillsPolicyErrorCode,
+    SkillsPolicyRequest,
+)
 from app.services.audit_receipts import AuditReceipt, SecurityAuditReceiptClient
 from app.services.cache import PolicyCache
 
 NOW = datetime(2026, 10, 29, 12, 0, tzinfo=UTC)
 VALID_WORKLOAD_TOKEN = "fixture-client-credentials-token"
+
+
+def test_error_code_contract_is_versioned_and_complete():
+    assert ERROR_CODE_CONTRACT_VERSION == "1.0.0"
+    assert {code.value for code in SkillsPolicyErrorCode} == {
+        "policy.none",
+        "policy.disabled",
+        "policy.kill_switch",
+        "policy.unapproved",
+        "policy.mapping_mismatch",
+        "policy.tenant_denied",
+        "policy.workload_unavailable",
+        "policy.transport_unsafe",
+        "policy.audit_failure",
+        "policy.malformed",
+        "policy.workload_unauthorized",
+        "policy.unknown_action",
+        "policy.unmapped_resource",
+        "policy.binding_mismatch",
+        "policy.stale",
+        "policy.unavailable",
+        "policy.denied",
+    }
 
 
 class AllowingVerifier:
@@ -150,11 +177,11 @@ def test_bound_allow_has_v2_identity_metadata_and_audit(service):
 @pytest.mark.parametrize(
     ("req", "code"),
     [
-        (request(action="skill.unknown"), "UNKNOWN_ACTION"),
-        (request(verified_permissions=[]), "DENIED"),
-        (request(resource="dataset:not-a-skill"), "UNMAPPED_RESOURCE"),
-        (request(permission_set_digest="0" * 64), "BINDING_MISMATCH"),
-        (request(request_time=NOW - timedelta(seconds=31)), "STALE"),
+        (request(action="skill.unknown"), "policy.unknown_action"),
+        (request(verified_permissions=[]), "policy.denied"),
+        (request(resource="dataset:not-a-skill"), "policy.unmapped_resource"),
+        (request(permission_set_digest="0" * 64), "policy.binding_mismatch"),
+        (request(request_time=NOW - timedelta(seconds=31)), "policy.stale"),
     ],
 )
 def test_gaps_fail_closed(service, req, code):
@@ -168,11 +195,11 @@ def test_admin_role_or_wildcard_cannot_be_asserted_or_grant(service):
     with pytest.raises(ValidationError):
         SkillsPolicyRequest(**{**request().model_dump(), "roles": ["admin"]})
     req = request(verified_permissions=["skill.*", "*"])
-    assert evaluate(service, req=req).error_code == "DENIED"
+    assert evaluate(service, req=req).error_code == "policy.denied"
 
 
 def test_missing_workload_token_denies(service):
-    assert evaluate(service, workload_token=None).error_code == "WORKLOAD_UNAUTHORIZED"
+    assert evaluate(service, workload_token=None).error_code == "policy.workload_unauthorized"
 
 
 def _workload_token(**changes):
@@ -240,7 +267,7 @@ def test_jwks_verifier_rejects_wrong_or_overlong_workload_tokens(changes):
 
 def test_transport_requires_tls_or_explicit_network_isolation(service):
     unsafe = settings(transport_mode="tls")
-    assert evaluate(service, configured=unsafe).error_code == "TRANSPORT_UNSAFE"
+    assert evaluate(service, configured=unsafe).error_code == "policy.transport_unsafe"
     tls = settings(
         transport_mode="tls",
         workload_jwks_url="https://auth/.well-known/jwks.json",
@@ -264,7 +291,7 @@ def test_activation_controls_fail_closed(service, configured):
 
 def test_execution_has_independent_default_off_kill_switch(service):
     req = request(action="skill.execute", verified_permissions=["skill.execute"])
-    assert evaluate(service, req=req).error_code == "KILL_SWITCH"
+    assert evaluate(service, req=req).error_code == "policy.kill_switch"
     assert (
         evaluate(service, req=req, configured=settings(execution_enabled=True)).allowed
         is True
@@ -281,13 +308,13 @@ def test_revocation_epoch_is_checked_before_every_decision(service):
     cache.redis.set(cache.authorization_epoch_key("tenant-a", "principal-a"), 8)
     revoked = evaluate(service)
     assert revoked.allowed is False
-    assert revoked.error_code == "STALE"
+    assert revoked.error_code == "policy.stale"
 
 
 def test_positive_decision_caching_fails_closed_until_slo_is_approved(service):
     assert (
         evaluate(service, configured=settings(cache_ttl_seconds=1)).error_code
-        == "MALFORMED"
+        == "policy.malformed"
     )
 
 
@@ -321,13 +348,13 @@ def test_cache_key_partitions_every_authorization_binding(service):
 def test_cache_and_revocation_failures_never_allow(service):
     _, cache, _ = service
     cache.redis.get = Mock(side_effect=RuntimeError("down"))
-    assert evaluate(service).error_code == "UNAVAILABLE"
+    assert evaluate(service).error_code == "policy.unavailable"
 
 
 def test_audit_failure_turns_allow_into_deny(service):
     instance, _, _ = service
     instance.audit = lambda event: (_ for _ in ()).throw(RuntimeError("audit down"))
-    assert evaluate(service).error_code == "AUDIT_FAILURE"
+    assert evaluate(service).error_code == "policy.audit_failure"
 
 
 def test_security_audit_client_requires_matching_durable_receipt(tmp_path):
@@ -386,6 +413,6 @@ def test_route_rejects_malformed_or_oversized_v2_without_legacy_fallback(monkeyp
     malformed = routes_policy.evaluate({}, content_length="2")
     oversized = routes_policy.evaluate({}, content_length="20000")
 
-    assert malformed["allowed"] is False and malformed["error_code"] == "MALFORMED"
-    assert oversized["allowed"] is False and oversized["error_code"] == "MALFORMED"
+    assert malformed["allowed"] is False and malformed["error_code"] == "policy.malformed"
+    assert oversized["allowed"] is False and oversized["error_code"] == "policy.malformed"
     legacy.assert_not_called()

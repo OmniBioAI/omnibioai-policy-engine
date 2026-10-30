@@ -1,9 +1,35 @@
 """Versioned, bound models for the opt-in Skills policy contract."""
 
 from datetime import datetime
+from enum import StrEnum
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field
+
+
+ERROR_CODE_CONTRACT_VERSION = "1.0.0"
+
+
+class SkillsPolicyErrorCode(StrEnum):
+    """Stable, namespaced policy-decision/v2 error code contract."""
+
+    NONE = "policy.none"
+    DISABLED = "policy.disabled"
+    KILL_SWITCH = "policy.kill_switch"
+    UNAPPROVED = "policy.unapproved"
+    MAPPING_MISMATCH = "policy.mapping_mismatch"
+    TENANT_DENIED = "policy.tenant_denied"
+    WORKLOAD_UNAVAILABLE = "policy.workload_unavailable"
+    TRANSPORT_UNSAFE = "policy.transport_unsafe"
+    AUDIT_FAILURE = "policy.audit_failure"
+    MALFORMED = "policy.malformed"
+    WORKLOAD_UNAUTHORIZED = "policy.workload_unauthorized"
+    UNKNOWN_ACTION = "policy.unknown_action"
+    UNMAPPED_RESOURCE = "policy.unmapped_resource"
+    BINDING_MISMATCH = "policy.binding_mismatch"
+    STALE = "policy.stale"
+    UNAVAILABLE = "policy.unavailable"
+    DENIED = "policy.denied"
 
 
 class SkillsPolicyRequest(BaseModel):
@@ -29,7 +55,7 @@ class SkillsPolicyDecision(BaseModel):
     decision_id: str = Field(min_length=8, max_length=128)
     allowed: bool
     reason: str = Field(max_length=256)
-    error_code: str
+    error_code: SkillsPolicyErrorCode
     policy_version: str
     policy_source: str
     evaluated_at: datetime

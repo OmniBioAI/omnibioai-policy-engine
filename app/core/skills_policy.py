@@ -19,7 +19,11 @@ from app.core.workload_identity import (
     JWKSWorkloadIdentityVerifier,
     WorkloadIdentityError,
 )
-from app.models.skills_policy import SkillsPolicyDecision, SkillsPolicyRequest
+from app.models.skills_policy import (
+    SkillsPolicyDecision,
+    SkillsPolicyErrorCode,
+    SkillsPolicyRequest,
+)
 from app.services.audit_receipts import (
     AuditReceiptPublisher,
     SecurityAuditReceiptClient,
@@ -57,7 +61,7 @@ def _env_int(name: str, default: int) -> int:
 class SkillsPolicyError(Exception):
     """A bounded fail-closed error safe to expose to a policy consumer."""
 
-    def __init__(self, code: str, reason: str) -> None:
+    def __init__(self, code: SkillsPolicyErrorCode, reason: str) -> None:
         super().__init__(reason)
         self.code = code
         self.reason = reason
@@ -121,23 +125,23 @@ class SkillsPolicySettings:
 
     def validate_for_request(self, tenant_id: str, action: str) -> None:
         if not self.live:
-            raise SkillsPolicyError("DISABLED", "skills policy integration is disabled")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.DISABLED, "skills policy integration is disabled")
         if self.kill_switch:
             raise SkillsPolicyError(
-                "KILL_SWITCH", "skills policy kill switch is active"
+                SkillsPolicyErrorCode.KILL_SWITCH, "skills policy kill switch is active"
             )
         if action == "skill.execute" and not self.execution_enabled:
             raise SkillsPolicyError(
-                "KILL_SWITCH", "skills execution kill switch is active"
+                SkillsPolicyErrorCode.KILL_SWITCH, "skills execution kill switch is active"
             )
         if not self.owner_approval_reference:
-            raise SkillsPolicyError("UNAPPROVED", "owner approval is absent")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.UNAPPROVED, "owner approval is absent")
         if not hmac.compare_digest(self.mapping_digest, APPROVED_MAPPING_DIGEST):
             raise SkillsPolicyError(
-                "MAPPING_MISMATCH", "permission mapping is not approved"
+                SkillsPolicyErrorCode.MAPPING_MISMATCH, "permission mapping is not approved"
             )
         if not self.tenant_allowlist or tenant_id not in self.tenant_allowlist:
-            raise SkillsPolicyError("TENANT_DENIED", "tenant is not enabled")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.TENANT_DENIED, "tenant is not enabled")
         if (
             not self.trusted_workload_clients
             or not self.workload_jwks_url
@@ -145,30 +149,30 @@ class SkillsPolicySettings:
             or self.workload_audience != "policy-engine"
         ):
             raise SkillsPolicyError(
-                "WORKLOAD_UNAVAILABLE", "workload identity is not configured"
+                SkillsPolicyErrorCode.WORKLOAD_UNAVAILABLE, "workload identity is not configured"
             )
         if self.transport_mode not in {"tls", "network-isolated"}:
-            raise SkillsPolicyError("TRANSPORT_UNSAFE", "transport guarantee is absent")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.TRANSPORT_UNSAFE, "transport guarantee is absent")
         urls = (self.workload_jwks_url, self.audit_receipt_url)
         if not self.audit_receipt_url or not self.audit_token_file:
             raise SkillsPolicyError(
-                "AUDIT_FAILURE", "security-audit receipt is not configured"
+                SkillsPolicyErrorCode.AUDIT_FAILURE, "security-audit receipt is not configured"
             )
         schemes = {urlparse(url).scheme for url in urls}
         if not schemes <= {"http", "https"}:
-            raise SkillsPolicyError("TRANSPORT_UNSAFE", "endpoint scheme is invalid")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.TRANSPORT_UNSAFE, "endpoint scheme is invalid")
         if schemes != {"https"} and self.transport_mode != "network-isolated":
             raise SkillsPolicyError(
-                "TRANSPORT_UNSAFE", "non-TLS transport is not isolated"
+                SkillsPolicyErrorCode.TRANSPORT_UNSAFE, "non-TLS transport is not isolated"
             )
         if self.cache_ttl_seconds != 0:
             raise SkillsPolicyError(
-                "MALFORMED", "positive decision caching is not approved"
+                SkillsPolicyErrorCode.MALFORMED, "positive decision caching is not approved"
             )
         if not 1 <= self.request_max_age_seconds <= REVOCATION_SLO_SECONDS:
-            raise SkillsPolicyError("MALFORMED", "request freshness limit is invalid")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.MALFORMED, "request freshness limit is invalid")
         if not 1024 <= self.max_body_bytes <= 1_048_576:
-            raise SkillsPolicyError("MALFORMED", "request size limit is invalid")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.MALFORMED, "request size limit is invalid")
 
 
 def permission_set_digest(permissions: list[str]) -> str:
@@ -212,7 +216,7 @@ class SkillsPolicyService:
                     now=now,
                 )
             except WorkloadIdentityError as exc:
-                raise SkillsPolicyError("WORKLOAD_UNAUTHORIZED", str(exc)) from exc
+                raise SkillsPolicyError(SkillsPolicyErrorCode.WORKLOAD_UNAUTHORIZED, str(exc)) from exc
             self._validate_revocation(request)
             decision = self._evaluate(request, now)
             try:
@@ -221,7 +225,7 @@ class SkillsPolicyService:
                 )
             except SkillsPolicyError:
                 return self.denial(
-                    request, "AUDIT_FAILURE", "authorization audit failed", now
+                    request, SkillsPolicyErrorCode.AUDIT_FAILURE, "authorization audit failed", now
                 )
             return decision.model_copy(update={"audit_receipt_id": receipt_id})
         except SkillsPolicyError as exc:
@@ -230,18 +234,18 @@ class SkillsPolicyService:
                 receipt_id = self._audit(decision, settings, started, "fail")
             except SkillsPolicyError:
                 return self.denial(
-                    request, "AUDIT_FAILURE", "authorization audit failed", now
+                    request, SkillsPolicyErrorCode.AUDIT_FAILURE, "authorization audit failed", now
                 )
             return decision.model_copy(update={"audit_receipt_id": receipt_id})
         except Exception:  # noqa: BLE001 - every unexpected dependency error must deny
             decision = self.denial(
-                request, "UNAVAILABLE", "policy evaluation unavailable", now
+                request, SkillsPolicyErrorCode.UNAVAILABLE, "policy evaluation unavailable", now
             )
             try:
                 receipt_id = self._audit(decision, settings, started, "fail")
             except SkillsPolicyError:
                 return self.denial(
-                    request, "AUDIT_FAILURE", "authorization audit failed", now
+                    request, SkillsPolicyErrorCode.AUDIT_FAILURE, "authorization audit failed", now
                 )
             return decision.model_copy(update={"audit_receipt_id": receipt_id})
 
@@ -253,23 +257,23 @@ class SkillsPolicyService:
     ) -> None:
         required = ACTION_PERMISSION_MAP.get(request.action)
         if required is None:
-            raise SkillsPolicyError("UNKNOWN_ACTION", "unknown action denied")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.UNKNOWN_ACTION, "unknown action denied")
         if not RESOURCE_PATTERN.fullmatch(request.resource):
             raise SkillsPolicyError(
-                "UNMAPPED_RESOURCE", "resource is not a canonical skill version"
+                SkillsPolicyErrorCode.UNMAPPED_RESOURCE, "resource is not a canonical skill version"
             )
         if request.permission_set_digest != permission_set_digest(
             request.verified_permissions
         ):
             raise SkillsPolicyError(
-                "BINDING_MISMATCH", "permission set digest mismatch"
+                SkillsPolicyErrorCode.BINDING_MISMATCH, "permission set digest mismatch"
             )
         request_time = request.request_time
         if request_time.tzinfo is None:
-            raise SkillsPolicyError("MALFORMED", "request time must include a timezone")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.MALFORMED, "request time must include a timezone")
         age = (now - request_time.astimezone(UTC)).total_seconds()
         if age < -5 or age > settings.request_max_age_seconds:
-            raise SkillsPolicyError("STALE", "request is outside the freshness window")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.STALE, "request is outside the freshness window")
 
     def _validate_revocation(self, request: SkillsPolicyRequest) -> None:
         try:
@@ -278,12 +282,12 @@ class SkillsPolicyService:
             )
         except Exception as exc:
             raise SkillsPolicyError(
-                "UNAVAILABLE", "revocation authority unavailable"
+                SkillsPolicyErrorCode.UNAVAILABLE, "revocation authority unavailable"
             ) from exc
         if current is None:
-            raise SkillsPolicyError("UNAVAILABLE", "revocation evidence is absent")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.UNAVAILABLE, "revocation evidence is absent")
         if current != request.authorization_epoch:
-            raise SkillsPolicyError("STALE", "authorization evidence is stale")
+            raise SkillsPolicyError(SkillsPolicyErrorCode.STALE, "authorization evidence is stale")
 
     def _evaluate(
         self, request: SkillsPolicyRequest, now: datetime
@@ -291,14 +295,14 @@ class SkillsPolicyService:
         required = ACTION_PERMISSION_MAP[request.action]
         if required not in request.verified_permissions:
             decision = self.denial(
-                request, "DENIED", f"missing required permission: {required}", now
+                request, SkillsPolicyErrorCode.DENIED, f"missing required permission: {required}", now
             )
         else:
             decision = SkillsPolicyDecision(
                 decision_id=uuid.uuid4().hex,
                 allowed=True,
                 reason="access granted",
-                error_code="NONE",
+                error_code=SkillsPolicyErrorCode.NONE,
                 policy_version=POLICY_VERSION,
                 policy_source="SKILLS_PERMISSION",
                 evaluated_at=now,
@@ -315,7 +319,7 @@ class SkillsPolicyService:
 
     @staticmethod
     def denial(
-        request: SkillsPolicyRequest, code: str, reason: str, now: datetime
+        request: SkillsPolicyRequest, code: SkillsPolicyErrorCode, reason: str, now: datetime
     ) -> SkillsPolicyDecision:
         return SkillsPolicyDecision(
             decision_id=uuid.uuid4().hex,
@@ -377,6 +381,6 @@ class SkillsPolicyService:
             receipt = publisher.publish(event)
         except Exception as exc:
             raise SkillsPolicyError(
-                "AUDIT_FAILURE", "authorization audit failed"
+                SkillsPolicyErrorCode.AUDIT_FAILURE, "authorization audit failed"
             ) from exc
         return receipt.receipt_id

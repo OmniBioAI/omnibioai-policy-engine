@@ -7,3 +7,6 @@ coverage.json
 htmlcov/
 .pytest_cache/
 .venv-trackb*/
+*.c
+*.so
+build/

@@ -33,3 +33,10 @@
 No policy-engine spec questions remain open. Phase 3 must qualify positive
 caching and the deployed Security Audit receipt endpoint before activation.
 
+## Additional owner decision: v2 error-code namespace
+
+Policy-specific v2 codes are all namespaced with `policy.` and published as
+the versioned `SkillsPolicyErrorCode` enum. The current error-code contract is
+version `1.0.0`, documented in `POLICY_DECISION_V2.md`; any addition, removal,
+or rename must bump that contract version and update its pinned test snapshot.
+

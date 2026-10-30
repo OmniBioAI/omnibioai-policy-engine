@@ -1,5 +1,9 @@
 # 📘 OmniBioAI Policy Engine
 
+The opt-in Skills `policy-decision/v2` response and its versioned policy error
+codes are documented in
+[`docs/skills-integration/POLICY_DECISION_V2.md`](docs/skills-integration/POLICY_DECISION_V2.md).
+
 **Policy Engine is the authorization brain of the OmniBioAI ecosystem.**
 It evaluates *who can do what*, *on which resource*, under *what conditions*.
 

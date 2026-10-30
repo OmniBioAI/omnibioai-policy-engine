@@ -15,6 +15,7 @@ from pydantic import ValidationError
 
 from app.core.skills_policy import SkillsPolicySettings
 from app.models.skills_policy import SkillsPolicyRequest
+from app.models.skills_policy import SkillsPolicyErrorCode
 from app.services.policy_service import evaluate_policy, skills_engine
 
 router = APIRouter()
@@ -39,7 +40,7 @@ def evaluate(
                 + datetime.now(UTC).strftime("%Y%m%d%H%M%S%f"),
                 "allowed": False,
                 "reason": "policy request exceeds the configured size limit",
-                "error_code": "MALFORMED",
+                "error_code": SkillsPolicyErrorCode.MALFORMED,
                 "policy_version": "skills-policy-2026-10-v2",
                 "policy_source": "SKILLS_POLICY",
                 "evaluated_at": datetime.now(UTC).isoformat(),
@@ -57,7 +58,7 @@ def evaluate(
                 + datetime.now(UTC).strftime("%Y%m%d%H%M%S%f"),
                 "allowed": False,
                 "reason": "malformed policy-decision/v2 request",
-                "error_code": "MALFORMED",
+                "error_code": SkillsPolicyErrorCode.MALFORMED,
                 "policy_version": "skills-policy-2026-10-v2",
                 "policy_source": "SKILLS_POLICY",
                 "evaluated_at": datetime.now(UTC).isoformat(),
